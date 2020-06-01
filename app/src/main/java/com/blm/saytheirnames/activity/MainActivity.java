@@ -73,13 +73,13 @@ public class MainActivity extends AppCompatActivity {
         // init corresponding fragment
         switch (item.getItemId()) {
             case R.id.navigation_home:
-                frag = HomeFragment.newInstance("Home");
+                frag = HomeFragment.newInstance();
                 break;
             case R.id.navigation_donation:
-                frag = HomeFragment.newInstance("Dash");
+                frag = HomeFragment.newInstance();
                 break;
             case R.id.navigation_petitions:
-                frag = HomeFragment.newInstance("Notification");
+                frag = HomeFragment.newInstance();
                 break;
         }
 

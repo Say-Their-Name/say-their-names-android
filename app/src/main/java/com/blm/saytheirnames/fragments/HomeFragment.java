@@ -1,15 +1,24 @@
 package com.blm.saytheirnames.fragments;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.blm.saytheirnames.R;
+import com.blm.saytheirnames.adapters.FilterAdapter;
+import com.blm.saytheirnames.adapters.PersonsAdapter;
+import com.blm.saytheirnames.models.Person;
+
+import java.util.ArrayList;
 
 
 public class HomeFragment extends Fragment {
@@ -22,13 +31,22 @@ public class HomeFragment extends Fragment {
     private View mContent;
     private TextView mTextView;
 
-    public static Fragment newInstance(String text) {
-        Fragment frag = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_TEXT, text);
-     //   args.putInt(ARG_COLOR, color);
-        frag.setArguments(args);
-        return frag;
+    private GridView personGridView;
+    private RecyclerView recyclerView;
+
+    private LinearLayoutManager layoutManager;
+    private LinearLayoutManager layoutManager1;
+
+    private PersonsAdapter personsAdapter;
+    private FilterAdapter filterAdapter;
+
+    private ArrayList<Person> personArrayList;
+    private String[] filterList;
+
+    Resources resources;
+
+    public static HomeFragment newInstance() {
+        return new HomeFragment();
     }
 
 
@@ -36,7 +54,52 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        mContent = inflater.inflate(R.layout.fragment_home, container, false);
+
+        resources = getResources();
+
+        personArrayList = new ArrayList<>();
+       // filterList = new ArrayList<String[]>();
+
+        filterList = resources.getStringArray(R.array.location);
+
+        personGridView = mContent.findViewById(R.id.personGridView);
+        recyclerView = mContent.findViewById(R.id.recyclerView);
+
+        personsAdapter = new PersonsAdapter(personArrayList,getActivity());
+        filterAdapter = new FilterAdapter(filterList,getActivity());
+
+        layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager1 = new LinearLayoutManager(getActivity());
+
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager1);
+
+        personGridView.setAdapter(personsAdapter);
+        recyclerView.setAdapter(filterAdapter);
+
+        loadData();
+
+        return mContent;
+    }
+
+
+    private void loadData(){
+        personArrayList.clear();
+
+
+//        filterList.add(new String[]{"Location ", "gfhfghhg", "hgfgfhfhgfhg"});
+        for(int i = 0; i < 10; i++){
+            Person person = new Person("1","George Floyd","2020-05-26","he death of George Floyd occurred on May 25, 2020, when Derek Chauvin, a white Minneapolis police officer, kneeled on his neck for at least seven minutes","asdjajoj","Minnesota",null,null,null,46,2);
+
+            personArrayList.add(person);
+        }
+
+        filterAdapter.notifyDataSetChanged();
+        personsAdapter.notifyDataSetChanged();
     }
 
     @Override
