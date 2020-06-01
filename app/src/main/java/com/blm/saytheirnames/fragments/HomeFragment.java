@@ -1,4 +1,4 @@
-package com.blm.saytheirnames.ui.home;
+package com.blm.saytheirnames.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment {
             // mColor = savedInstanceState.getInt(ARG_COLOR);
         }*/
 
-        Bundle bundle = getActivity().getIntent().getExtras();
+        Bundle bundle = requireActivity().getIntent().getExtras();
         if (bundle != null)
         {
             mTextView.setText(" "+bundle.getString("arg_text"));

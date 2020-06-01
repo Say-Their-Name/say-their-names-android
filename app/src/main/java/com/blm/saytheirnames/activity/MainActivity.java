@@ -1,4 +1,4 @@
-package com.blm.saytheirnames;
+package com.blm.saytheirnames.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -9,7 +9,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.blm.saytheirnames.ui.home.HomeFragment;
+import com.blm.saytheirnames.R;
+import com.blm.saytheirnames.fragments.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
