@@ -5,4 +5,14 @@
     <string name="title_donation">Donations</string>
     <string name="title_petition">Petitions</string>
     <string name="context">The death of George Floyd occurred on May 25, 2020, when Derek Chauvin, a white Minneapolis police officer, kneeled on his neck for at least seven minutes</string>
+
+    <string-array name="location">
+        <item>All</item>
+        <item>Missouri</item>
+        <item>Texas</item>
+        <item>Dallas</item>
+        <item>Atlanta</item>
+        <item>LA</item>
+
+    </string-array>
 </resources>
