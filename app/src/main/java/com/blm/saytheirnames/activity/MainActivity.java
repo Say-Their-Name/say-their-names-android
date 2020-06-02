@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.blm.saytheirnames.R;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        setDefaultFragment();
+
 
         MenuItem selectedItem;
         if (savedInstanceState != null) {
@@ -57,6 +60,13 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+    private void setDefaultFragment() {
+        mBottomNav.setSelectedItemId(R.id.navigation_home);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, HomeFragment.newInstance());
+        transaction.commit();
+    }
+
     @Override
     public void onBackPressed() {
         MenuItem homeItem = mBottomNav.getMenu().getItem(0);
@@ -69,6 +79,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void selectFragment(MenuItem item) {
+
+        Log.d("SHH", String.valueOf(item));
+        Log.d("SHH", String.valueOf(item.getItemId()));
+        mSelectedItem = item.getItemId();
         Fragment frag = null;
         // init corresponding fragment
         switch (item.getItemId()) {
@@ -81,24 +95,30 @@ public class MainActivity extends AppCompatActivity {
             case R.id.navigation_petitions:
                 frag = HomeFragment.newInstance();
                 break;
+
+            case R.id.navigation_settings:
+                frag = HomeFragment.newInstance();
+                break;
         }
 
         // update selected item
         mSelectedItem = item.getItemId();
 
         // uncheck the other items.
-        for (int i = 0; i < mBottomNav.getMenu().size(); i++) {
+        /*for (int i = 0; i < mBottomNav.getMenu().size(); i++) {
             MenuItem menuItem = mBottomNav.getMenu().getItem(i);
-            menuItem.setChecked(menuItem.getItemId() == item.getItemId());
+            //menuItem.setChecked(menuItem.getItemId() == item.getItemId());
+
         }
 
-        updateToolbarText(item.getTitle());
+        updateToolbarText(item.getTitle());*/
 
         if (frag != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.add(R.id.container, frag, frag.getTag());
             ft.commit();
         }
+
     }
 
     private void updateToolbarText(CharSequence text) {
