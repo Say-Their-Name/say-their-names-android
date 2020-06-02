@@ -6,25 +6,6 @@
     <string name="title_petition">Petitions</string>
     <string name="context">The death of George Floyd occurred on May 25, 2020, when Derek Chauvin, a white Minneapolis police officer, kneeled on his neck for at least seven minutes</string>
 
-
-    <!--Login/Sign up strings -->
-    <string name="login">Login</string>
-    <string name="sign_up">Sign Up</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="swipe_right_to_login">Swipe right to login</string>
-    <string name="swipe_left_to_sign_up">Swipe left to sign up</string>
-    <string name="register_welcome_message">Welcome message here</string>
-    <string name="hint_full_name">Full Name</string>
-    <string name="hint_password">Password</string>
-    <string name="hint_re_password">Retype password</string>
-
-    <!--String validation error messages-->
-    <string name="error_password_length">Password must be a minimum 6 characters long</string>
-    <string name="error_name">Please enter your name</string>
-    <string name="error_email">Please enter a valid email</string>
-    <string name="error_password_do_not_match">Passwords do not match</string>
-
     <string-array name="location">
         <item>All</item>
         <item>Missouri</item>
