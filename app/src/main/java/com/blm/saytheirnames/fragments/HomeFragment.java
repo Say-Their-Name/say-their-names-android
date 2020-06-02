@@ -10,11 +10,13 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blm.saytheirnames.R;
 import com.blm.saytheirnames.adapters.FilterAdapter;
+import com.blm.saytheirnames.adapters.PerAdapter;
 import com.blm.saytheirnames.adapters.PersonsAdapter;
 import com.blm.saytheirnames.models.Person;
 
@@ -29,15 +31,15 @@ public class HomeFragment extends Fragment {
     private int mColor;
 
     private View mContent;
-    private TextView mTextView;
+    //private TextView mTextView;
 
-    private GridView personGridView;
+    private RecyclerView personGridView;
     private RecyclerView recyclerView;
 
     private LinearLayoutManager layoutManager;
     private LinearLayoutManager layoutManager1;
 
-    private PersonsAdapter personsAdapter;
+    private PerAdapter personsAdapter;
     private FilterAdapter filterAdapter;
 
     private ArrayList<Person> personArrayList;
@@ -66,7 +68,7 @@ public class HomeFragment extends Fragment {
         personGridView = mContent.findViewById(R.id.personGridView);
         recyclerView = mContent.findViewById(R.id.recyclerView);
 
-        personsAdapter = new PersonsAdapter(personArrayList,getActivity());
+        personsAdapter = new PerAdapter(personArrayList,getActivity());
         filterAdapter = new FilterAdapter(filterList,getActivity());
 
         layoutManager = new LinearLayoutManager(getActivity());
@@ -77,6 +79,8 @@ public class HomeFragment extends Fragment {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager1);
+        personGridView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+
 
         personGridView.setAdapter(personsAdapter);
         recyclerView.setAdapter(filterAdapter);
@@ -93,7 +97,7 @@ public class HomeFragment extends Fragment {
 
 //        filterList.add(new String[]{"Location ", "gfhfghhg", "hgfgfhfhgfhg"});
         for(int i = 0; i < 10; i++){
-            Person person = new Person("1","George Floyd","2020-05-26","he death of George Floyd occurred on May 25, 2020, when Derek Chauvin, a white Minneapolis police officer, kneeled on his neck for at least seven minutes","asdjajoj","Minnesota",null,null,null,46,2);
+            Person person = new Person("1","George Floyd","2020-05-26","he death of George Floyd occurred on May 25, 2020, when Derek Chauvin, a white Minneapolis police officer, kneeled on his neck for at least seven minutes","03-23-1967","Minnesota","46","Minnesota","United States","-",null);
 
             personArrayList.add(person);
         }
@@ -108,7 +112,6 @@ public class HomeFragment extends Fragment {
 
         // initialize views
         mContent = view.findViewById(R.id.navigation_donation);
-        mTextView = view.findViewById(R.id.text_home);
 
         // retrieve text and color from bundle or savedInstanceState
         /*if (savedInstanceState == null) {
@@ -124,7 +127,7 @@ public class HomeFragment extends Fragment {
         Bundle bundle = requireActivity().getIntent().getExtras();
         if (bundle != null)
         {
-            mTextView.setText(" "+bundle.getString("arg_text"));
+            //mTextView.setText(" "+bundle.getString("arg_text"));
         }
 
         // set text and background color

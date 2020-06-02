@@ -52,7 +52,7 @@ public class PersonsAdapter extends BaseAdapter {
 
         Person person = personList.get(position);
 
-        personName.setText(person.getFullName());
+        personName.setText(person.getFull_name());
         personAge.setText(String.valueOf(person.getAge()));
 
 
