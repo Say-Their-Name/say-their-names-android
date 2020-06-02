@@ -4,36 +4,48 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.blm.saytheirnames.R;
 import com.blm.saytheirnames.models.Person;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class PersonsAdapter extends BaseAdapter {
+public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.FilterItemHolder> {
 
-    private List<Person> personList;
+    private ArrayList<Person> personList;
     private Context context;
+    private int selected_item = 0;
 
 
-    public PersonsAdapter(List<Person> personList, Context context) {
+    public PersonsAdapter(ArrayList<Person> personList, Context context) {
         super();
         this.personList = personList;
         this.context = context;
         notifyDataSetChanged();
     }
 
+    @NonNull
     @Override
-    public int getCount() {
-        return personList.size();
+    public PersonsAdapter.FilterItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.person_item, parent, false);
+
+
+        return new FilterItemHolder(convertView);
     }
 
     @Override
-    public Object getItem(int position) {
-        return position;
+    public void onBindViewHolder(@NonNull PersonsAdapter.FilterItemHolder holder, final int position) {
+
+        Person person = personList.get(position);
+
+        holder.personName.setText(person.getFull_name());
+        holder.personAge.setText(String.valueOf(person.getAge()));
     }
 
     @Override
@@ -42,20 +54,22 @@ public class PersonsAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public int getItemCount() {
+        return personList.size();
+    }
 
-        convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.person_item,null);
+    class FilterItemHolder extends RecyclerView.ViewHolder {
+        TextView personName;
+        TextView personAge;
+        ImageView personImage;
 
-        TextView personName = convertView.findViewById(R.id.txtPersonName);
-        TextView personAge = convertView.findViewById(R.id.txtPersonAge);
-        ImageView personImage = convertView.findViewById(R.id.personImage);
-
-        Person person = personList.get(position);
-
-        personName.setText(person.getFull_name());
-        personAge.setText(String.valueOf(person.getAge()));
+        public FilterItemHolder(@NonNull View itemView) {
+            super(itemView);
+            personName = itemView.findViewById(R.id.txtPersonName);
+            personAge = itemView.findViewById(R.id.txtPersonAge);
+            personImage = itemView.findViewById(R.id.personImage);
 
 
-        return convertView;
+        }
     }
 }

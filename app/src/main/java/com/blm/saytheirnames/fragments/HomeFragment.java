@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -16,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blm.saytheirnames.R;
 import com.blm.saytheirnames.adapters.FilterAdapter;
-import com.blm.saytheirnames.adapters.PerAdapter;
 import com.blm.saytheirnames.adapters.PersonsAdapter;
 import com.blm.saytheirnames.models.Person;
 
@@ -39,7 +36,7 @@ public class HomeFragment extends Fragment {
     private LinearLayoutManager layoutManager;
     private LinearLayoutManager layoutManager1;
 
-    private PerAdapter personsAdapter;
+    private PersonsAdapter personsAdapter;
     private FilterAdapter filterAdapter;
 
     private ArrayList<Person> personArrayList;
@@ -68,7 +65,7 @@ public class HomeFragment extends Fragment {
         personGridView = mContent.findViewById(R.id.personGridView);
         recyclerView = mContent.findViewById(R.id.recyclerView);
 
-        personsAdapter = new PerAdapter(personArrayList,getActivity());
+        personsAdapter = new PersonsAdapter(personArrayList,getActivity());
         filterAdapter = new FilterAdapter(filterList,getActivity());
 
         layoutManager = new LinearLayoutManager(getActivity());
