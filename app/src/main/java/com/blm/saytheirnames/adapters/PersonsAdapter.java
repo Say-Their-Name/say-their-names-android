@@ -1,6 +1,7 @@
 package com.blm.saytheirnames.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,9 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blm.saytheirnames.R;
+import com.blm.saytheirnames.activity.DetailsActivity;
 import com.blm.saytheirnames.models.Person;
 
 import java.util.ArrayList;
@@ -46,6 +49,14 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.FilterIt
 
         holder.personName.setText(person.getFull_name());
         holder.personAge.setText(String.valueOf(person.getAge()));
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailsActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -62,12 +73,14 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.FilterIt
         TextView personName;
         TextView personAge;
         ImageView personImage;
+        CardView cardView;
 
         public FilterItemHolder(@NonNull View itemView) {
             super(itemView);
             personName = itemView.findViewById(R.id.txtPersonName);
             personAge = itemView.findViewById(R.id.txtPersonAge);
             personImage = itemView.findViewById(R.id.personImage);
+            cardView = itemView.findViewById(R.id.cardView);
 
 
         }

@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         setDefaultFragment();
+        updateToolbarText();
 
 
         MenuItem selectedItem;
@@ -63,16 +64,17 @@ public class MainActivity extends AppCompatActivity {
 
 //Testing APi- added by thegeekybaniya
         backendInterface = Utils.getBackendService();
-        backendInterface.getPeopleById(1).enqueue(new Callback<JsonObject>() {
+        backendInterface.getPeople().enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 Log.d("API_Response", response.body().toString());
+                System.out.println("RES::::::"+response.body());
 
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-
+                System.out.println("RES::::::"+t.getMessage());
             }
         });
 
@@ -147,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void updateToolbarText(CharSequence text) {
+    private void updateToolbarText() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setCustomView(R.layout.action_bar_layout);
