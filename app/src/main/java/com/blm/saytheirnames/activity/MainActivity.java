@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import com.blm.saytheirnames.R;
 import com.blm.saytheirnames.fragments.HomeFragment;
+import com.blm.saytheirnames.fragments.PetitionsFragment;
 import com.blm.saytheirnames.network.BackendInterface;
 import com.blm.saytheirnames.network.Utils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         setDefaultFragment();
-        updateToolbarText();
+       // updateToolbarText();
 
 
         MenuItem selectedItem;
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 //Testing APi- added by thegeekybaniya
-        backendInterface = Utils.getBackendService();
+   /*     backendInterface = Utils.getBackendService();
         backendInterface.getPeople().enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("RES::::::"+t.getMessage());
             }
         });
-
+*/
 
     }
 
@@ -108,8 +109,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void selectFragment(MenuItem item) {
 
-        Log.d("SHH", String.valueOf(item));
-        Log.d("SHH", String.valueOf(item.getItemId()));
         mSelectedItem = item.getItemId();
         Fragment frag = null;
         // init corresponding fragment
@@ -121,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 frag = HomeFragment.newInstance();
                 break;
             case R.id.navigation_petitions:
-                frag = HomeFragment.newInstance();
+                frag = PetitionsFragment.newInstance();
                 break;
 
             case R.id.navigation_settings:
@@ -149,13 +148,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void updateToolbarText() {
+    /*private void updateToolbarText() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setCustomView(R.layout.action_bar_layout);
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         }
-    }
+    }*/
 
 
 }
