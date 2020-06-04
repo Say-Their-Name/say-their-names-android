@@ -1,7 +1,10 @@
 package com.blm.saytheirnames.fragments;
 
+import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -9,10 +12,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.Contacts;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.blm.saytheirnames.R;
 import com.blm.saytheirnames.adapters.FilterAdapter;
@@ -20,8 +26,16 @@ import com.blm.saytheirnames.adapters.PersonsAdapter;
 import com.blm.saytheirnames.adapters.PetitionsAdapter;
 import com.blm.saytheirnames.models.Person;
 import com.blm.saytheirnames.models.Petition;
+import com.blm.saytheirnames.models.PetitionData;
+import com.blm.saytheirnames.network.BackendInterface;
+import com.blm.saytheirnames.network.Utils;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PetitionsFragment extends Fragment {
 
@@ -31,11 +45,11 @@ public class PetitionsFragment extends Fragment {
     private ImageView imgFilter,imgSearch;
 
     private LinearLayoutManager layoutManager;
-    private LinearLayoutManager layoutManager1;
+    private ProgressBar progressBar;
 
     private PetitionsAdapter petitionsAdapter;
 
-    private ArrayList<Petition> petitionArrayList;
+    private List<Petition> petitionArrayList;
     private String[] filterList;
 
 
@@ -74,6 +88,11 @@ public class PetitionsFragment extends Fragment {
 
         petitionsAdapter = new PetitionsAdapter(petitionArrayList,getActivity());
 
+        progressBar = myFragment.findViewById(R.id.progressBar);
+
+
+        progressBar.getIndeterminateDrawable().setColorFilter(R.color.colorBlack, android.graphics.PorterDuff.Mode.MULTIPLY);
+
         layoutManager = new LinearLayoutManager(getActivity());
 
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -89,7 +108,7 @@ public class PetitionsFragment extends Fragment {
         return myFragment;
     }
 
-    private void loadData(){
+    /*private void loadData(){
         petitionArrayList.clear();
 
 
@@ -101,5 +120,47 @@ public class PetitionsFragment extends Fragment {
         }
 
         petitionsAdapter.notifyDataSetChanged();
+    }*/
+
+    private void loadData() {
+        @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> getPetitions    = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressBar.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                BackendInterface backendInterface = Utils.getBackendService();
+                backendInterface.getPetitions().enqueue(new Callback<PetitionData>() {
+                    @Override
+                    public void onResponse(@NonNull Call<PetitionData> call, @NonNull Response<PetitionData> response) {
+                        petitionArrayList.clear();
+                        Log.d("API_Response", response.body().toString());
+                        List<Petition> body = response.body().getData();
+
+                        petitionArrayList.addAll(body);
+                        progressBar.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+
+
+                        petitionsAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure(Call<PetitionData> call, Throwable t) {
+                        progressBar.setVisibility(View.GONE);
+                        Log.d("API_Response", t.getMessage().toString());
+                    }
+                });
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result) {
+            }
+        };
+        getPetitions.execute(null, null, null);
     }
 }

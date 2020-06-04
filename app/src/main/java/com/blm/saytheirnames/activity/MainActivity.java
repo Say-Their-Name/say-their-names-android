@@ -64,20 +64,20 @@ public class MainActivity extends AppCompatActivity {
 
 
 //Testing APi- added by thegeekybaniya
-        backendInterface = Utils.getBackendService();
+        /*backendInterface = Utils.getBackendService();
         backendInterface.getPetitions().enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 Log.d("API_Response", response.body().toString());
-                System.out.println("RES::::::"+response.body());
+                System.out.println("RES::::::" + response.body());
 
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                System.out.println("RES::::::"+t.getMessage());
+                System.out.println("RES::::::" + t.getMessage());
             }
-        });
+        });*/
 
 
     }

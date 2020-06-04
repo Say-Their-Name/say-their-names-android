@@ -1,18 +1,35 @@
 package com.blm.saytheirnames.models;
 
+import java.util.List;
+
 public class Petition {
 
     int id;
-    String title, description, link,person;
-    String[] images;
+    String title, description, link;
+    Person person;
+    List<Images> images;
+    Type type;
 
-    public Petition(int id, String title, String description, String link, String person, String[] images) {
+    public Petition(int id, String title, String description, String link, Person person, List<Images> images,Type type) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.link = link;
         this.person = person;
         this.images = images;
+        this.type = type;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public int getId() {
@@ -46,20 +63,20 @@ public class Petition {
     public void setLink(String link) {
         this.link = link;
     }
-
+/*
     public String getPerson() {
         return person;
     }
 
     public void setPerson(String person) {
         this.person = person;
-    }
+    }*/
 
-    public String[] getImages() {
+    public List getImages() {
         return images;
     }
 
-    public void setImages(String[] images) {
+    public void setImages(List images) {
         this.images = images;
     }
 }

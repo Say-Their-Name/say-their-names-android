@@ -18,15 +18,16 @@ import com.blm.saytheirnames.models.Person;
 import com.blm.saytheirnames.models.Petition;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PetitionsAdapter extends RecyclerView.Adapter<PetitionsAdapter.PetitionItemHolder> {
 
-    private ArrayList<Petition> personList;
+    private List<Petition> personList;
     private Context context;
     private int selected_item = 0;
 
 
-    public PetitionsAdapter(ArrayList<Petition> personList, Context context) {
+    public PetitionsAdapter(List<Petition> personList, Context context) {
         super();
         this.personList = personList;
         this.context = context;
