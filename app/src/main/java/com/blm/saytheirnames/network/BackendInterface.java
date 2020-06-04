@@ -1,7 +1,5 @@
 package com.blm.saytheirnames.network;
 
-import com.blm.saytheirnames.models.PeopleData;
-import com.blm.saytheirnames.models.PersonData;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -10,10 +8,10 @@ import retrofit2.http.Path;
 
 public interface BackendInterface {
     @GET("/api/people")
-    Call<PeopleData> getPeople();
+    Call<JsonObject> getPeople();
 
     @GET("/api/people/{id}")
-    Call<PersonData> getPeopleById(@Path("id") String id);
+    Call<JsonObject> getPeopleById(@Path("id") int id);
 
 
     @GET("/api/petitions")

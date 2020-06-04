@@ -1,19 +1,25 @@
 package com.blm.saytheirnames.activity;
 
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+
 import com.blm.saytheirnames.R;
 import com.blm.saytheirnames.fragments.HomeFragment;
 import com.blm.saytheirnames.network.BackendInterface;
+import com.blm.saytheirnames.network.Utils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.JsonObject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,6 +60,25 @@ public class MainActivity extends AppCompatActivity {
             selectedItem = mBottomNav.getMenu().getItem(0);
         }
         selectFragment(selectedItem);
+
+
+//Testing APi- added by thegeekybaniya
+        backendInterface = Utils.getBackendService();
+        backendInterface.getPeople().enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                Log.d("API_Response", response.body().toString());
+                System.out.println("RES::::::"+response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                System.out.println("RES::::::"+t.getMessage());
+            }
+        });
+
+
     }
 
 

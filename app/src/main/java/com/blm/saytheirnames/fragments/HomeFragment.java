@@ -1,24 +1,12 @@
 package com.blm.saytheirnames.fragments;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.browser.customtabs.CustomTabsIntent;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,20 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blm.saytheirnames.R;
 import com.blm.saytheirnames.adapters.FilterAdapter;
-import com.blm.saytheirnames.adapters.PeopleAdapter;
-import com.blm.saytheirnames.customTabs.CustomTabActivityHelper;
-import com.blm.saytheirnames.customTabs.WebViewActivity;
-import com.blm.saytheirnames.models.People;
-import com.blm.saytheirnames.models.PeopleData;
-import com.blm.saytheirnames.network.BackendInterface;
-import com.blm.saytheirnames.network.Utils;
+import com.blm.saytheirnames.adapters.PersonsAdapter;
+import com.blm.saytheirnames.models.Person;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
     private static final String ARG_TEXT = "arg_text";
@@ -51,25 +30,24 @@ public class HomeFragment extends Fragment {
     private View mContent;
     //private TextView mTextView;
 
-    private RecyclerView personRecyclerView;
+    private RecyclerView personGridView;
     private RecyclerView recyclerView;
 
     private LinearLayoutManager layoutManager;
     private LinearLayoutManager layoutManager1;
 
-    private PeopleAdapter peopleAdapter;
+    private PersonsAdapter personsAdapter;
     private FilterAdapter filterAdapter;
 
-    private List<People> peopleArrayList;
+    private ArrayList<Person> personArrayList;
     private String[] filterList;
-    private ProgressBar progressBar;
-    private ImageView imageView;
 
     Resources resources;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,31 +56,17 @@ public class HomeFragment extends Fragment {
         mContent = inflater.inflate(R.layout.fragment_home, container, false);
 
         resources = getResources();
-        imageView = mContent.findViewById(R.id.imageView);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (validateUrl("http://google.com")) {
-                    Uri uri = Uri.parse("http://google.com");
-                    if (uri != null) {
-                        openCustomChromeTab(uri);
-                    }
-                } else {
-                    Toast.makeText(getContext(), "Error with link", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
-        peopleArrayList = new ArrayList<>();
+        personArrayList = new ArrayList<>();
+       // filterList = new ArrayList<String[]>();
 
         filterList = resources.getStringArray(R.array.location);
 
-        personRecyclerView = mContent.findViewById(R.id.personRecyclerView);
+        personGridView = mContent.findViewById(R.id.personGridView);
         recyclerView = mContent.findViewById(R.id.recyclerView);
-        progressBar = mContent.findViewById(R.id.progressBar);
 
-        peopleAdapter = new PeopleAdapter(peopleArrayList, getActivity());
-        filterAdapter = new FilterAdapter(filterList, getActivity());
+        personsAdapter = new PersonsAdapter(personArrayList,getActivity());
+        filterAdapter = new FilterAdapter(filterList,getActivity());
 
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager1 = new LinearLayoutManager(getActivity());
@@ -112,9 +76,10 @@ public class HomeFragment extends Fragment {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager1);
-        personRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        personGridView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
-        personRecyclerView.setAdapter(peopleAdapter);
+
+        personGridView.setAdapter(personsAdapter);
         recyclerView.setAdapter(filterAdapter);
 
         loadData();
@@ -122,71 +87,20 @@ public class HomeFragment extends Fragment {
         return mContent;
     }
 
-    private boolean validateUrl(String url) {
-        return url != null && url.length() > 0 && (url.startsWith("http://") || url.startsWith("https://"));
-    }
 
-    private void openCustomChromeTab(Uri uri) {
-        CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
-        CustomTabsIntent customTabsIntent = intentBuilder.build();
+    private void loadData(){
+        personArrayList.clear();
 
-        intentBuilder.setToolbarColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
-        intentBuilder.setSecondaryToolbarColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
 
-        CustomTabActivityHelper.openCustomTab(getContext(), customTabsIntent, uri, new CustomTabActivityHelper.CustomTabFallback() {
-            @Override
-            public void openUri(Context activity, Uri uri) {
-                openWebView(uri);
-            }
-        });
-    }
+//        filterList.add(new String[]{"Location ", "gfhfghhg", "hgfgfhfhgfhg"});
+        for(int i = 0; i < 10; i++){
+            Person person = new Person("1","George Floyd","2020-05-26","he death of George Floyd occurred on May 25, 2020, when Derek Chauvin, a white Minneapolis police officer, kneeled on his neck for at least seven minutes","03-23-1967","Minnesota","46","Minnesota","United States","-",null);
 
-    private void openWebView(Uri uri) {
-        Intent webViewIntent = new Intent(getContext(), WebViewActivity.class);
-        webViewIntent.putExtra(WebViewActivity.EXTRA_URL, uri.toString());
-        webViewIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        getContext().startActivity(webViewIntent);
-    }
+            personArrayList.add(person);
+        }
 
-    private void loadData() {
-        @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> getPeople = new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                progressBar.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            protected Void doInBackground(Void... params) {
-                BackendInterface backendInterface = Utils.getBackendService();
-                backendInterface.getPeople().enqueue(new Callback<PeopleData>() {
-                    @Override
-                    public void onResponse(@NonNull Call<PeopleData> call, @NonNull Response<PeopleData> response) {
-                        peopleArrayList.clear();
-                        Log.d("API_Response", response.body().toString());
-                        List<People> body = response.body().getData();
-
-                        peopleArrayList.addAll(body);
-                        progressBar.setVisibility(View.GONE);
-                        personRecyclerView.setVisibility(View.VISIBLE);
-
-                        filterAdapter.notifyDataSetChanged();
-                        peopleAdapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onFailure(Call<PeopleData> call, Throwable t) {
-
-                    }
-                });
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void result) {
-            }
-        };
-        getPeople.execute(null, null, null);
+        filterAdapter.notifyDataSetChanged();
+        personsAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -208,19 +122,20 @@ public class HomeFragment extends Fragment {
         }*/
 
         Bundle bundle = requireActivity().getIntent().getExtras();
-        if (bundle != null) {
+        if (bundle != null)
+        {
             //mTextView.setText(" "+bundle.getString("arg_text"));
         }
 
         // set text and background color
-        // mTextView.setText(text);
+       // mTextView.setText(text);
         //mContent.setBackgroundColor(mColor);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putString(ARG_TEXT, mText);
-        // outState.putInt(ARG_COLOR, mColor);
+       // outState.putInt(ARG_COLOR, mColor);
         super.onSaveInstanceState(outState);
     }
 }
