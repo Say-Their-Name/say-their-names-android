@@ -18,7 +18,7 @@ import com.blm.saytheirnames.models.Person;
 
 import java.util.ArrayList;
 
-public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.FilterItemHolder> {
+public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.PersonItemHolder> {
 
     private ArrayList<Person> personList;
     private Context context;
@@ -34,28 +34,25 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.FilterIt
 
     @NonNull
     @Override
-    public PersonsAdapter.FilterItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PersonsAdapter.PersonItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.person_item, parent, false);
 
 
-        return new FilterItemHolder(convertView);
+        return new PersonItemHolder(convertView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PersonsAdapter.FilterItemHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull PersonsAdapter.PersonItemHolder holder, final int position) {
 
         Person person = personList.get(position);
 
         holder.personName.setText(person.getFull_name());
         holder.personAge.setText(String.valueOf(person.getAge()));
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, DetailsActivity.class);
-                context.startActivity(intent);
-            }
+        holder.cardView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DetailsActivity.class);
+            context.startActivity(intent);
         });
     }
 
@@ -69,13 +66,13 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.FilterIt
         return personList.size();
     }
 
-    class FilterItemHolder extends RecyclerView.ViewHolder {
+    class PersonItemHolder extends RecyclerView.ViewHolder {
         TextView personName;
         TextView personAge;
         ImageView personImage;
         CardView cardView;
 
-        public FilterItemHolder(@NonNull View itemView) {
+        public PersonItemHolder(@NonNull View itemView) {
             super(itemView);
             personName = itemView.findViewById(R.id.txtPersonName);
             personAge = itemView.findViewById(R.id.txtPersonAge);

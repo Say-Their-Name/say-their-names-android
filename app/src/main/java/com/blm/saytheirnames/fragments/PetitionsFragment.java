@@ -1,0 +1,105 @@
+package com.blm.saytheirnames.fragments;
+
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.blm.saytheirnames.R;
+import com.blm.saytheirnames.adapters.FilterAdapter;
+import com.blm.saytheirnames.adapters.PersonsAdapter;
+import com.blm.saytheirnames.adapters.PetitionsAdapter;
+import com.blm.saytheirnames.models.Person;
+import com.blm.saytheirnames.models.Petition;
+
+import java.util.ArrayList;
+
+public class PetitionsFragment extends Fragment {
+
+    private RecyclerView recyclerView;
+    private View myFragment;
+    private Toolbar toolbar;
+    private ImageView imgFilter,imgSearch;
+
+    private LinearLayoutManager layoutManager;
+    private LinearLayoutManager layoutManager1;
+
+    private PetitionsAdapter petitionsAdapter;
+
+    private ArrayList<Petition> petitionArrayList;
+    private String[] filterList;
+
+
+    public static PetitionsFragment newInstance() {
+        return new PetitionsFragment();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        myFragment =  inflater.inflate(R.layout.fragment_petitions, container, false);
+
+        recyclerView = myFragment.findViewById(R.id.recyclerView);
+        toolbar = myFragment.findViewById(R.id.toolbar);
+        imgFilter = toolbar.findViewById(R.id.imgFilter);
+        imgSearch = toolbar.findViewById(R.id.imgSearch);
+
+        //toolbar.setNavigationIcon(R.drawable.filter);
+        //toolbar.setLogo(R.drawable.filter);
+        toolbar.setTitle("");
+        imgFilter.setOnClickListener(v -> System.out.println("Filter"));
+        imgSearch.setOnClickListener(v -> System.out.println("Search"));
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+
+
+        petitionArrayList = new ArrayList<>();
+
+
+        recyclerView = myFragment.findViewById(R.id.recyclerView);
+
+        petitionsAdapter = new PetitionsAdapter(petitionArrayList,getActivity());
+
+        layoutManager = new LinearLayoutManager(getActivity());
+
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+
+
+        recyclerView.setAdapter(petitionsAdapter);
+
+        loadData();
+
+        return myFragment;
+    }
+
+    private void loadData(){
+        petitionArrayList.clear();
+
+
+//        filterList.add(new String[]{"Location ", "gfhfghhg", "hgfgfhfhgfhg"});
+        for(int i = 0; i < 10; i++){
+            Petition person = new Petition(1,"George Floyd","he death of George Floyd occurred on May 25, 2020, when Derek Chauvin, a white Minneapolis police officer, kneeled on his neck for at least seven minutes","https://google.com","Minnesota",null);
+
+            petitionArrayList.add(person);
+        }
+
+        petitionsAdapter.notifyDataSetChanged();
+    }
+}
