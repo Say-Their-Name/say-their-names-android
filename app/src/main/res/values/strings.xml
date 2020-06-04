@@ -31,4 +31,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="filter">Filter</string>
     <string name="search">Search</string>
+    <string name="george_floyd">GEORGE FLOYD</string>
+    <string name="_2">2</string>
+    <string name="minnesota">MINNESOTA</string>
+    <string name="button">Button</string>
 </resources>

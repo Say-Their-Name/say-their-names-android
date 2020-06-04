@@ -186,7 +186,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="GEORGE FLOYD"
+                        android:text="@string/george_floyd"
                         android:textAlignment="center"
                         android:textColor="@color/colorBlack"
                         android:textSize="24sp"
@@ -253,7 +253,7 @@
                         android:id="@+id/txtFullNameMore"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="GEORGE FLOYD"
+                        android:text="@string/george_floyd"
                         android:textColor="@color/colorBlack"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -318,7 +318,7 @@
                                 android:id="@+id/txtChildren"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="2"
+                                android:text="@string/_2"
                                 android:textColor="@color/colorBlack"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -344,7 +344,7 @@
                         android:id="@+id/txtLocation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="MINNESOTA"
+                        android:text="@string/minnesota"
                         android:textColor="@color/colorBlack"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -417,7 +417,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_weight="1"
-                        android:text="Button" />
+                        android:text="@string/button" />
                 </LinearLayout>
 
                 <View
