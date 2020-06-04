@@ -1,11 +1,13 @@
 package com.blm.saytheirnames.models;
 
-public class Person {
+import java.util.List;
 
-    String id, full_name, date_of_incident,context,date_of_birth,number_of_children,age,city,country,biography;
-    String[] images;
+public class People {
 
-    public Person(String id, String full_name, String date_of_incident, String context, String date_of_birth, String number_of_children, String age, String city, String country, String biography, String[] images) {
+    private String id, full_name, date_of_incident, context, date_of_birth, number_of_children, age, city, country, biography;
+    private List<Images> images;
+
+    public People(String id, String full_name, String date_of_incident, String context, String date_of_birth, String number_of_children, String age, String city, String country, String biography, List<Images> images) {
         this.id = id;
         this.full_name = full_name;
         this.date_of_incident = date_of_incident;
@@ -99,11 +101,11 @@ public class Person {
         this.biography = biography;
     }
 
-    public String[] getImages() {
+    public List<Images> getImages() {
         return images;
     }
 
-    public void setImages(String[] images) {
+    public void setImages(List<Images> images) {
         this.images = images;
     }
 }

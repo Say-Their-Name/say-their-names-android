@@ -17,8 +17,7 @@
             android:theme="@style/AppTheme2">
 
         </activity>
-        <activity android:name=".activity.MainActivity"
-            android:theme="@style/AppTheme2">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,6 +1,5 @@
 package com.blm.saytheirnames.network;
 
-import com.blm.saytheirnames.models.PetitionData;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -16,7 +15,7 @@ public interface BackendInterface {
 
 
     @GET("/api/petitions")
-    Call<PetitionData> getPetitions();
+    Call<JsonObject> getPetitions();
 
 
     @GET("/api/petitions/{id}")

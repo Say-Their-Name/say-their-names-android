@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="true"
     android:background="@android:color/white"
+    android:clipToPadding="true"
     tools:context=".fragments.HomeFragment">
 
     <LinearLayout
@@ -86,7 +86,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="match_parent"
@@ -120,24 +119,33 @@
             </FrameLayout>
         </androidx.cardview.widget.CardView>
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_margin="16dp"
+            android:visibility="gone" />
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/personGridView"
+            android:id="@+id/personRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnWidth="150dp"
-            android:overScrollMode="never"
             android:numColumns="2"
+            android:overScrollMode="never"
             android:padding="8dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            tools:listitem="@layout/person_item" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            android:layout_height="50dp" />
 
     </LinearLayout>
-
 
 </ScrollView>

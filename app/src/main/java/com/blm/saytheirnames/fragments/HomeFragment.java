@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,7 +18,6 @@ import com.blm.saytheirnames.adapters.PersonsAdapter;
 import com.blm.saytheirnames.models.Person;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 public class HomeFragment extends Fragment {
@@ -47,8 +44,6 @@ public class HomeFragment extends Fragment {
 
     Resources resources;
 
-    Toolbar toolbar;
-
     public static HomeFragment newInstance() {
         return new HomeFragment();
     }
@@ -65,10 +60,6 @@ public class HomeFragment extends Fragment {
         personArrayList = new ArrayList<>();
        // filterList = new ArrayList<String[]>();
 
-        toolbar = mContent.findViewById(R.id.toolbar);
-
-        toolbar.setTitle("");
-        ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
         filterList = resources.getStringArray(R.array.location);
 
         personGridView = mContent.findViewById(R.id.personGridView);

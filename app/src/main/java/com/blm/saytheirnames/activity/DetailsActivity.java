@@ -22,7 +22,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private TextView txtDescription;
 
     private ImageButton btnReadmore;
-    private ImageButton imgBack;
 
     private LinearLayout linearLayoutDetails;
     private LinearLayout linearLayoutReadmore;
@@ -40,12 +39,10 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         btnReadmore = findViewById(R.id.btnReadmore);
         linearLayoutDetails = findViewById(R.id.linearLayoutDetails);
         linearLayoutReadmore = findViewById(R.id.linearLayoutReadmore);
-        imgBack = findViewById(R.id.imgBack);
 
         actualImage.setImageDrawable(getResources().getDrawable(R.drawable.mrfloyd));
 
         btnReadmore.setOnClickListener(this);
-        imgBack.setOnClickListener(this);
 
         Shader myShader = new LinearGradient(
                 0, txtDescription.getLineHeight() * 5.10f, 0, 0,
@@ -59,9 +56,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.btnReadmore:
                 switchView(true);
-                break;
-            case R.id.imgBack:
-                goBack();
                 break;
         }
     }
@@ -79,15 +73,11 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onBackPressed() {
-        goBack();
-
-    }
-
-    private void goBack() {
         if(readMoreState){
             switchView(false);
         }else{
             super.onBackPressed();
         }
+
     }
 }
