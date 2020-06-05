@@ -84,10 +84,7 @@ public class PetitionsFragment extends Fragment {
 
         progressBar = myFragment.findViewById(R.id.progressBar);
 
-//  TODO  Android studio really hates this line:
-//   Error:(88, 63) Should pass resolved color instead of resource id here: `getResources().getColor(R.color.colorBlack)`
-//   Is there a fix ?
-        progressBar.getIndeterminateDrawable().setColorFilter(R.color.colorBlack, android.graphics.PorterDuff.Mode.MULTIPLY);
+        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorBlack), android.graphics.PorterDuff.Mode.MULTIPLY);
 
         layoutManager = new LinearLayoutManager(getActivity());
 

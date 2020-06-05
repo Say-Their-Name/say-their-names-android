@@ -54,26 +54,6 @@ public class MainActivity extends AppCompatActivity {
         }
         selectFragment(selectedItem);
 
-
-
-//TODO move this into  src/test/  ?
-//Testing APi- added by thegeekybaniya
-   /*     backendInterface = Utils.getBackendService();
-        backendInterface.getPeople().enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                Log.d("API_Response", response.body().toString());
-                System.out.println("RES::::::"+response.body());
-
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                System.out.println("RES::::::"+t.getMessage());
-            }
-        });
-*/
-
     }
 
 
@@ -125,15 +105,6 @@ public class MainActivity extends AppCompatActivity {
         // update selected item
         mSelectedItem = item.getItemId();
 
-        // uncheck the other items.
-        /*for (int i = 0; i < mBottomNav.getMenu().size(); i++) {
-            MenuItem menuItem = mBottomNav.getMenu().getItem(i);
-            //menuItem.setChecked(menuItem.getItemId() == item.getItemId());
-
-        }
-
-        updateToolbarText(item.getTitle());*/
-
         if (frag != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.add(R.id.container, frag, frag.getTag());
@@ -141,14 +112,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-    /*private void updateToolbarText() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setCustomView(R.layout.action_bar_layout);
-            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        }
-    }*/
-
 
 }
