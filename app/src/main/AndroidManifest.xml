@@ -17,13 +17,6 @@
             android:theme="@style/AppTheme2">
 
         </activity>
-        <activity
-            android:name=".activity.LoginRegisterActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemeLogin"
-            android:windowSoftInputMode="adjustPan">
-
-        </activity>
 
         <activity android:name=".activity.MainActivity">
             <intent-filter>
