@@ -6,11 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.blm.saytheirnames.R;
+import com.blm.saytheirnames.fragments.DonationFragment;
 import com.blm.saytheirnames.fragments.HomeFragment;
 import com.blm.saytheirnames.network.BackendInterface;
 import com.blm.saytheirnames.network.Utils;
@@ -40,12 +45,9 @@ public class MainActivity extends AppCompatActivity {
         mBottomNav = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                selectFragment(item);
-                return true;
-            }
+        mBottomNav.setOnNavigationItemSelectedListener(item -> {
+            selectFragment(item);
+            return true;
         });
 
         setDefaultFragment();
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         backendInterface.getPeopleById(1).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                Log.d("API_Response", response.body().toString());
+//                Log.d("API_Response", response.body().toString());
 
             }
 
@@ -116,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 frag = HomeFragment.newInstance();
                 break;
             case R.id.navigation_donation:
-                frag = HomeFragment.newInstance();
+                frag = new DonationFragment();
                 break;
             case R.id.navigation_petitions:
                 frag = HomeFragment.newInstance();
@@ -155,5 +157,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //change status bar color to white for donation fragment
+    public void updateStatusBarColor(String color){// Color must be in hexadecimal fromat
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.parseColor(color));
+        }
+    }
 
 }
