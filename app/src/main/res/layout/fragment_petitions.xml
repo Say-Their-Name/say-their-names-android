@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="16dp"
-
+        android:indeterminateTint="@color/colorBlack"
         android:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
