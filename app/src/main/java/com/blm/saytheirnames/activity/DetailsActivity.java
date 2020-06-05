@@ -141,9 +141,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onResponse(@NonNull Call<PersonData> call, @NonNull Response<PersonData> response) {
                         if (response.isSuccessful()) {
-                            if (response.body() != null) {
-                                person = response.body().getData();
-                            }
+                            person = response.body().getData();
                             mediaList.addAll(person.getMedia_links());
 
                             Log.d("DATA", String.valueOf(response.body()));
