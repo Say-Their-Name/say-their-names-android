@@ -6,12 +6,13 @@ import java.util.List;
 
 public class Person {
 
-    String id, full_name, date_of_incident,context,date_of_birth,number_of_children,age,city,country,biography;
+    String id, full_name, identifier,date_of_incident,context,date_of_birth,number_of_children,age,city,country,biography;
     List<Images> images;
 
-    public Person(String id, String full_name, String date_of_incident, String context, String date_of_birth, String number_of_children, String age, String city, String country, String biography, List<Images> images) {
+    public Person(String id, String full_name, String identifier,String date_of_incident, String context, String date_of_birth, String number_of_children, String age, String city, String country, String biography, List<Images> images) {
         this.id = id;
         this.full_name = full_name;
+        this.identifier = identifier;
         this.date_of_incident = date_of_incident;
         this.context = context;
         this.date_of_birth = date_of_birth;
@@ -22,6 +23,8 @@ public class Person {
         this.biography = biography;
         this.images = images;
     }
+
+
 
     public String getId() {
         return id;
@@ -37,6 +40,14 @@ public class Person {
 
     public void setFull_name(String full_name) {
         this.full_name = full_name;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
     public String getDate_of_incident() {

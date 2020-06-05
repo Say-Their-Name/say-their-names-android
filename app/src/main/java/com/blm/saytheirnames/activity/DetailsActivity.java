@@ -35,7 +35,7 @@ import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class DetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String EXTRA_ID = "id";
+    public static final String EXTRA_ID = "identifier";
     private ImageView actualImage;
     private BlurImageView blurImageView;
     private TextView txtName, txtDescription, txtMoreName,
