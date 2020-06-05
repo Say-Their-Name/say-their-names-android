@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import com.blm.saytheirnames.R;
 import com.blm.saytheirnames.fragments.HomeFragment;
+import com.blm.saytheirnames.fragments.PetitionsFragment;
 import com.blm.saytheirnames.network.BackendInterface;
 import com.blm.saytheirnames.network.Utils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -48,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        setDefaultFragment();
+       // updateToolbarText();
+
 
         MenuItem selectedItem;
         if (savedInstanceState != null) {
@@ -60,20 +64,21 @@ public class MainActivity extends AppCompatActivity {
 
 
 //Testing APi- added by thegeekybaniya
-        backendInterface = Utils.getBackendService();
-        backendInterface.getPeopleById(1).enqueue(new Callback<JsonObject>() {
+   /*     backendInterface = Utils.getBackendService();
+        backendInterface.getPeople().enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 Log.d("API_Response", response.body().toString());
+                System.out.println("RES::::::"+response.body());
 
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-
+                System.out.println("RES::::::"+t.getMessage());
             }
         });
-
+*/
 
     }
 
@@ -82,6 +87,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         outState.putInt(SELECTED_ITEM, mSelectedItem);
         super.onSaveInstanceState(outState);
+    }
+
+    private void setDefaultFragment() {
+        mBottomNav.setSelectedItemId(R.id.navigation_home);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, HomeFragment.newInstance());
+        transaction.commit();
     }
 
     @Override
@@ -96,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void selectFragment(MenuItem item) {
+
+        mSelectedItem = item.getItemId();
         Fragment frag = null;
         // init corresponding fragment
         switch (item.getItemId()) {
@@ -106,6 +120,10 @@ public class MainActivity extends AppCompatActivity {
                 frag = HomeFragment.newInstance();
                 break;
             case R.id.navigation_petitions:
+                frag = PetitionsFragment.newInstance();
+                break;
+
+            case R.id.navigation_settings:
                 frag = HomeFragment.newInstance();
                 break;
         }
@@ -114,27 +132,29 @@ public class MainActivity extends AppCompatActivity {
         mSelectedItem = item.getItemId();
 
         // uncheck the other items.
-        for (int i = 0; i < mBottomNav.getMenu().size(); i++) {
+        /*for (int i = 0; i < mBottomNav.getMenu().size(); i++) {
             MenuItem menuItem = mBottomNav.getMenu().getItem(i);
-            menuItem.setChecked(menuItem.getItemId() == item.getItemId());
+            //menuItem.setChecked(menuItem.getItemId() == item.getItemId());
+
         }
 
-        updateToolbarText(item.getTitle());
+        updateToolbarText(item.getTitle());*/
 
         if (frag != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.add(R.id.container, frag, frag.getTag());
             ft.commit();
         }
+
     }
 
-    private void updateToolbarText(CharSequence text) {
+    /*private void updateToolbarText() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setCustomView(R.layout.action_bar_layout);
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         }
-    }
+    }*/
 
 
 }
