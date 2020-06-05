@@ -5,19 +5,12 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blm.saytheirnames.R;
-import com.blm.saytheirnames.models.Person;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterItemHolder> {
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navigation_home"
@@ -8,12 +9,17 @@
 
     <item
         android:id="@+id/navigation_donation"
-        android:icon="@drawable/heart"
+        android:icon="@drawable/donation"
         android:title="@string/title_donation" />
 
     <item
         android:id="@+id/navigation_petitions"
-        android:icon="@drawable/edit"
+        android:icon="@drawable/send"
         android:title="@string/title_petition" />
+
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/settings"
+        android:title="@string/settings" />
 
 </menu>
