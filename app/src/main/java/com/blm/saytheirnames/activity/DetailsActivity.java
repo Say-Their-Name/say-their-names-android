@@ -8,8 +8,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,17 +15,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blm.saytheirnames.R;
-import com.blm.saytheirnames.adapters.FilterAdapter;
 import com.blm.saytheirnames.adapters.MediaAdapter;
-import com.blm.saytheirnames.adapters.PeopleAdapter;
 import com.blm.saytheirnames.models.Media;
-import com.blm.saytheirnames.models.People;
-import com.blm.saytheirnames.models.PeopleData;
 import com.blm.saytheirnames.models.Person;
 import com.blm.saytheirnames.models.PersonData;
 import com.blm.saytheirnames.network.BackendInterface;
@@ -148,6 +141,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onResponse(@NonNull Call<PersonData> call, @NonNull Response<PersonData> response) {
                         if (response.isSuccessful()) {
+                            //TODO check for null on .getData()
                             person = response.body().getData();
                             mediaList.addAll(person.getMedia_links());
 
