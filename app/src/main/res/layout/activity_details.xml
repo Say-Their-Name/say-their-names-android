@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <FrameLayout
                 android:id="@+id/frameLayout"
@@ -146,7 +146,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -384,51 +384,28 @@
                     app:layout_constraintStart_toStartOf="@+id/textView12"
                     app:layout_constraintTop_toBottomOf="@+id/txtContextMore" />
                 <!-- USE BUTTONS FOR THE TIME BEING-->
-                <LinearLayout
-                    android:id="@+id/linearLayout3"
-                    android:layout_width="0dp"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    android:orientation="horizontal"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView14">
+                    app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
-                    <ImageButton
-                        android:id="@+id/button3"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_weight="1"
-
-                        android:text="Button" />
-
-                    <ImageButton
-                        android:id="@+id/button4"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_weight="1"
-                        android:text="Button" />
-
-                    <ImageButton
-                        android:id="@+id/button5"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_weight="1"
-                        android:text="@string/button" />
-                </LinearLayout>
 
                 <View
                     android:id="@+id/view7"
                     android:layout_width="wrap_content"
                     android:layout_height="2dp"
+                    android:layout_marginTop="13dp"
                     android:layout_marginBottom="16dp"
                     android:background="@color/colorSecondaryGrey"
                     app:layout_constraintBottom_toTopOf="@+id/btnMoreDonate"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
                 <Button
                     android:id="@+id/btnMoreDonate"
