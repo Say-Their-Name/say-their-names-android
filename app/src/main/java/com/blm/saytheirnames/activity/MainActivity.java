@@ -1,26 +1,18 @@
 package com.blm.saytheirnames.activity;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
 
 import com.blm.saytheirnames.R;
 import com.blm.saytheirnames.fragments.HomeFragment;
 import com.blm.saytheirnames.fragments.PetitionsFragment;
 import com.blm.saytheirnames.network.BackendInterface;
-import com.blm.saytheirnames.network.Utils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.gson.JsonObject;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         selectFragment(selectedItem);
 
 
+
+//TODO move this into  src/test/  ?
 //Testing APi- added by thegeekybaniya
    /*     backendInterface = Utils.getBackendService();
         backendInterface.getPeople().enqueue(new Callback<JsonObject>() {
