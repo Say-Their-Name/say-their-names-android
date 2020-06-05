@@ -1,9 +1,7 @@
 package com.blm.saytheirnames.network;
 
-import com.blm.saytheirnames.models.People;
 import com.blm.saytheirnames.models.PeopleData;
 import com.blm.saytheirnames.models.PersonData;
-import com.blm.saytheirnames.models.Petition;
 import com.blm.saytheirnames.models.PetitionData;
 import com.google.gson.JsonObject;
 
