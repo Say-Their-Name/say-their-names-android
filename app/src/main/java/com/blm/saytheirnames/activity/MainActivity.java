@@ -116,10 +116,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.navigation_petitions:
                 frag = PetitionsFragment.newInstance();
                 break;
-
-            case R.id.navigation_settings:
-                frag = HomeFragment.newInstance();
-                break;
         }
 
         // update selected item
