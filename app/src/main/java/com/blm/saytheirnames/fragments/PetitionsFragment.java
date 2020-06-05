@@ -90,6 +90,9 @@ public class PetitionsFragment extends Fragment {
 
         progressBar = myFragment.findViewById(R.id.progressBar);
 
+
+        progressBar.getIndeterminateDrawable().setColorFilter(R.color.colorBlack, android.graphics.PorterDuff.Mode.MULTIPLY);
+
         layoutManager = new LinearLayoutManager(getActivity());
 
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
