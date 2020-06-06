@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blm.saytheirnames.R;
 import com.blm.saytheirnames.adapters.FilterAdapter;
+import com.blm.saytheirnames.adapters.FilterHomeAdapter;
 import com.blm.saytheirnames.adapters.PeopleAdapter;
 import com.blm.saytheirnames.customTabs.CustomTabActivityHelper;
 import com.blm.saytheirnames.customTabs.WebViewActivity;
@@ -59,7 +60,7 @@ public class HomeFragment extends Fragment {
     private LinearLayoutManager layoutManager1;
 
     private PeopleAdapter peopleAdapter;
-    private FilterAdapter filterAdapter;
+    private FilterHomeAdapter filterHomeAdapter;
 
     private List<People> peopleArrayList;
     private String[] filterList;
@@ -106,7 +107,7 @@ public class HomeFragment extends Fragment {
         progressBar = mContent.findViewById(R.id.progressBar);
 
         peopleAdapter = new PeopleAdapter(peopleArrayList, getActivity());
-        filterAdapter = new FilterAdapter(filterArrayList, getActivity());
+        filterHomeAdapter = new FilterHomeAdapter(filterArrayList, getActivity());
 
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager1 = new LinearLayoutManager(getActivity());
@@ -119,7 +120,7 @@ public class HomeFragment extends Fragment {
         personRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         personRecyclerView.setAdapter(peopleAdapter);
-        recyclerView.setAdapter(filterAdapter);
+        recyclerView.setAdapter(filterHomeAdapter);
 
         loadData();
 
@@ -174,7 +175,7 @@ public class HomeFragment extends Fragment {
                         progressBar.setVisibility(View.GONE);
                         personRecyclerView.setVisibility(View.VISIBLE);
 
-                        filterAdapter.notifyDataSetChanged();
+                        filterHomeAdapter.notifyDataSetChanged();
                         peopleAdapter.notifyDataSetChanged();
                     }
 
