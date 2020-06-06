@@ -13,6 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activity.DetailsActivity"
+            android:theme="@style/AppTheme2">
+
+        </activity>
         <activity android:name=".activity.PetitionDetailsActivity" android:theme="@style/AppTheme2"></activity>
         <activity
             android:name=".activity.DetailsActivity"
@@ -26,6 +31,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.DonationDetailsActivity"
+            android:theme="@style/AppTheme2" />
 
         <meta-data
             android:name="preloaded_fonts"

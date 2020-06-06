@@ -35,6 +35,16 @@
     <string name="_2">2</string>
     <string name="minnesota">MINNESOTA</string>
     <string name="button">Button</string>
+  
+    <string name="donation_image">donation image</string>
+
+    <string-array name="tag_donation">
+        <item>All</item>
+        <item>Victims</item>
+        <item>Protesters</item>
+        <item>Others</item>
+    </string-array>
+
     <string name="blacklivesmatter">#BLACKLIVESMATTER</string>
     <string name="how_to_get_involved">How to get involved</string>
     <string name="name">Name</string>
