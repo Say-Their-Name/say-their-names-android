@@ -60,6 +60,8 @@
             android:background="@drawable/find_out_btn_border"
             android:text="@string/find_out_more"
             android:textColor="@color/colorBlack"
+            android:textSize="17sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/txtDescription"
             app:layout_constraintStart_toStartOf="@+id/txtDescription"
