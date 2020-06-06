@@ -34,18 +34,9 @@
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/default_font"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/btnBookmark"
             app:layout_constraintStart_toStartOf="@+id/personImage"
             app:layout_constraintTop_toBottomOf="@+id/personImage" />
 
-        <ImageView
-            android:id="@+id/btnBookmark"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginEnd="@dimen/default_margin"
-            app:layout_constraintEnd_toEndOf="@+id/personImage"
-            app:layout_constraintTop_toTopOf="@+id/txtPersonName"
-            app:srcCompat="@drawable/bookmark" />
 
         <TextView
             android:id="@+id/dateOfIncident"
