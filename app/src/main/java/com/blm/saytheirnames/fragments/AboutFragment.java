@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.blm.saytheirnames.R;
 import com.blm.saytheirnames.customTabs.CustomTabActivityHelper;
 import com.blm.saytheirnames.customTabs.WebViewActivity;
+import com.blm.saytheirnames.utils.CustomTabUtil;
 
 public class AboutFragment extends Fragment {
 
@@ -67,35 +68,8 @@ public class AboutFragment extends Fragment {
         return myFragment;
     }
 
-    private void visitPages(String link){
-        if (validateUrl(link)) {
-            Uri uri = Uri.parse(link);
-            if (uri != null) {
-                openCustomChromeTab(uri);
-            }
-        } else {
-            Toast.makeText(requireActivity(), "Error with link", Toast.LENGTH_SHORT).show();
-        }
+    private void visitPages(String link) {
+        CustomTabUtil.openCustomTabForUrl(requireActivity(), link);
     }
 
-    private boolean validateUrl(String url) {
-        return url != null && url.length() > 0 && (url.startsWith("http://") || url.startsWith("https://"));
-    }
-
-    private void openCustomChromeTab(Uri uri) {
-        CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
-        CustomTabsIntent customTabsIntent = intentBuilder.build();
-
-        intentBuilder.setToolbarColor(ContextCompat.getColor(requireActivity(), R.color.colorPrimary));
-        intentBuilder.setSecondaryToolbarColor(ContextCompat.getColor(requireActivity(), R.color.colorPrimaryDark));
-
-        CustomTabActivityHelper.openCustomTab(requireActivity(), customTabsIntent, uri, (activity, uri1) -> openWebView(uri1));
-    }
-
-    private void openWebView(Uri uri) {
-        Intent webViewIntent = new Intent(requireActivity(), WebViewActivity.class);
-        webViewIntent.putExtra(WebViewActivity.EXTRA_URL, uri.toString());
-        webViewIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(webViewIntent);
-    }
 }
