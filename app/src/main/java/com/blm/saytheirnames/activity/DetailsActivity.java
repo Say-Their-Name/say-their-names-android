@@ -3,16 +3,19 @@ package com.blm.saytheirnames.activity;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
+import android.graphics.Point;
 import android.graphics.Shader;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -67,12 +70,23 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
     Person person;
 
-   // ImageView imageview;
+    // ImageView imageview;
+
+    //screen parameters
+    Display display;
+    int screenHeight;
+    int screenWidth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+
+        display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        screenHeight = size.y;
+        screenWidth = size.x;
 
         personID = getIntent().getStringExtra(EXTRA_ID);
         actualImage = findViewById(R.id.actual_image);
@@ -95,7 +109,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
         btnReadMore.setOnClickListener(this);
 
-        mediaAdapter = new MediaAdapter(mediaList,this);
+        mediaAdapter = new MediaAdapter(mediaList, this);
 
         closeDetails = findViewById(R.id.closeDetails);
         closeDetails.setOnClickListener(view -> onBackPressed());
@@ -202,14 +216,27 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         return inputString;
     }
 
+    private void switchViewAnimation(View layout) {
+        layout.setTranslationY(screenHeight);
+        layout.animate()
+                .alpha(1.0f)
+                .setDuration(200)
+                .translationY(0).start();
+    }
+
+    private void onBackPressAnimation(View layout)
+
     public void switchView(boolean state) {
         readMoreState = state;
         if (!state) {
             linearLayoutDetails.setVisibility(View.VISIBLE);
             linearLayoutReadMore.setVisibility(View.GONE);
+            switchViewAnimation(linearLayoutDetails);
         } else {
             linearLayoutDetails.setVisibility(View.GONE);
             linearLayoutReadMore.setVisibility(View.VISIBLE);
+            switchViewAnimation(linearLayoutReadMore);
+
         }
     }
 
