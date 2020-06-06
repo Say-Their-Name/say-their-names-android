@@ -48,7 +48,7 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.FilterIt
         Person person = personList.get(position);
 
         holder.personName.setText(person.getFull_name());
-        holder.personAge.setText(String.valueOf(person.getAge()));
+        holder.personDateOfIncident.setText(String.valueOf(person.getDate_of_incident()));
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,14 +71,14 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.FilterIt
 
     class FilterItemHolder extends RecyclerView.ViewHolder {
         TextView personName;
-        TextView personAge;
+        TextView personDateOfIncident;
         ImageView personImage;
         CardView cardView;
 
         public FilterItemHolder(@NonNull View itemView) {
             super(itemView);
             personName = itemView.findViewById(R.id.txtPersonName);
-            personAge = itemView.findViewById(R.id.txtPersonAge);
+            personDateOfIncident = itemView.findViewById(R.id.dateOfIncident);
             personImage = itemView.findViewById(R.id.personImage);
             cardView = itemView.findViewById(R.id.cardView);
 

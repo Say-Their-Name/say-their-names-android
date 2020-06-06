@@ -19,8 +19,12 @@ import com.blm.saytheirnames.models.People;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.FilterItemHolder> {
     private List<People> peopleList;
@@ -46,10 +50,23 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.FilterItem
 
     @Override
     public void onBindViewHolder(@NonNull PeopleAdapter.FilterItemHolder holder, final int position) {
-        People people = filteredPeopleList.get(position);
+        People people = peopleList.get(position);
 
-        holder.personName.setText(people.getFull_name());
-        holder.personAge.setText(String.valueOf(people.getAge()));
+        holder.personName.setText(people.getFullName());
+
+        SimpleDateFormat dateOut = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat dateIn = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            Date parsedDate = dateIn.parse(people.getDateOfIncident());
+            holder.dateOfIncident.setText(dateOut.format(parsedDate));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        holder.personName.setText(people.getFullName());
+
+
         Glide.with(context)
                 .load(people.getImages().get(0).getImage_url())
                 .apply(new RequestOptions()
@@ -109,14 +126,14 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.FilterItem
 
     static class FilterItemHolder extends RecyclerView.ViewHolder {
         TextView personName;
-        TextView personAge;
+        TextView dateOfIncident;
         ImageView personImage;
         CardView cardView;
 
         public FilterItemHolder(@NonNull View itemView) {
             super(itemView);
             personName = itemView.findViewById(R.id.txtPersonName);
-            personAge = itemView.findViewById(R.id.txtPersonAge);
+            dateOfIncident = itemView.findViewById(R.id.dateOfIncident);
             personImage = itemView.findViewById(R.id.personImage);
             cardView = itemView.findViewById(R.id.cardView);
         }
