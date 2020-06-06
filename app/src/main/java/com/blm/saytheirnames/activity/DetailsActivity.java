@@ -1,59 +1,49 @@
 package com.blm.saytheirnames.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.Shader;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.Group;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blm.saytheirnames.R;
 import com.blm.saytheirnames.adapters.MediaAdapter;
-import com.blm.saytheirnames.models.Donation;
+import com.blm.saytheirnames.adapters.HashtagAdapter;
 import com.blm.saytheirnames.models.Media;
 import com.blm.saytheirnames.models.Person;
 import com.blm.saytheirnames.models.PersonData;
+import com.blm.saytheirnames.models.Hashtag;
 import com.blm.saytheirnames.network.BackendInterface;
 import com.blm.saytheirnames.network.Utils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.snackbar.Snackbar;
-import com.jgabrielfreitas.core.BlurImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.wasabeef.glide.transformations.BlurTransformation;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
-
-public class DetailsActivity extends AppCompatActivity implements MediaAdapter.MediaListener, View.OnClickListener {
+public class DetailsActivity extends AppCompatActivity
+        implements MediaAdapter.MediaListener, View.OnClickListener, HashtagAdapter.HashtagListener {
 
     public static final String EXTRA_ID = "identifier";
 
     private MediaAdapter mediaAdapter;
+    private HashtagAdapter hashtagAdapter;
 
     private List<Media> mediaList;
+    private List<Hashtag> hashtagList;
 
     private String personID;
 
@@ -92,6 +82,7 @@ public class DetailsActivity extends AppCompatActivity implements MediaAdapter.M
         bindViews();
         initializeBackend();
         renderMedia();
+        renderSocialMedia();
         renderData();
     }
 
@@ -131,9 +122,20 @@ public class DetailsActivity extends AppCompatActivity implements MediaAdapter.M
         media.setAdapter(mediaAdapter);
     }
 
+    private void renderSocialMedia() {
+        hashtagList = new ArrayList<>();
+        hashtagAdapter = new HashtagAdapter(this, hashtagList);
+        hashtags.setAdapter(hashtagAdapter);
+    }
+
     @Override
     public void onMediaSelected(Media media) {
         navigateToUrl(media.getUrl());
+    }
+
+    @Override
+    public void onHashtagClick(Hashtag hashtag) {
+        navigateToUrl(hashtag.getLink());
     }
 
     private void renderData() {
@@ -160,14 +162,26 @@ public class DetailsActivity extends AppCompatActivity implements MediaAdapter.M
     private void onGetPersonSuccess(Person person) {
         this.person = person;
 
-        mediaList.addAll(person.getMediaLinks());
-        mediaAdapter.notifyDataSetChanged();
+        if (person.getMediaLinks() != null && person.getMediaLinks().size() > 0) {
+            mediaList.clear();
+            mediaList.addAll(person.getMediaLinks());
+            mediaAdapter.notifyDataSetChanged();
+            mediaGroup.setVisibility(View.VISIBLE);
+        } else {
+            mediaGroup.setVisibility(View.GONE);
+        }
 
-        //TODO: Make adapter for News
+        //TODO: There is no News currently. Media will function as that for now.
         newsGroup.setVisibility(View.GONE);
 
-        //TODO: Make adapter for Hashtags
-        hashtagGroup.setVisibility(View.GONE);
+        if (person.getHashtags() != null && person.getHashtags().size() > 0) {
+            hashtagList.clear();
+            hashtagList.addAll(person.getHashtags());
+            hashtagAdapter.notifyDataSetChanged();
+            hashtagGroup.setVisibility(View.VISIBLE);
+        } else {
+            hashtagGroup.setVisibility(View.GONE);
+        }
 
         name.setText(person.getFullName());
         age.setText(person.getAge().toString());

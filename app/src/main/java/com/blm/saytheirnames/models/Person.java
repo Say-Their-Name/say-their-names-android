@@ -1,7 +1,5 @@
 package com.blm.saytheirnames.models;
 
-import android.media.Image;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -56,8 +54,8 @@ public class Person {
     @SerializedName("media_links")
     List<Media> mediaLinks;
 
-    @SerializedName("social_media")
-    List<SocialMedia> socialMedia;
+    @SerializedName("hash_tags")
+    List<Hashtag> hashtags;
 
 
     public String getId() {
@@ -188,11 +186,11 @@ public class Person {
         this.mediaLinks = mediaLinks;
     }
 
-    public List<SocialMedia> getSocialMedia() {
-        return socialMedia;
+    public List<Hashtag> getHashtags() {
+        return hashtags;
     }
 
-    public void setSocialMedia(List<SocialMedia> socialMedia) {
-        this.socialMedia = socialMedia;
+    public void setHashtags(List<Hashtag> hashtag) {
+        this.hashtags = hashtag;
     }
 }
