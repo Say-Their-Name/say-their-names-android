@@ -1,5 +1,7 @@
 package com.blm.saytheirnames.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
@@ -15,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -216,25 +217,24 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         return inputString;
     }
 
-    private void switchViewAnimation(View layout) {
-        layout.setTranslationY(screenHeight);
-        layout.animate()
-                .alpha(1.0f)
+    //method to handle switchView animations for overlaying layout
+    private void switchViewAnimation(View overlayView) {
+        overlayView.setTranslationY(screenHeight);
+        overlayView.animate()
                 .setDuration(200)
-                .translationY(0).start();
+                .translationY(0)
+                .start();
     }
 
     public void switchView(boolean state) {
         readMoreState = state;
-        if (!state) {
+        if (!state){
             linearLayoutDetails.setVisibility(View.VISIBLE);
             linearLayoutReadMore.setVisibility(View.GONE);
-            switchViewAnimation(linearLayoutDetails);
         } else {
-            linearLayoutDetails.setVisibility(View.GONE);
             linearLayoutReadMore.setVisibility(View.VISIBLE);
-            switchViewAnimation(linearLayoutReadMore);
-
+            switchViewAnimation(linearLayoutReadMore);      //onload animation
+            linearLayoutDetails.setVisibility(View.GONE);
         }
     }
 
