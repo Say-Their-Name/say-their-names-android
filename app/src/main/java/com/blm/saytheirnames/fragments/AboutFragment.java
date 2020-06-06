@@ -23,7 +23,7 @@ public class AboutFragment extends Fragment {
 
     private View myFragment;
 
-    String twitterLink;
+    String twitterLink = "https://twitter.com/SayTheirName_io";
     String slackLink = "https://app.slack.com/client/T014JL5B3SN/C014X92G997";
     String repoLink = "https://github.com/Say-Their-Name/";
 
