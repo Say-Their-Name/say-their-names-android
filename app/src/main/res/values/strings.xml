@@ -42,4 +42,8 @@
     <string name="title">Title</string>
     <string name="verified">verified</string>
     <string name="description">Description</string>
+    <string name="find_out_more">Find Out More</string>
+    <string name="sign_this_petition">SIGN THIS PETITION</string>
+    <string name="share_this_petition">SHARE THIS PETITION</string>
+    <string name="content">CONTENT</string>
 </resources>

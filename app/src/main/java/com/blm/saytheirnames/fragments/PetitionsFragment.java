@@ -8,25 +8,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.provider.Contacts;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.blm.saytheirnames.R;
-import com.blm.saytheirnames.adapters.FilterAdapter;
-import com.blm.saytheirnames.adapters.PersonsAdapter;
 import com.blm.saytheirnames.adapters.PetitionsAdapter;
-import com.blm.saytheirnames.models.Person;
 import com.blm.saytheirnames.models.Petition;
-import com.blm.saytheirnames.models.PetitionData;
+import com.blm.saytheirnames.models.PetitionsData;
 import com.blm.saytheirnames.network.BackendInterface;
 import com.blm.saytheirnames.network.Utils;
 
@@ -42,7 +36,7 @@ public class PetitionsFragment extends Fragment {
     private RecyclerView recyclerView;
     private View myFragment;
     private Toolbar toolbar;
-    private ImageView imgFilter,imgSearch;
+   // private ImageView imgFilter,imgSearch;
 
     private LinearLayoutManager layoutManager;
     private ProgressBar progressBar;
@@ -50,7 +44,6 @@ public class PetitionsFragment extends Fragment {
     private PetitionsAdapter petitionsAdapter;
 
     private List<Petition> petitionArrayList;
-    private String[] filterList;
 
 
     public static PetitionsFragment newInstance() {
@@ -70,14 +63,14 @@ public class PetitionsFragment extends Fragment {
 
         recyclerView = myFragment.findViewById(R.id.recyclerView);
         toolbar = myFragment.findViewById(R.id.toolbar);
-        imgFilter = toolbar.findViewById(R.id.imgFilter);
-        imgSearch = toolbar.findViewById(R.id.imgSearch);
+       /* imgFilter = toolbar.findViewById(R.id.imgFilter);
+        imgSearch = toolbar.findViewById(R.id.imgSearch);*/
 
         //toolbar.setNavigationIcon(R.drawable.filter);
         //toolbar.setLogo(R.drawable.filter);
         toolbar.setTitle("");
-        imgFilter.setOnClickListener(v -> System.out.println("Filter"));
-        imgSearch.setOnClickListener(v -> System.out.println("Search"));
+     /*   imgFilter.setOnClickListener(v -> System.out.println("Filter"));
+        imgSearch.setOnClickListener(v -> System.out.println("Search"));*/
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
 
@@ -105,20 +98,6 @@ public class PetitionsFragment extends Fragment {
         return myFragment;
     }
 
-    /*private void loadData(){
-        petitionArrayList.clear();
-
-
-//        filterList.add(new String[]{"Location ", "gfhfghhg", "hgfgfhfhgfhg"});
-        for(int i = 0; i < 10; i++){
-            Petition person = new Petition(1,"George Floyd","he death of George Floyd occurred on May 25, 2020, when Derek Chauvin, a white Minneapolis police officer, kneeled on his neck for at least seven minutes","https://google.com","Minnesota",null);
-
-            petitionArrayList.add(person);
-        }
-
-        petitionsAdapter.notifyDataSetChanged();
-    }*/
-
     private void loadData() {
         @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> getPetitions    = new AsyncTask<Void, Void, Void>() {
             @Override
@@ -130,9 +109,9 @@ public class PetitionsFragment extends Fragment {
             @Override
             protected Void doInBackground(Void... params) {
                 BackendInterface backendInterface = Utils.getBackendService();
-                backendInterface.getPetitions().enqueue(new Callback<PetitionData>() {
+                backendInterface.getPetitions().enqueue(new Callback<PetitionsData>() {
                     @Override
-                    public void onResponse(@NonNull Call<PetitionData> call, @NonNull Response<PetitionData> response) {
+                    public void onResponse(@NonNull Call<PetitionsData> call, @NonNull Response<PetitionsData> response) {
                         petitionArrayList.clear();
                         Log.d("API_Response", response.body().toString());
                         List<Petition> body = response.body().getData();
@@ -146,7 +125,7 @@ public class PetitionsFragment extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<PetitionData> call, Throwable t) {
+                    public void onFailure(Call<PetitionsData> call, Throwable t) {
                         progressBar.setVisibility(View.GONE);
                         Log.d("API_Response", t.getMessage().toString());
                     }
