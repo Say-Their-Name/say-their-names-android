@@ -168,7 +168,8 @@
             <TextView
                 android:id="@+id/story_label"
                 style="@style/Person.Section.Label"
-                android:text="THEIR STORY"
+                android:text="@string/their_story"
+                android:textAllCaps="true"
                 app:layout_constraintTop_toBottomOf="@id/information_values_guideline"
                 app:layout_constraintStart_toStartOf="parent"/>
 
@@ -184,7 +185,8 @@
             <TextView
                 android:id="@+id/outcome_label"
                 style="@style/Person.Section.Label"
-                android:text="OUTCOME"
+                android:text="@string/outcome"
+                android:textAllCaps="true"
                 app:layout_constraintTop_toBottomOf="@id/story"
                 app:layout_constraintStart_toStartOf="parent"/>
 
@@ -204,7 +206,8 @@
             <TextView
                 android:id="@+id/news_label"
                 style="@style/Person.Section.Label"
-                android:text="NEWS"
+                android:text="@string/news"
+                android:textAllCaps="true"
                 app:layout_constraintTop_toBottomOf="@id/outcome"
                 app:layout_constraintStart_toStartOf="parent"/>
 
@@ -224,7 +227,8 @@
             <TextView
                 android:id="@+id/media_label"
                 style="@style/Person.Section.Label"
-                android:text="MEDIA"
+                android:text="@string/media"
+                android:textAllCaps="true"
                 app:layout_constraintTop_toBottomOf="@id/news"
                 app:layout_constraintStart_toStartOf="parent"/>
 
@@ -244,7 +248,8 @@
             <TextView
                 android:id="@+id/hashtags_label"
                 style="@style/Person.Section.Label"
-                android:text="SOCIAL MEDIA HASHTAGS"
+                android:text="@string/hashtags"
+                android:textAllCaps="true"
                 app:layout_constraintTop_toBottomOf="@id/media"
                 app:layout_constraintStart_toStartOf="parent"/>
 

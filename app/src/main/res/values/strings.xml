@@ -42,4 +42,9 @@
     <string name="title">Title</string>
     <string name="verified">verified</string>
     <string name="description">Description</string>
+    <string name="hashtags">Social Media Hashtags</string>
+    <string name="media">Media</string>
+    <string name="news">News</string>
+    <string name="outcome">Outcome</string>
+    <string name="their_story">Their Story</string>
 </resources>
