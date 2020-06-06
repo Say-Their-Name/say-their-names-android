@@ -3,7 +3,9 @@ package com.blm.saytheirnames.network;
 import com.blm.saytheirnames.models.DonationData;
 import com.blm.saytheirnames.models.PeopleData;
 import com.blm.saytheirnames.models.PersonData;
+import com.blm.saytheirnames.models.Petition;
 import com.blm.saytheirnames.models.PetitionData;
+import com.blm.saytheirnames.models.PetitionsData;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -19,11 +21,11 @@ public interface BackendInterface {
 
 
     @GET("/api/petitions")
-    Call<PetitionData> getPetitions();
+    Call<PetitionsData> getPetitions();
 
 
     @GET("/api/petitions/{id}")
-    Call<JsonObject> getPetitionsById(@Path("id") int id);
+    Call<PetitionData> getPetitionsById(@Path("id") int id);
 
 
     @GET("/api/donations")

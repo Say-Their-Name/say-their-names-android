@@ -1,15 +1,13 @@
 package com.blm.saytheirnames.models;
 
-import java.util.List;
-
 public class PetitionData {
-    private List<Petition> data;
+    private Petition data;
 
-    public List<Petition> getData() {
+    public Petition getData() {
         return data;
     }
 
-    public void setData(List<Petition> data) {
+    public void setData(Petition data) {
         this.data = data;
     }
 }

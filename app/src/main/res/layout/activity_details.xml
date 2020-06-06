@@ -126,18 +126,6 @@
                     app:layout_constraintStart_toStartOf="@+id/txtDescription"
                     app:layout_constraintTop_toBottomOf="@+id/view" />
 
-                <ImageButton
-                    android:id="@+id/btnBookmark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="17dp"
-                    android:background="@android:color/transparent"
-                    android:scaleType="centerInside"
-                    app:layout_constraintBottom_toTopOf="@+id/txtDescription"
-                    app:layout_constraintEnd_toEndOf="@+id/txtDescription"
-                    app:layout_constraintTop_toTopOf="@+id/txtName"
-                    app:srcCompat="@drawable/ic_bookmark" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
@@ -186,13 +174,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/george_floyd"
                         android:textAlignment="center"
                         android:textColor="@color/colorBlack"
                         android:textSize="24sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <!--
+                        Only keeping this one because of the spacing it adds to the layout.
+                    -->
                     <ImageButton
                         android:id="@+id/btnMoreBookmark"
                         android:layout_width="wrap_content"
@@ -200,6 +190,7 @@
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:scaleType="centerInside"
+                        android:visibility="invisible"
                         app:layout_constraintBottom_toTopOf="@+id/txtDescription"
                         app:layout_constraintEnd_toEndOf="@+id/txtDescription"
                         app:layout_constraintTop_toTopOf="@+id/txtName"
@@ -253,7 +244,6 @@
                         android:id="@+id/txtFullNameMore"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/george_floyd"
                         android:textColor="@color/colorBlack"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -318,7 +308,7 @@
                                 android:id="@+id/txtChildren"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/_2"
+                                android:text="@string/children_title"
                                 android:textColor="@color/colorBlack"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -344,7 +334,7 @@
                         android:id="@+id/txtLocation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/minnesota"
+                        android:text="@string/location_title"
                         android:textColor="@color/colorBlack"
                         android:textSize="18sp"
                         android:textStyle="bold" />
