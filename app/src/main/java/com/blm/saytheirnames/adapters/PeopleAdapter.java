@@ -54,7 +54,7 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.FilterItem
 
         holder.personName.setText(people.getFullName());
 
-        SimpleDateFormat dateOut = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat dateOut = new SimpleDateFormat("MM.dd.yyyy");
         SimpleDateFormat dateIn = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
