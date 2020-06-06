@@ -29,6 +29,7 @@ import com.blm.saytheirnames.adapters.FilterAdapter;
 import com.blm.saytheirnames.adapters.PeopleAdapter;
 import com.blm.saytheirnames.customTabs.CustomTabActivityHelper;
 import com.blm.saytheirnames.customTabs.WebViewActivity;
+import com.blm.saytheirnames.models.HomeFilter;
 import com.blm.saytheirnames.models.People;
 import com.blm.saytheirnames.models.PeopleData;
 import com.blm.saytheirnames.network.BackendInterface;
@@ -62,6 +63,7 @@ public class HomeFragment extends Fragment {
 
     private List<People> peopleArrayList;
     private String[] filterList;
+    private ArrayList<HomeFilter> filterArrayList;
     private ProgressBar progressBar;
     private ImageView imageView;
 
@@ -90,16 +92,21 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        filterArrayList = new ArrayList<>();
         peopleArrayList = new ArrayList<>();
 
-        filterList = resources.getStringArray(R.array.location);
+        filterList = resources.getStringArray(R.array.filters);
+
+        for(String filter : filterList){
+            filterArrayList.add(new HomeFilter(filter, false));
+        }
 
         personRecyclerView = mContent.findViewById(R.id.personRecyclerView);
         recyclerView = mContent.findViewById(R.id.recyclerView);
         progressBar = mContent.findViewById(R.id.progressBar);
 
         peopleAdapter = new PeopleAdapter(peopleArrayList, getActivity());
-        filterAdapter = new FilterAdapter(filterList, getActivity());
+        filterAdapter = new FilterAdapter(filterArrayList, getActivity());
 
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager1 = new LinearLayoutManager(getActivity());

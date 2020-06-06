@@ -37,13 +37,10 @@
     <string name="error_email">Please enter a valid email</string>
     <string name="error_password_do_not_match">Passwords do not match</string>
 
-    <string-array name="location">
-        <item>All</item>
-        <item>Missouri</item>
-        <item>Texas</item>
-        <item>Dallas</item>
-        <item>Atlanta</item>
-        <item>LA</item>
+    <string-array name="filters">
+        <item>Age</item>
+        <item>Location</item>
+        <item>State</item>
 
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
