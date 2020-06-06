@@ -1,6 +1,5 @@
 package com.blm.saytheirnames.adapters;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,36 +17,47 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
-public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.FilterItemHolder> {
+public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHolder> {
+
+    private MediaListener listener;
     private List<Media> mediaList;
 
-    private Context context;
-
-    public MediaAdapter(List<Media> mediaList, Context context) {
+    public MediaAdapter(MediaListener listener, List<Media> mediaList) {
         super();
+        this.listener = listener;
         this.mediaList = mediaList;
-        this.context = context;
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public MediaAdapter.FilterItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MediaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.media_item, parent, false);
-        return new FilterItemHolder(convertView);
+        return new MediaViewHolder(convertView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MediaAdapter.FilterItemHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull MediaViewHolder holder, final int position) {
+        //TODO: This should support URL previews at some point. I believe there are libraries out there that can do that for us.
+
         Media media = mediaList.get(position);
 
-
-        Glide.with(context)
+        Glide.with(holder.itemView.getContext())
                 .load(media.getUrl())
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.blm2)
                         .error(R.drawable.blm2))
                 .into(holder.mediaUrl);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onMediaSelected(media);
+            }
+        });
+
+
+        Log.d("IASD:::", String.valueOf(mediaList.size()));
     }
 
     @Override
@@ -60,12 +70,15 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.FilterItemHo
         return mediaList.size();
     }
 
+    public interface MediaListener {
+        void onMediaSelected(Media media);
+    }
 
-    static class FilterItemHolder extends RecyclerView.ViewHolder {
+    static class MediaViewHolder extends RecyclerView.ViewHolder {
         ImageView mediaUrl;
         CardView cardView;
 
-        public FilterItemHolder(@NonNull View itemView) {
+        public MediaViewHolder(@NonNull View itemView) {
             super(itemView);
             mediaUrl = itemView.findViewById(R.id.mediaUrl);;
             cardView = itemView.findViewById(R.id.cardView);
