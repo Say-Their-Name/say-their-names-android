@@ -27,8 +27,8 @@ import java.util.List;
 public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.FilterItemHolder> {
     private List<People> peopleList;
     private List<People> filteredPeopleList;
-    SimpleDateFormat dateOut;
-    SimpleDateFormat dateIn;
+    private SimpleDateFormat dateOut;
+    private SimpleDateFormat dateIn;
 
     private Context context;
     private int selected_item = 0;
