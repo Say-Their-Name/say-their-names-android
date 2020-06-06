@@ -22,8 +22,6 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.FilterItemHo
     private List<Media> mediaList;
 
     private Context context;
-    //TODO use the field or remove it
-    private int selected_item = 0;
 
     public MediaAdapter(List<Media> mediaList, Context context) {
         super();
@@ -50,9 +48,6 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.FilterItemHo
                         .placeholder(R.drawable.blm2)
                         .error(R.drawable.blm2))
                 .into(holder.mediaUrl);
-
-
-        Log.d("IASD:::", String.valueOf(mediaList.size()));
     }
 
     @Override
