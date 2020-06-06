@@ -4,10 +4,10 @@ import java.util.List;
 
 public class People {
 
-    private String id, full_name, identifier,date_of_incident, context, date_of_birth, number_of_children, age, city, country, biography;
+    private String id, full_name, identifier, date_of_incident, context, date_of_birth, number_of_children, age, city, country, biography;
     private List<Images> images;
 
-    public People(String id, String full_name, String identifier,String date_of_incident, String context, String date_of_birth, String number_of_children, String age, String city, String country, String biography, List<Images> images) {
+    public People(String id, String full_name, String identifier, String date_of_incident, String context, String date_of_birth, String number_of_children, String age, String city, String country, String biography, List<Images> images) {
         this.id = id;
         this.full_name = full_name;
         this.identifier = identifier;
@@ -30,15 +30,15 @@ public class People {
         this.id = id;
     }
 
-    public String getFull_name() {
+    public String getFullName() {
         return full_name;
     }
 
-    public void setFull_name(String full_name) {
-        this.full_name = full_name;
+    public void setFullName(String fullName) {
+        this.full_name = fullName;
     }
 
-    public String getDate_of_incident() {
+    public String getDateOfIncident() {
         return date_of_incident;
     }
 
@@ -50,8 +50,8 @@ public class People {
         return identifier;
     }
 
-    public void setDate_of_incident(String date_of_incident) {
-        this.date_of_incident = date_of_incident;
+    public void setDateOfIncident(String dateOfIncident) {
+        this.date_of_incident = dateOfIncident;
     }
 
     public String getContext() {
