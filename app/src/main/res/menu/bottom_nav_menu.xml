@@ -17,4 +17,9 @@
         android:icon="@drawable/send"
         android:title="@string/title_petition" />
 
+    <item
+        android:id="@+id/navigation_about"
+        android:icon="@drawable/ic_about"
+        android:title="@string/about" />
+
 </menu>

@@ -4,19 +4,25 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -25,12 +31,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blm.saytheirnames.R;
+import com.blm.saytheirnames.activity.DonationDetailsActivity;
+import com.blm.saytheirnames.activity.MainActivity;
+import com.blm.saytheirnames.adapters.DonationAdapter;
 import com.blm.saytheirnames.adapters.FilterAdapter;
 import com.blm.saytheirnames.adapters.PeopleAdapter;
+import com.blm.saytheirnames.adapters.PersonsAdapter;
+import com.blm.saytheirnames.adapters.PetitionsAdapter;
 import com.blm.saytheirnames.customTabs.CustomTabActivityHelper;
 import com.blm.saytheirnames.customTabs.WebViewActivity;
+import com.blm.saytheirnames.models.Donation;
+import com.blm.saytheirnames.models.DonationData;
 import com.blm.saytheirnames.models.People;
 import com.blm.saytheirnames.models.PeopleData;
+import com.blm.saytheirnames.models.Person;
+import com.blm.saytheirnames.models.Petition;
+import com.blm.saytheirnames.models.PetitionData;
 import com.blm.saytheirnames.network.BackendInterface;
 import com.blm.saytheirnames.network.Utils;
 
@@ -41,64 +57,57 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment {
+public class DonationFragment extends Fragment {
     private static final String ARG_TEXT = "arg_text";
     private static final String ARG_COLOR = "arg_color";
 
     private String mText;
     private int mColor;
 
-    private View mContent;
+    private View view;
     //private TextView mTextView;
 
-    private RecyclerView personRecyclerView;
+    private RecyclerView donationRecyclerView;
     private RecyclerView recyclerView;
 
     private LinearLayoutManager layoutManager;
     private LinearLayoutManager layoutManager1;
 
-    private PeopleAdapter peopleAdapter;
+    private DonationAdapter donationAdapter;
     private FilterAdapter filterAdapter;
 
-    private List<People> peopleArrayList;
+    private List<Donation> donationArrayList;
     private String[] filterList;
     private ProgressBar progressBar;
     private ImageView imageView;
 
     Resources resources;
 
-    public static HomeFragment newInstance() {
-        return new HomeFragment();
+    public static DonationFragment newInstance() {
+        return new DonationFragment();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mContent = inflater.inflate(R.layout.fragment_home, container, false);
+        view = inflater.inflate(R.layout.fragment_donation, container, false);
 
         resources = getResources();
-        imageView = mContent.findViewById(R.id.imageView);
-        imageView.setOnClickListener(view -> {
-            if (validateUrl("http://google.com")) {
-                Uri uri = Uri.parse("http://google.com");
-                if (uri != null) {
-                    openCustomChromeTab(uri);
-                }
-            } else {
-                Toast.makeText(getContext(), "Error with link", Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        peopleArrayList = new ArrayList<>();
+        donationArrayList = new ArrayList<>();
 
-        filterList = resources.getStringArray(R.array.location);
+        filterList = resources.getStringArray(R.array.tag_donation);
 
-        personRecyclerView = mContent.findViewById(R.id.personRecyclerView);
-        recyclerView = mContent.findViewById(R.id.recyclerView);
-        progressBar = mContent.findViewById(R.id.progressBar);
+        donationRecyclerView = view.findViewById(R.id.donationRecycler);
+        recyclerView = view.findViewById(R.id.recyclerView);
 
-        peopleAdapter = new PeopleAdapter(peopleArrayList, getActivity());
+        donationAdapter = new DonationAdapter(donationArrayList, getActivity());
         filterAdapter = new FilterAdapter(filterList, getActivity());
 
         layoutManager = new LinearLayoutManager(getActivity());
@@ -109,14 +118,31 @@ public class HomeFragment extends Fragment {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager1);
-        personRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        donationRecyclerView.setLayoutManager(layoutManager);
 
-        personRecyclerView.setAdapter(peopleAdapter);
+        donationAdapter.setOnItemClickListener(position -> {
+            String image_url, title, desc;
+            image_url = donationArrayList.get(position).getImage();
+            title = donationArrayList.get(position).getTitle();
+            desc = donationArrayList.get(position).getDescription();
+
+            Intent intent = new Intent(getContext(), DonationDetailsActivity.class);
+            intent.putExtra("image", image_url);
+            intent.putExtra("title", title);
+            intent.putExtra("desc", desc);
+            startActivity(intent);
+        });
+
+        donationRecyclerView.setAdapter(donationAdapter);
         recyclerView.setAdapter(filterAdapter);
+
+        progressBar = view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
 
         loadData();
 
-        return mContent;
+
+        return view;
     }
 
     private boolean validateUrl(String url) {
@@ -150,30 +176,29 @@ public class HomeFragment extends Fragment {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                progressBar.setVisibility(View.VISIBLE);
             }
 
             @Override
             protected Void doInBackground(Void... params) {
                 BackendInterface backendInterface = Utils.getBackendService();
-                backendInterface.getPeople().enqueue(new Callback<PeopleData>() {
+                backendInterface.getDonations().enqueue(new Callback<DonationData>() {
                     @Override
-                    public void onResponse(@NonNull Call<PeopleData> call, @NonNull Response<PeopleData> response) {
-                        peopleArrayList.clear();
+                    public void onResponse(@NonNull Call<DonationData> call, @NonNull Response<DonationData> response) {
+                        donationArrayList.clear();
                         Log.d("API_Response", response.body().toString());
-                        List<People> body = response.body().getData();
+                        List<Donation> body = response.body().getData();
 
-                        peopleArrayList.addAll(body);
                         progressBar.setVisibility(View.GONE);
-                        personRecyclerView.setVisibility(View.VISIBLE);
+                        donationArrayList.addAll(body);
+                        donationRecyclerView.setVisibility(View.VISIBLE);
 
                         filterAdapter.notifyDataSetChanged();
-                        peopleAdapter.notifyDataSetChanged();
+                        donationAdapter.notifyDataSetChanged();
                     }
 
                     @Override
-                    public void onFailure(Call<PeopleData> call, Throwable t) {
-
+                    public void onFailure(Call<DonationData> call, Throwable t) {
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
                 return null;
@@ -191,7 +216,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // initialize views
-        mContent = view.findViewById(R.id.navigation_donation);
+        view = view.findViewById(R.id.navigation_donation);
 
         // retrieve text and color from bundle or savedInstanceState
         /*if (savedInstanceState == null) {
@@ -211,7 +236,7 @@ public class HomeFragment extends Fragment {
 
         // set text and background color
         // mTextView.setText(text);
-        //mContent.setBackgroundColor(mColor);
+        //view.setBackgroundColor(mColor);
     }
 
     @Override
@@ -220,4 +245,5 @@ public class HomeFragment extends Fragment {
         // outState.putInt(ARG_COLOR, mColor);
         super.onSaveInstanceState(outState);
     }
+
 }

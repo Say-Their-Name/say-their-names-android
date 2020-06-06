@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.blm.saytheirnames.R;
+import com.blm.saytheirnames.fragments.DonationFragment;
+import com.blm.saytheirnames.fragments.AboutFragment;
 import com.blm.saytheirnames.fragments.HomeFragment;
 import com.blm.saytheirnames.fragments.PetitionsFragment;
 import com.blm.saytheirnames.network.BackendInterface;
@@ -54,26 +56,6 @@ public class MainActivity extends AppCompatActivity {
         }
         selectFragment(selectedItem);
 
-
-
-//TODO move this into  src/test/  ?
-//Testing APi- added by thegeekybaniya
-   /*     backendInterface = Utils.getBackendService();
-        backendInterface.getPeople().enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                Log.d("API_Response", response.body().toString());
-                System.out.println("RES::::::"+response.body());
-
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                System.out.println("RES::::::"+t.getMessage());
-            }
-        });
-*/
-
     }
 
 
@@ -111,24 +93,19 @@ public class MainActivity extends AppCompatActivity {
                 frag = HomeFragment.newInstance();
                 break;
             case R.id.navigation_donation:
-                frag = HomeFragment.newInstance();
+                frag = DonationFragment.newInstance();
                 break;
             case R.id.navigation_petitions:
                 frag = PetitionsFragment.newInstance();
                 break;
+            case R.id.navigation_about:
+                frag = AboutFragment.newInstance();
+                break;
+            default:
         }
 
         // update selected item
         mSelectedItem = item.getItemId();
-
-        // uncheck the other items.
-        /*for (int i = 0; i < mBottomNav.getMenu().size(); i++) {
-            MenuItem menuItem = mBottomNav.getMenu().getItem(i);
-            //menuItem.setChecked(menuItem.getItemId() == item.getItemId());
-
-        }
-
-        updateToolbarText(item.getTitle());*/
 
         if (frag != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -137,14 +114,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-    /*private void updateToolbarText() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setCustomView(R.layout.action_bar_layout);
-            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        }
-    }*/
-
 
 }
