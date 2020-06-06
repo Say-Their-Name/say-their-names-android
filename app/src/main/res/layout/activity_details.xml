@@ -126,18 +126,6 @@
                     app:layout_constraintStart_toStartOf="@+id/txtDescription"
                     app:layout_constraintTop_toBottomOf="@+id/view" />
 
-                <ImageButton
-                    android:id="@+id/btnBookmark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="17dp"
-                    android:background="@android:color/transparent"
-                    android:scaleType="centerInside"
-                    app:layout_constraintBottom_toTopOf="@+id/txtDescription"
-                    app:layout_constraintEnd_toEndOf="@+id/txtDescription"
-                    app:layout_constraintTop_toTopOf="@+id/txtName"
-                    app:srcCompat="@drawable/ic_bookmark" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
@@ -192,6 +180,9 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <!--
+                        Only keeping this one because of the spacing it adds to the layout.
+                    -->
                     <ImageButton
                         android:id="@+id/btnMoreBookmark"
                         android:layout_width="wrap_content"
@@ -199,6 +190,7 @@
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:scaleType="centerInside"
+                        android:visibility="invisible"
                         app:layout_constraintBottom_toTopOf="@+id/txtDescription"
                         app:layout_constraintEnd_toEndOf="@+id/txtDescription"
                         app:layout_constraintTop_toTopOf="@+id/txtName"
