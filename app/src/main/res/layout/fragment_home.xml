@@ -64,6 +64,8 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:text="FILTER"
+                android:textStyle="bold"
+                android:fontFamily="@font/raleway"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp" />
