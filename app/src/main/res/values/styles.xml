@@ -59,4 +59,9 @@
         <item name="android:layout_marginTop">32dp</item>
         <item name="android:layout_marginStart">32dp</item>
     </style>
+
+    <style name="ToolbarStyle" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <item name="fontFamily">@font/raleway</item>
+
+    </style>
 </resources>
