@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.blm.saytheirnames.R;
+import com.blm.saytheirnames.fragments.AboutFragment;
 import com.blm.saytheirnames.fragments.HomeFragment;
 import com.blm.saytheirnames.fragments.PetitionsFragment;
 import com.blm.saytheirnames.network.BackendInterface;
@@ -96,10 +97,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.navigation_petitions:
                 frag = PetitionsFragment.newInstance();
                 break;
-
-            case R.id.navigation_settings:
-                frag = HomeFragment.newInstance();
+            case R.id.navigation_about:
+                frag = AboutFragment.newInstance();
                 break;
+            default:
         }
 
         // update selected item

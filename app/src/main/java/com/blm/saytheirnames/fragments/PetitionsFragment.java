@@ -26,6 +26,7 @@ import com.blm.saytheirnames.network.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +37,7 @@ public class PetitionsFragment extends Fragment {
     private RecyclerView recyclerView;
     private View myFragment;
     private Toolbar toolbar;
-   // private ImageView imgFilter,imgSearch;
+    // private ImageView imgFilter,imgSearch;
 
     private LinearLayoutManager layoutManager;
     private ProgressBar progressBar;
@@ -59,7 +60,7 @@ public class PetitionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        myFragment =  inflater.inflate(R.layout.fragment_petitions, container, false);
+        myFragment = inflater.inflate(R.layout.fragment_petitions, container, false);
 
         recyclerView = myFragment.findViewById(R.id.recyclerView);
         toolbar = myFragment.findViewById(R.id.toolbar);
@@ -71,7 +72,7 @@ public class PetitionsFragment extends Fragment {
         toolbar.setTitle("");
      /*   imgFilter.setOnClickListener(v -> System.out.println("Filter"));
         imgSearch.setOnClickListener(v -> System.out.println("Search"));*/
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
 
 
         petitionArrayList = new ArrayList<>();
@@ -79,7 +80,7 @@ public class PetitionsFragment extends Fragment {
 
         recyclerView = myFragment.findViewById(R.id.recyclerView);
 
-        petitionsAdapter = new PetitionsAdapter(petitionArrayList,getActivity());
+        petitionsAdapter = new PetitionsAdapter(petitionArrayList, getActivity());
 
         progressBar = myFragment.findViewById(R.id.progressBar);
 
@@ -99,7 +100,7 @@ public class PetitionsFragment extends Fragment {
     }
 
     private void loadData() {
-        @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> getPetitions    = new AsyncTask<Void, Void, Void>() {
+        @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> getPetitions = new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
