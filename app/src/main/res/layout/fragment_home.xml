@@ -104,14 +104,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="#BLACKLIVESMATTER"
+                        android:text="@string/blacklivesmatter"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="How to get involved"
+                        android:text="@string/how_to_get_involved"
                         android:textColor="@android:color/white"
                         android:textStyle="normal" />
 
@@ -125,6 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="16dp"
+            android:indeterminateTint="@color/colorBlack"
             android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView

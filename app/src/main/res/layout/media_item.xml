@@ -5,7 +5,8 @@
     android:id="@+id/cardView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="8dp"
     android:orientation="vertical"
     app:cardCornerRadius="0dp"
     app:cardElevation="0dp">

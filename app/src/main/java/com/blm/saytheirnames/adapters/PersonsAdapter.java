@@ -47,8 +47,9 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.FilterIt
 
         Person person = personList.get(position);
 
-        holder.personName.setText(person.getFull_name());
-        holder.personDateOfIncident.setText(String.valueOf(person.getDate_of_incident()));
+        holder.personName.setText(person.getFullName());
+        holder.personDateOfIncident.setText(String.valueOf(person.getDateOfIncident()));
+
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override

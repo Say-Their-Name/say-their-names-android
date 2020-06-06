@@ -24,11 +24,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-
 public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.FilterItemHolder> {
     private List<People> peopleList;
     private List<People> filteredPeopleList;
+    SimpleDateFormat dateOut;
+    SimpleDateFormat dateIn;
 
     private Context context;
     private int selected_item = 0;
@@ -38,6 +38,8 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.FilterItem
         this.peopleList = peopleList;
         this.filteredPeopleList = peopleList;
         this.context = context;
+        dateOut = new SimpleDateFormat("MM.dd.yyyy");
+        dateIn = new SimpleDateFormat("yyyy-MM-dd");
         notifyDataSetChanged();
     }
 
@@ -54,8 +56,6 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.FilterItem
 
         holder.personName.setText(people.getFullName());
 
-        SimpleDateFormat dateOut = new SimpleDateFormat("MM.dd.yyyy");
-        SimpleDateFormat dateIn = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
             Date parsedDate = dateIn.parse(people.getDateOfIncident());
@@ -138,4 +138,5 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.FilterItem
             cardView = itemView.findViewById(R.id.cardView);
         }
     }
+
 }
