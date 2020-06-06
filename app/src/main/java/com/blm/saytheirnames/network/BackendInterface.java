@@ -1,5 +1,6 @@
 package com.blm.saytheirnames.network;
 
+import com.blm.saytheirnames.models.DonationData;
 import com.blm.saytheirnames.models.PeopleData;
 import com.blm.saytheirnames.models.PersonData;
 import com.blm.saytheirnames.models.PetitionData;
@@ -26,7 +27,7 @@ public interface BackendInterface {
 
 
     @GET("/api/donations")
-    Call<JsonObject> getDonations();
+    Call<DonationData> getDonations();
 
 
     @GET("/api/donations/{id}")

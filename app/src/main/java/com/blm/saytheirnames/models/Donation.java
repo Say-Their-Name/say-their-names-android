@@ -2,12 +2,21 @@ package com.blm.saytheirnames.models;
 
 public class Donation {
 
-    String title, description, link;
+    String title, description, link, image_url;;
 
-    public Donation(String title, String description, String link) {
+    public Donation(String image_url, String title, String description, String link) {
+        this.image_url = image_url;
         this.title = title;
         this.description = description;
         this.link = link;
+    }
+
+    public String getImage() {
+        return image_url;
+    }
+
+    public void setImage(String image_url) {
+        this.image_url = image_url;
     }
 
     public String getTitle() {
