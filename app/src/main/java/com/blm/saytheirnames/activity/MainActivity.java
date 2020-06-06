@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.blm.saytheirnames.R;
+import com.blm.saytheirnames.fragments.DonationFragment;
 import com.blm.saytheirnames.fragments.AboutFragment;
 import com.blm.saytheirnames.fragments.HomeFragment;
 import com.blm.saytheirnames.fragments.PetitionsFragment;
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 frag = HomeFragment.newInstance();
                 break;
             case R.id.navigation_donation:
-                frag = HomeFragment.newInstance();
+                frag = DonationFragment.newInstance();
                 break;
             case R.id.navigation_petitions:
                 frag = PetitionsFragment.newInstance();

@@ -7,7 +7,7 @@ public class Media {
         return url;
     }
 
-    public void setUrk(String url) {
+    public void setUrl(String url) {
         this.url = url;
     }
 }

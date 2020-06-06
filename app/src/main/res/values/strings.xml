@@ -32,6 +32,18 @@
     <string name="_2">2</string>
     <string name="minnesota">MINNESOTA</string>
     <string name="button">Button</string>
+    <string name="date_of_incident">00.00.0000</string>
+    <string name="person_name">Firstname Lastname</string>
+
+    <string name="donation_image">donation image</string>
+
+    <string-array name="tag_donation">
+        <item>All</item>
+        <item>Victims</item>
+        <item>Protesters</item>
+        <item>Others</item>
+    </string-array>
+
     <string name="blacklivesmatter">#BLACKLIVESMATTER</string>
     <string name="how_to_get_involved">How to get involved</string>
     <string name="name">Name</string>
@@ -55,4 +67,10 @@
     <string name="join_us_on_twitter">JOIN US ON TWITTER</string>
     <string name="join_twitter_desciption">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</string>
     <string name="more">MORE</string>
+
+    <string name="hashtags">Social Media Hashtags</string>
+    <string name="media">Media</string>
+    <string name="news">News</string>
+    <string name="outcome">Outcome</string>
+    <string name="their_story">Their Story</string>
 </resources>
