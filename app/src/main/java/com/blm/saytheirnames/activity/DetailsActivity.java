@@ -23,6 +23,7 @@ import com.blm.saytheirnames.models.PersonData;
 import com.blm.saytheirnames.models.Hashtag;
 import com.blm.saytheirnames.network.BackendInterface;
 import com.blm.saytheirnames.network.Utils;
+import com.blm.saytheirnames.utils.CustomTabUtil;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.snackbar.Snackbar;
@@ -244,8 +245,7 @@ public class DetailsActivity extends AppCompatActivity
     }
 
     private void navigateToUrl(String url) {
-        Intent urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url.trim()));
-        startActivity(urlIntent);
+        CustomTabUtil.openCustomTabForUrl(this, url);
     }
 
 }
