@@ -68,4 +68,10 @@
     <string name="join_us_on_twitter">JOIN US ON TWITTER</string>
     <string name="join_twitter_desciption">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</string>
     <string name="more">MORE</string>
+
+    <string name="hashtags">Social Media Hashtags</string>
+    <string name="media">Media</string>
+    <string name="news">News</string>
+    <string name="outcome">Outcome</string>
+    <string name="their_story">Their Story</string>
 </resources>
