@@ -1,7 +1,6 @@
 package com.blm.saytheirnames.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +12,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blm.saytheirnames.R;
-import com.blm.saytheirnames.activity.DetailsActivity;
-import com.blm.saytheirnames.models.Person;
 import com.blm.saytheirnames.models.Petition;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PetitionsAdapter extends RecyclerView.Adapter<PetitionsAdapter.PetitionItemHolder> {
