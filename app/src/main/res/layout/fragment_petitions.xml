@@ -13,7 +13,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
+        android:background="@color/colorBlack"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:contentInsetStart="20dp"
@@ -27,12 +27,12 @@
             android:text="@string/title_petition"
             android:textSize="18sp"
             android:fontFamily="@font/raleway"
-            android:textColor="@color/colorBlack"
+            android:textColor="@android:color/white"
             android:layout_gravity="center"
             android:textStyle="bold"
             />
 
-        <ImageView
+        <!--<ImageView
             android:id="@+id/imgFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
             android:layout_gravity="end"
             android:layout_marginEnd="16dp"
             android:textStyle="bold"
-            android:contentDescription="@string/search" />
+            android:contentDescription="@string/search" />-->
     </androidx.appcompat.widget.Toolbar>
 
     <View
@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="16dp"
-
+        android:indeterminateTint="@color/colorBlack"
         android:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView

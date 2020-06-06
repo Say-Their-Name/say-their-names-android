@@ -79,17 +79,14 @@ public class HomeFragment extends Fragment {
 
         resources = getResources();
         imageView = mContent.findViewById(R.id.imageView);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (validateUrl("http://google.com")) {
-                    Uri uri = Uri.parse("http://google.com");
-                    if (uri != null) {
-                        openCustomChromeTab(uri);
-                    }
-                } else {
-                    Toast.makeText(getContext(), "Error with link", Toast.LENGTH_SHORT).show();
+        imageView.setOnClickListener(view -> {
+            if (validateUrl("http://google.com")) {
+                Uri uri = Uri.parse("http://google.com");
+                if (uri != null) {
+                    openCustomChromeTab(uri);
                 }
+            } else {
+                Toast.makeText(getContext(), "Error with link", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -106,8 +103,6 @@ public class HomeFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager1 = new LinearLayoutManager(getActivity());
-
-        progressBar.getIndeterminateDrawable().setColorFilter(R.color.colorBlack, android.graphics.PorterDuff.Mode.MULTIPLY);
 
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);

@@ -60,10 +60,12 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.FilterItem
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailsActivity.class);
-                intent.putExtra(DetailsActivity.EXTRA_ID, people.getId());
+                intent.putExtra(DetailsActivity.EXTRA_ID, people.getIdentifier());
                 context.startActivity(intent);
             }
         });
+
+
     }
 
     @Override

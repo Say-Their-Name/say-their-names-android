@@ -1,26 +1,19 @@
 package com.blm.saytheirnames.activity;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-
 import com.blm.saytheirnames.R;
+import com.blm.saytheirnames.fragments.AboutFragment;
 import com.blm.saytheirnames.fragments.HomeFragment;
 import com.blm.saytheirnames.fragments.PetitionsFragment;
 import com.blm.saytheirnames.network.BackendInterface;
-import com.blm.saytheirnames.network.Utils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.gson.JsonObject;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,24 +54,6 @@ public class MainActivity extends AppCompatActivity {
             selectedItem = mBottomNav.getMenu().getItem(0);
         }
         selectFragment(selectedItem);
-
-
-//Testing APi- added by thegeekybaniya
-   /*     backendInterface = Utils.getBackendService();
-        backendInterface.getPeople().enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                Log.d("API_Response", response.body().toString());
-                System.out.println("RES::::::"+response.body());
-
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                System.out.println("RES::::::"+t.getMessage());
-            }
-        });
-*/
 
     }
 
@@ -122,23 +97,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.navigation_petitions:
                 frag = PetitionsFragment.newInstance();
                 break;
-
-            case R.id.navigation_settings:
-                frag = HomeFragment.newInstance();
+            case R.id.navigation_about:
+                frag = AboutFragment.newInstance();
                 break;
+            default:
         }
 
         // update selected item
         mSelectedItem = item.getItemId();
-
-        // uncheck the other items.
-        /*for (int i = 0; i < mBottomNav.getMenu().size(); i++) {
-            MenuItem menuItem = mBottomNav.getMenu().getItem(i);
-            //menuItem.setChecked(menuItem.getItemId() == item.getItemId());
-
-        }
-
-        updateToolbarText(item.getTitle());*/
 
         if (frag != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -147,14 +113,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-    /*private void updateToolbarText() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setCustomView(R.layout.action_bar_layout);
-            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        }
-    }*/
-
 
 }
