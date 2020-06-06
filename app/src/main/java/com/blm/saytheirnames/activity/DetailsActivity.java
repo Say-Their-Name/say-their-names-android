@@ -224,8 +224,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 .translationY(0).start();
     }
 
-    private void onBackPressAnimation(View layout)
-
     public void switchView(boolean state) {
         readMoreState = state;
         if (!state) {
