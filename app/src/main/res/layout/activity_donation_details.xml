@@ -112,7 +112,7 @@
                     android:text="NCPC TITLE HERE"
                     android:textAlignment="center"
                     android:textColor="@color/colorBlack"
-                    android:textSize="21dp"
+                    android:textSize="21sp"
                     android:textStyle="bold" />
 
                 <Button

@@ -67,7 +67,7 @@
             android:text="Find Out More"
             android:textAllCaps="true"
             android:textColor="@color/colorBlack"
-            android:textSize="17dp"
+            android:textSize="17sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/donation_desc"
