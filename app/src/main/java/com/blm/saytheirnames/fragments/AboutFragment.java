@@ -25,7 +25,7 @@ public class AboutFragment extends Fragment {
     private View myFragment;
 
     String twitterLink = "https://twitter.com/SayTheirName_io";
-    String slackLink = "https://app.slack.com/client/T014JL5B3SN/C014X92G997";
+    String slackLink = "https://saytheirnames.slack.com/";
     String repoLink = "https://github.com/Say-Their-Name/";
 
     private Button btnTwitter,btnSlack,btnRepo;
