@@ -92,14 +92,10 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         recyclerView = findViewById(R.id.recyclerView);
 
         mediaList = new ArrayList<>();
-
         btnReadMore.setOnClickListener(this);
-
         mediaAdapter = new MediaAdapter(mediaList,this);
-
         closeDetails = findViewById(R.id.closeDetails);
         closeDetails.setOnClickListener(view -> onBackPressed());
-
         Shader myShader = new LinearGradient(
                 0, txtDescription.getLineHeight() * 5.10f, 0, 0,
                 Color.WHITE, Color.parseColor("#101010"),
