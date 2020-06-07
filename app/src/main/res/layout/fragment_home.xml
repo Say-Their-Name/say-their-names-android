@@ -31,35 +31,57 @@
                     android:id="@+id/slideMenuButton"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:layout_marginEnd="5dp"
                     android:layout_gravity="center"
-                    android:scaleType="fitCenter"
+                    android:layout_marginEnd="5dp"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/logo"
-                    />
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/logo" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/white"
                     android:fontFamily="@font/raleway"
                     android:text="@string/app_name"
-                    android:textAllCaps="true" />
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
 
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="FILTER"
+                android:textStyle="bold"
+                android:fontFamily="@font/raleway"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="3" />
+
+        </LinearLayout>
+
 
         <View
             android:id="@+id/view4"

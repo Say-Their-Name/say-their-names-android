@@ -31,9 +31,12 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.BlurTransformation;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class DetailsActivity extends AppCompatActivity
         implements MediaAdapter.MediaListener, View.OnClickListener, HashtagAdapter.HashtagListener {
@@ -55,6 +58,7 @@ public class DetailsActivity extends AppCompatActivity
     private Toolbar toolbar;
     private FrameLayout heroContainer;
     private ImageView hero;
+    private ImageView blurImageView;
     private TextView name;
     private TextView age;
     private TextView children;
@@ -95,6 +99,7 @@ public class DetailsActivity extends AppCompatActivity
         toolbar = findViewById(R.id.toolbar);
         heroContainer = findViewById(R.id.hero_container);
         hero = findViewById(R.id.hero);
+        blurImageView = findViewById(R.id.blurImageView);
         name = findViewById(R.id.full_name);
         age = findViewById(R.id.age);
         children = findViewById(R.id.children);
@@ -205,6 +210,14 @@ public class DetailsActivity extends AppCompatActivity
                         .placeholder(R.drawable.blm2)
                         .error(R.drawable.blm2))
                 .into(hero);
+
+        Glide.with(getApplicationContext())
+                .load(person.getImages().get(0).getImage_url())
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.blm2)
+                        .error(R.drawable.blm2))
+                .apply(bitmapTransform(new BlurTransformation(22, 5)))
+                .into(blurImageView);
 
     }
 
