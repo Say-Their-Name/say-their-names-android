@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -23,25 +22,31 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.blm.saytheirnames.R;
 import com.blm.saytheirnames.adapters.FilterAdapter;
+import com.blm.saytheirnames.adapters.HeaderCardRecyclerAdapter;
 import com.blm.saytheirnames.adapters.PeopleAdapter;
 import com.blm.saytheirnames.customTabs.CustomTabActivityHelper;
 import com.blm.saytheirnames.customTabs.WebViewActivity;
+import com.blm.saytheirnames.models.HeaderCard;
 import com.blm.saytheirnames.models.People;
 import com.blm.saytheirnames.models.PeopleData;
 import com.blm.saytheirnames.network.BackendInterface;
 import com.blm.saytheirnames.network.Utils;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.HeaderCardClickListener {
     private static final String ARG_TEXT = "arg_text";
     private static final String ARG_COLOR = "arg_color";
 
@@ -57,13 +62,17 @@ public class HomeFragment extends Fragment {
     private LinearLayoutManager layoutManager;
     private LinearLayoutManager layoutManager1;
 
+    private TabLayout tabLayout;
+    private ViewPager2 viewPager;
+
     private PeopleAdapter peopleAdapter;
     private FilterAdapter filterAdapter;
+    private HeaderCardRecyclerAdapter headerCardRecyclerAdapter;
 
     private List<People> peopleArrayList;
     private String[] filterList;
+    private List<HeaderCard> headerCards;
     private ProgressBar progressBar;
-    private ImageView imageView;
 
     Resources resources;
 
@@ -78,17 +87,6 @@ public class HomeFragment extends Fragment {
         mContent = inflater.inflate(R.layout.fragment_home, container, false);
 
         resources = getResources();
-        imageView = mContent.findViewById(R.id.imageView);
-        imageView.setOnClickListener(view -> {
-            if (validateUrl("http://google.com")) {
-                Uri uri = Uri.parse("http://google.com");
-                if (uri != null) {
-                    openCustomChromeTab(uri);
-                }
-            } else {
-                Toast.makeText(getContext(), "Error with link", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         peopleArrayList = new ArrayList<>();
 
@@ -113,10 +111,26 @@ public class HomeFragment extends Fragment {
 
         personRecyclerView.setAdapter(peopleAdapter);
         recyclerView.setAdapter(filterAdapter);
+        setupHeaderCardViews();
 
         loadData();
 
         return mContent;
+    }
+
+    private void setupHeaderCardViews() {
+        tabLayout = mContent.findViewById(R.id.header_tab_layout);
+        viewPager = mContent.findViewById(R.id.header_view_pager);
+        // TODO: update implementation
+        headerCards = Arrays.asList(new HeaderCard(), new HeaderCard(), new HeaderCard(),
+                new HeaderCard());
+        headerCardRecyclerAdapter = new HeaderCardRecyclerAdapter(headerCards, this);
+
+        viewPager.setAdapter(headerCardRecyclerAdapter);
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+            tabLayout.selectTab(tabLayout.getTabAt(position));
+            viewPager.setCurrentItem(tab.getPosition(), true);
+        }).attach();
     }
 
     private boolean validateUrl(String url) {
@@ -219,5 +233,17 @@ public class HomeFragment extends Fragment {
         outState.putString(ARG_TEXT, mText);
         // outState.putInt(ARG_COLOR, mColor);
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onHeaderClick() {
+        if (validateUrl("http://google.com")) {
+            Uri uri = Uri.parse("http://google.com");
+            if (uri != null) {
+                openCustomChromeTab(uri);
+            }
+        } else {
+            Toast.makeText(getContext(), "Error with link", Toast.LENGTH_SHORT).show();
+        }
     }
 }
