@@ -55,8 +55,7 @@ public class PetitionsAdapter extends RecyclerView.Adapter<PetitionsAdapter.Peti
         holder.txtDescription.setText(String.valueOf(petition.getDescription()));
 
         Glide.with(context)
-                .load(petition.getImage_url())
-               // .load(petition.getPerson().getImages().get(0).getImage_url())
+                .load(petition.getBanner_img_url())
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.blm2)
                         .error(R.drawable.blm2))
@@ -64,7 +63,7 @@ public class PetitionsAdapter extends RecyclerView.Adapter<PetitionsAdapter.Peti
 
         holder.btnFindOutMore.setOnClickListener(v -> {
             Intent intent = new Intent(context, PetitionDetailsActivity.class);
-            intent.putExtra(PetitionDetailsActivity.EXTRA_ID, petition.getId());
+            intent.putExtra(PetitionDetailsActivity.EXTRA_ID, petition.getIdentifier());
             context.startActivity(intent);
         });
     }

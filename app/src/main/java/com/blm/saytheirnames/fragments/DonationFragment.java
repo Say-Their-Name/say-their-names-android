@@ -24,6 +24,7 @@ import com.blm.saytheirnames.adapters.DonationAdapter;
 import com.blm.saytheirnames.adapters.FilterAdapter;
 import com.blm.saytheirnames.models.Donation;
 import com.blm.saytheirnames.models.DonationData;
+import com.blm.saytheirnames.models.DonationsData;
 import com.blm.saytheirnames.network.BackendInterface;
 import com.blm.saytheirnames.network.Utils;
 import com.blm.saytheirnames.utils.CustomTabUtil;
@@ -99,12 +100,14 @@ public class DonationFragment extends Fragment {
         donationRecyclerView.setLayoutManager(layoutManager);
 
         donationAdapter.setOnItemClickListener(position -> {
-            String image_url, title, desc;
-            image_url = donationArrayList.get(position).getImage();
+            String identifier,image_url, title, desc;
+            identifier = donationArrayList.get(position).getIdentifier();
+            image_url = donationArrayList.get(position).getBanner_img_url();
             title = donationArrayList.get(position).getTitle();
             desc = donationArrayList.get(position).getDescription();
 
             Intent intent = new Intent(getContext(), DonationDetailsActivity.class);
+            intent.putExtra("identifier", identifier);
             intent.putExtra("image", image_url);
             intent.putExtra("title", title);
             intent.putExtra("desc", desc);
@@ -141,9 +144,9 @@ public class DonationFragment extends Fragment {
             @Override
             protected Void doInBackground(Void... params) {
                 BackendInterface backendInterface = Utils.getBackendService();
-                backendInterface.getDonations().enqueue(new Callback<DonationData>() {
+                backendInterface.getDonations().enqueue(new Callback<DonationsData>() {
                     @Override
-                    public void onResponse(@NonNull Call<DonationData> call, @NonNull Response<DonationData> response) {
+                    public void onResponse(@NonNull Call<DonationsData> call, @NonNull Response<DonationsData> response) {
                         donationArrayList.clear();
                         Log.d("API_Response", response.body().toString());
                         List<Donation> body = response.body().getData();
@@ -157,7 +160,7 @@ public class DonationFragment extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<DonationData> call, Throwable t) {
+                    public void onFailure(Call<DonationsData> call, Throwable t) {
                         progressBar.setVisibility(View.GONE);
                     }
                 });

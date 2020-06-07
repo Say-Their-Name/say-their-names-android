@@ -33,7 +33,7 @@ import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class PetitionDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String EXTRA_ID = "id";
+    public static final String EXTRA_ID = "identifier";
 
     private ImageView imgClose, imgShare;
 
@@ -46,7 +46,7 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
 
     private Toolbar toolbar;
 
-    private int petitionID;
+    private String petitionID;
     private String petitionLink;
 
     private Petition petition;
@@ -59,7 +59,7 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            petitionID = extras.getInt(EXTRA_ID);
+            petitionID = extras.getString(EXTRA_ID);
 
         }
 
@@ -112,14 +112,14 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
 
 
                             Glide.with(getApplicationContext())
-                                    .load(petition.getPerson().getImages().get(0).getImage_url())
+                                    .load(petition.getBanner_img_url())
                                     .apply(new RequestOptions()
                                             .placeholder(R.drawable.blm2)
                                             .error(R.drawable.blm2))
                                     .into(actualImage);
 
                             Glide.with(getApplicationContext())
-                                    .load(petition.getPerson().getImages().get(0).getImage_url())
+                                    .load(petition.getBanner_img_url())
                                     .apply(new RequestOptions()
                                             .placeholder(R.drawable.blm2)
                                             .error(R.drawable.blm2))
@@ -154,11 +154,7 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnSignThisPetition:
-                if (validateUrl(petitionLink)) {
-                    visitPage(petitionLink);
-                } else {
-                    Toast.makeText(PetitionDetailsActivity.this, "Error with link", Toast.LENGTH_SHORT).show();
-                }
+               visitPage(petitionLink);
                 break;
             case R.id.btnShareThisPetition:
 
@@ -172,9 +168,7 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
         }
     }
 
-    private boolean validateUrl(String url) {
-        return url != null && url.length() > 0 && (url.startsWith("http://") || url.startsWith("https://"));
-    }
+
 
     private void visitPage(String url) {
         CustomTabUtil.openCustomTabForUrl(this, url);
