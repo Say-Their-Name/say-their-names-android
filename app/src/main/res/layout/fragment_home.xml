@@ -91,55 +91,38 @@
             android:background="@color/colorSecondaryGrey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+            app:layout_constraintBottom_toTopOf="@+id/ll_header_tab"/>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
+        <LinearLayout
+            android:id="@+id/ll_header_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/margin_4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view4">
+            app:layout_constraintTop_toBottomOf="@+id/header_recycler_view"
+            app:layout_constraintBottom_toTopOf="@+id/personRecyclerView">
 
-            <FrameLayout
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/header_view_pager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_4dp"
+                android:orientation="horizontal"/>
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:foreground="@drawable/image_overlay"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/blm" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_margin="16dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/blacklivesmatter"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/how_to_get_involved"
-                        android:textColor="@android:color/white"
-                        android:textStyle="normal" />
-
-                </LinearLayout>
-            </FrameLayout>
-        </androidx.cardview.widget.CardView>
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/header_tab_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:tabBackground="@drawable/tab_selector"
+                app:tabGravity="center"
+                app:tabIndicatorGravity="bottom"
+                app:tabIndicatorHeight="@dimen/height_0dp"
+                app:tabMode="scrollable" />
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -162,7 +145,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/ll_header_tab"
             tools:listitem="@layout/person_item" />
 
         <View
