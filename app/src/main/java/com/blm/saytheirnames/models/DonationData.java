@@ -4,13 +4,13 @@ import java.util.List;
 
 public class DonationData {
 
-    private List<Donation> data;
+    private Donation data;
 
-    public List<Donation> getData() {
+    public Donation getData() {
         return data;
     }
 
-    public void setData(List<Donation> data) {
+    public void setData(Donation data) {
         this.data = data;
     }
 }

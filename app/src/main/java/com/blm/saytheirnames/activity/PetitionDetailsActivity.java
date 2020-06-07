@@ -1,15 +1,6 @@
 package com.blm.saytheirnames.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.browser.customtabs.CustomTabsIntent;
-import androidx.core.content.ContextCompat;
-
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,14 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.blm.saytheirnames.R;
-import com.blm.saytheirnames.customTabs.CustomTabActivityHelper;
-import com.blm.saytheirnames.customTabs.WebViewActivity;
-import com.blm.saytheirnames.models.PersonData;
 import com.blm.saytheirnames.models.Petition;
 import com.blm.saytheirnames.models.PetitionData;
 import com.blm.saytheirnames.network.BackendInterface;
 import com.blm.saytheirnames.network.Utils;
+import com.blm.saytheirnames.utils.CustomTabUtil;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.jgabrielfreitas.core.BlurImageView;
@@ -40,7 +33,7 @@ import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class PetitionDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String EXTRA_ID = "id";
+    public static final String EXTRA_ID = "identifier";
 
     private ImageView imgClose, imgShare;
 
@@ -53,7 +46,7 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
 
     private Toolbar toolbar;
 
-    private int petitionID;
+    private String petitionID;
     private String petitionLink;
 
     private Petition petition;
@@ -66,7 +59,7 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            petitionID = extras.getInt(EXTRA_ID);
+            petitionID = extras.getString(EXTRA_ID);
 
         }
 
@@ -119,14 +112,14 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
 
 
                             Glide.with(getApplicationContext())
-                                    .load(petition.getPerson().getImages().get(0).getImage_url())
+                                    .load(petition.getBanner_img_url())
                                     .apply(new RequestOptions()
                                             .placeholder(R.drawable.blm2)
                                             .error(R.drawable.blm2))
                                     .into(actualImage);
 
                             Glide.with(getApplicationContext())
-                                    .load(petition.getPerson().getImages().get(0).getImage_url())
+                                    .load(petition.getBanner_img_url())
                                     .apply(new RequestOptions()
                                             .placeholder(R.drawable.blm2)
                                             .error(R.drawable.blm2))
@@ -161,14 +154,7 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnSignThisPetition:
-                if (validateUrl(petitionLink)) {
-                    Uri uri = Uri.parse(petitionLink);
-                    if (uri != null) {
-                        openCustomChromeTab(uri);
-                    }
-                } else {
-                    Toast.makeText(PetitionDetailsActivity.this, "Error with link", Toast.LENGTH_SHORT).show();
-                }
+               visitPage(petitionLink);
                 break;
             case R.id.btnShareThisPetition:
 
@@ -178,29 +164,13 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
                 break;
 
             case R.id.imgShare:
-                
                 break;
         }
     }
 
-    private boolean validateUrl(String url) {
-        return url != null && url.length() > 0 && (url.startsWith("http://") || url.startsWith("https://"));
-    }
 
-    private void openCustomChromeTab(Uri uri) {
-        CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
-        CustomTabsIntent customTabsIntent = intentBuilder.build();
 
-        intentBuilder.setToolbarColor(ContextCompat.getColor(PetitionDetailsActivity.this, R.color.colorPrimary));
-        intentBuilder.setSecondaryToolbarColor(ContextCompat.getColor(PetitionDetailsActivity.this, R.color.colorPrimaryDark));
-
-        CustomTabActivityHelper.openCustomTab(PetitionDetailsActivity.this, customTabsIntent, uri, (activity, uri1) -> openWebView(uri1));
-    }
-
-    private void openWebView(Uri uri) {
-        Intent webViewIntent = new Intent(PetitionDetailsActivity.this, WebViewActivity.class);
-        webViewIntent.putExtra(WebViewActivity.EXTRA_URL, uri.toString());
-        webViewIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(webViewIntent);
+    private void visitPage(String url) {
+        CustomTabUtil.openCustomTabForUrl(this, url);
     }
 }

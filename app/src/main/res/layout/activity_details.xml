@@ -90,6 +90,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/toolbar">
 
+                <com.jgabrielfreitas.core.BlurImageView
+                    android:id="@+id/blurImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    tools:src="@drawable/blm"
+                    app:radius="24" />
+
                 <ImageView
                     android:id="@+id/hero"
                     android:layout_width="match_parent"

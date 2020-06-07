@@ -18,13 +18,10 @@
     <string name="action_forward">Forward</string>
     <string name="action_bookmark">Bookmark</string>
 
-    <string-array name="location">
-        <item>All</item>
-        <item>Missouri</item>
-        <item>Texas</item>
-        <item>Dallas</item>
-        <item>Atlanta</item>
-        <item>LA</item>
+    <string-array name="filters">
+        <item>Age</item>
+        <item>Location</item>
+        <item>State</item>
 
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
@@ -77,4 +74,5 @@
     <string name="news">News</string>
     <string name="outcome">Outcome</string>
     <string name="their_story">Their Story</string>
+    <string name="social_media_hashtags">SOCIAL MEDIA HASHTAGS</string>
 </resources>

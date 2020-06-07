@@ -1,6 +1,7 @@
 package com.blm.saytheirnames.network;
 
 import com.blm.saytheirnames.models.DonationData;
+import com.blm.saytheirnames.models.DonationsData;
 import com.blm.saytheirnames.models.PeopleData;
 import com.blm.saytheirnames.models.PersonData;
 import com.blm.saytheirnames.models.Petition;
@@ -25,15 +26,15 @@ public interface BackendInterface {
 
 
     @GET("/api/petitions/{id}")
-    Call<PetitionData> getPetitionsById(@Path("id") int id);
+    Call<PetitionData> getPetitionsById(@Path("id") String identifier);
 
 
     @GET("/api/donations")
-    Call<DonationData> getDonations();
+    Call<DonationsData> getDonations();
 
 
-    @GET("/api/donations/{id}")
-    Call<JsonObject> getDonationsById(@Path("id") int id);
+    @GET("/api/donations/{identifier}")
+    Call<DonationData> getDonationsById(@Path("identifier") String identifier);
 
 
 }

@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp">
 
+
             <ImageView
                 android:id="@+id/close"
                 android:layout_width="wrap_content"
@@ -94,6 +95,17 @@
 
             </FrameLayout>
 
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -109,31 +121,17 @@
                     android:id="@+id/donation_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="NCPC TITLE HERE"
                     android:textAlignment="center"
                     android:textColor="@color/colorBlack"
                     android:textSize="21sp"
                     android:textStyle="bold" />
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/selected_button_background"
-                    android:text="Donate"
-                    android:textAllCaps="true"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView"
-                    app:layout_constraintStart_toStartOf="@+id/textView"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
 
                 <TextView
                     android:id="@+id/sub_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
-                    android:text="CONTENT"
+                    android:text="@string/content"
                     android:textColor="@color/colorBlack"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -143,14 +141,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:textColor="@color/colorBlack"
-                    tools:text="At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturiasdlnalkd" />
+                    android:textColor="@color/colorBlack" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="SOCIAL MEDIA HASHTAGS"
+                    android:text="@string/social_media_hashtags"
                     android:textAllCaps="true"
                     android:textColor="@color/colorBlack"
                     android:textSize="18sp"
@@ -164,6 +161,8 @@
 
             </LinearLayout>
 
+
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
@@ -173,6 +172,7 @@
 
 
             <Button
+                android:id="@+id/btnDonate"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="16dp"
@@ -180,7 +180,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/selected_button_background"
-                android:text="Donate"
+                android:text="@string/donate"
                 android:textAllCaps="true"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
