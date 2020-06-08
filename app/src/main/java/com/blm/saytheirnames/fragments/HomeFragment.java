@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -20,9 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blm.saytheirnames.R;
-import com.blm.saytheirnames.adapters.FilterHomeAdapter;
 import com.blm.saytheirnames.adapters.PeopleAdapter;
-import com.blm.saytheirnames.models.HomeFilter;
 import com.blm.saytheirnames.models.People;
 import com.blm.saytheirnames.models.PeopleData;
 import com.blm.saytheirnames.network.BackendInterface;
@@ -47,19 +46,13 @@ public class HomeFragment extends Fragment {
     //private TextView mTextView;
 
     private RecyclerView personRecyclerView;
-    private RecyclerView recyclerView;
-
     private LinearLayoutManager layoutManager;
-    private LinearLayoutManager layoutManager1;
-
     private PeopleAdapter peopleAdapter;
-    private FilterHomeAdapter filterHomeAdapter;
 
     private List<People> peopleArrayList;
-    private String[] filterList;
-    private ArrayList<HomeFilter> filterArrayList;
     private ProgressBar progressBar;
     private ImageView imageView;
+    private ImageButton searchBtn;
 
     Resources resources;
 
@@ -74,7 +67,19 @@ public class HomeFragment extends Fragment {
         mContent = inflater.inflate(R.layout.fragment_home, container, false);
 
         resources = getResources();
+
+        bindViews();
+        setupPeopleRecyclerView();
+
+        return mContent;
+    }
+
+    private void bindViews() {
         imageView = mContent.findViewById(R.id.imageView);
+        personRecyclerView = mContent.findViewById(R.id.personRecyclerView);
+        progressBar = mContent.findViewById(R.id.progressBar);
+        searchBtn = mContent.findViewById(R.id.searchButton);
+
         imageView.setOnClickListener(view -> {
             if (validateUrl("http://google.com")) {
                 visitPage("http://google.com");
@@ -83,38 +88,21 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        filterArrayList = new ArrayList<>();
+        searchBtn.setOnClickListener(view -> {
+            //TODO: Handle search function
+        });
+    }
+
+    private void setupPeopleRecyclerView() {
         peopleArrayList = new ArrayList<>();
-
-        filterList = resources.getStringArray(R.array.filters);
-
-        for (String filter : filterList) {
-            filterArrayList.add(new HomeFilter(filter, false));
-        }
-
-        personRecyclerView = mContent.findViewById(R.id.personRecyclerView);
-        recyclerView = mContent.findViewById(R.id.recyclerView);
-        progressBar = mContent.findViewById(R.id.progressBar);
-
         peopleAdapter = new PeopleAdapter(peopleArrayList, getActivity());
-        filterHomeAdapter = new FilterHomeAdapter(filterArrayList, getActivity());
 
         layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager1 = new LinearLayoutManager(getActivity());
-
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        layoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
-
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager1);
         personRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-
         personRecyclerView.setAdapter(peopleAdapter);
-        recyclerView.setAdapter(filterHomeAdapter);
 
         loadData();
-
-        return mContent;
     }
 
     private boolean validateUrl(String url) {
@@ -147,7 +135,6 @@ public class HomeFragment extends Fragment {
                         progressBar.setVisibility(View.GONE);
                         personRecyclerView.setVisibility(View.VISIBLE);
 
-                        filterHomeAdapter.notifyDataSetChanged();
                         peopleAdapter.notifyDataSetChanged();
                     }
 
