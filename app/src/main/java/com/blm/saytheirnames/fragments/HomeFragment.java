@@ -52,7 +52,6 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
     //private TextView mTextView;
 
     private RecyclerView personRecyclerView;
-    private RecyclerView recyclerView;
 
     private LinearLayoutManager layoutManager;
     private LinearLayoutManager layoutManager1;
@@ -94,7 +93,6 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
         }
 
         personRecyclerView = mContent.findViewById(R.id.personRecyclerView);
-        recyclerView = mContent.findViewById(R.id.recyclerView);
         progressBar = mContent.findViewById(R.id.progressBar);
 
         peopleAdapter = new PeopleAdapter(peopleArrayList, getActivity());
@@ -106,12 +104,9 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
 
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager1);
         personRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         personRecyclerView.setAdapter(peopleAdapter);
-        recyclerView.setAdapter(filterHomeAdapter);
         setupHeaderCardViews();
 
         loadData();
@@ -132,10 +127,6 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
             tabLayout.selectTab(tabLayout.getTabAt(position));
             viewPager.setCurrentItem(tab.getPosition(), true);
         }).attach();
-    }
-
-    private boolean validateUrl(String url) {
-        return url != null && url.length() > 0 && (url.startsWith("http://") || url.startsWith("https://"));
     }
 
     private void visitPage(String url) {
@@ -220,10 +211,6 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
 
     @Override
     public void onHeaderClick() {
-        if (validateUrl("http://google.com")) {
-            visitPage("http://google.com");
-        } else {
-            Toast.makeText(getContext(), "Error with link", Toast.LENGTH_SHORT).show();
-        }
+        visitPage("http://google.com");
     }
 }

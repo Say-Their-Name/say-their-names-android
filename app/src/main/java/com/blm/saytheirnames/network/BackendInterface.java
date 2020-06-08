@@ -1,6 +1,7 @@
 package com.blm.saytheirnames.network;
 
 import com.blm.saytheirnames.models.DonationData;
+import com.blm.saytheirnames.models.DonationTypesData;
 import com.blm.saytheirnames.models.DonationsData;
 import com.blm.saytheirnames.models.PeopleData;
 import com.blm.saytheirnames.models.PersonData;
@@ -12,6 +13,7 @@ import com.google.gson.JsonObject;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface BackendInterface {
     @GET("/api/people")
@@ -35,6 +37,12 @@ public interface BackendInterface {
 
     @GET("/api/donations/{identifier}")
     Call<DonationData> getDonationsById(@Path("identifier") String identifier);
+
+    @GET("/api/donation-types")
+    Call<DonationTypesData> getDonationsTypes();
+
+    @GET("/api/donations")
+    Call<DonationsData> getFilteredDonations(@Query("type") String type);
 
 
 }

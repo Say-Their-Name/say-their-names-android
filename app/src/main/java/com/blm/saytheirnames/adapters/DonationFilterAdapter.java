@@ -2,6 +2,7 @@ package com.blm.saytheirnames.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,24 +12,30 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blm.saytheirnames.R;
+import com.blm.saytheirnames.models.Donation;
+import com.blm.saytheirnames.models.DonationType;
+import com.blm.saytheirnames.models.Media;
 
-public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterItemHolder> {
+import java.util.List;
 
-    private String[] filterList;
-    private Context context;
+public class DonationFilterAdapter extends RecyclerView.Adapter<DonationFilterAdapter.FilterItemHolder> {
+
+    private List<DonationType> donationTypeList;
+    private DonationFilterAdapter.DonationFilterListener listener;
+
     private int selected_item = 0;
 
 
-    public FilterAdapter(String[] filterList, Context context) {
+    public DonationFilterAdapter(List<DonationType> donationTypeList, DonationFilterAdapter.DonationFilterListener listener) {
         super();
-        this.filterList = filterList;
-        this.context = context;
+        this.donationTypeList = donationTypeList;
+        this.listener = listener;
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public FilterAdapter.FilterItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DonationFilterAdapter.FilterItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.filter_item, parent, false);
 
@@ -37,7 +44,9 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterItem
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FilterAdapter.FilterItemHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull DonationFilterAdapter.FilterItemHolder holder, final int position) {
+
+        DonationType donationType = donationTypeList.get(position);
 
         if (position == selected_item) {
             holder.filterLocation.setBackgroundResource(R.drawable.selected_button_background);
@@ -47,18 +56,13 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterItem
             holder.filterLocation.setTextColor(Color.parseColor("#101010"));
         }
 
-        holder.filterLocation.setText(filterList[position]);
+        holder.filterLocation.setText(donationType.getType());
 
-        holder.filterLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selected_item = position;
-                notifyDataSetChanged();
-            }
+        holder.filterLocation.setOnClickListener(v -> {
+            selected_item = position;
+            listener.onDonationFilterSelected(donationType);
+            notifyDataSetChanged();
         });
-        /*holder.personName.setText(person.getFullName());
-        holder.personName.setText(person.getFullName());
-        holder.personAge.setText(String.valueOf(person.getAge()));*/
     }
 
     @Override
@@ -68,7 +72,11 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterItem
 
     @Override
     public int getItemCount() {
-        return filterList.length;
+        return donationTypeList.size();
+    }
+
+    public interface DonationFilterListener {
+        void onDonationFilterSelected(DonationType donationType);
     }
 
     class FilterItemHolder extends RecyclerView.ViewHolder {

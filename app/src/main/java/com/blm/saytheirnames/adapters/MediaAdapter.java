@@ -49,12 +49,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
                         .error(R.drawable.blm2))
                 .into(holder.mediaUrl);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onMediaSelected(media);
-            }
-        });
+        holder.itemView.setOnClickListener(v -> listener.onMediaSelected(media));
 
 
         Log.d("IASD:::", String.valueOf(mediaList.size()));

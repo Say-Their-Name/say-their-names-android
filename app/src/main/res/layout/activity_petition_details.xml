@@ -53,7 +53,7 @@
                 android:id="@+id/imgShare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_noun_share"
+                android:src="@drawable/share"
                 android:layout_gravity="end"
                 android:layout_marginEnd="16dp"
                 android:textStyle="bold"

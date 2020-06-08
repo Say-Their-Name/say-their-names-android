@@ -21,10 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blm.saytheirnames.R;
 import com.blm.saytheirnames.activity.DonationDetailsActivity;
 import com.blm.saytheirnames.adapters.DonationAdapter;
-import com.blm.saytheirnames.adapters.FilterAdapter;
+import com.blm.saytheirnames.adapters.DonationFilterAdapter;
 import com.blm.saytheirnames.models.Donation;
-import com.blm.saytheirnames.models.DonationData;
+import com.blm.saytheirnames.models.DonationType;
+import com.blm.saytheirnames.models.DonationTypesData;
 import com.blm.saytheirnames.models.DonationsData;
+import com.blm.saytheirnames.models.Media;
 import com.blm.saytheirnames.network.BackendInterface;
 import com.blm.saytheirnames.network.Utils;
 import com.blm.saytheirnames.utils.CustomTabUtil;
@@ -36,7 +38,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DonationFragment extends Fragment {
+public class DonationFragment extends Fragment implements DonationFilterAdapter.DonationFilterListener {
     private static final String ARG_TEXT = "arg_text";
     private static final String ARG_COLOR = "arg_color";
 
@@ -53,12 +55,14 @@ public class DonationFragment extends Fragment {
     private LinearLayoutManager layoutManager1;
 
     private DonationAdapter donationAdapter;
-    private FilterAdapter filterAdapter;
+    private DonationFilterAdapter donationFilterAdapter;
 
     private List<Donation> donationArrayList;
-    private String[] filterList;
+    private List<DonationType> donationTypeList;
     private ProgressBar progressBar;
     private ImageView imageView;
+
+    BackendInterface backendInterface;
 
     Resources resources;
 
@@ -79,15 +83,16 @@ public class DonationFragment extends Fragment {
 
         resources = getResources();
 
-        donationArrayList = new ArrayList<>();
+        backendInterface = Utils.getBackendService();
 
-        filterList = resources.getStringArray(R.array.tag_donation);
+        donationArrayList = new ArrayList<>();
+        donationTypeList = new ArrayList<>();
 
         donationRecyclerView = view.findViewById(R.id.donationRecycler);
         recyclerView = view.findViewById(R.id.recyclerView);
 
         donationAdapter = new DonationAdapter(donationArrayList, getActivity());
-        filterAdapter = new FilterAdapter(filterList, getActivity());
+        donationFilterAdapter = new DonationFilterAdapter(donationTypeList, this);
 
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager1 = new LinearLayoutManager(getActivity());
@@ -115,19 +120,21 @@ public class DonationFragment extends Fragment {
         });
 
         donationRecyclerView.setAdapter(donationAdapter);
-        recyclerView.setAdapter(filterAdapter);
+        recyclerView.setAdapter(donationFilterAdapter);
 
         progressBar = view.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
+        getDonationFilterItems();
         loadData();
 
 
         return view;
     }
 
-    private boolean validateUrl(String url) {
-        return url != null && url.length() > 0 && (url.startsWith("http://") || url.startsWith("https://"));
+    @Override
+    public void onDonationFilterSelected(DonationType donationType) {
+        filterDonation(donationType.getType());
     }
 
     private void visitPage(String url) {
@@ -135,6 +142,7 @@ public class DonationFragment extends Fragment {
     }
 
     private void loadData() {
+        showProgress(true);
         @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> getPeople = new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
@@ -143,7 +151,7 @@ public class DonationFragment extends Fragment {
 
             @Override
             protected Void doInBackground(Void... params) {
-                BackendInterface backendInterface = Utils.getBackendService();
+
                 backendInterface.getDonations().enqueue(new Callback<DonationsData>() {
                     @Override
                     public void onResponse(@NonNull Call<DonationsData> call, @NonNull Response<DonationsData> response) {
@@ -151,17 +159,16 @@ public class DonationFragment extends Fragment {
                         Log.d("API_Response", response.body().toString());
                         List<Donation> body = response.body().getData();
 
-                        progressBar.setVisibility(View.GONE);
                         donationArrayList.addAll(body);
                         donationRecyclerView.setVisibility(View.VISIBLE);
 
-                        filterAdapter.notifyDataSetChanged();
                         donationAdapter.notifyDataSetChanged();
+                        showProgress(false);
                     }
 
                     @Override
                     public void onFailure(Call<DonationsData> call, Throwable t) {
-                        progressBar.setVisibility(View.GONE);
+                        showProgress(false);
                     }
                 });
                 return null;
@@ -172,6 +179,69 @@ public class DonationFragment extends Fragment {
             }
         };
         getPeople.execute(null, null, null);
+    }
+
+    public void getDonationFilterItems(){
+        showProgress(true);
+        backendInterface.getDonationsTypes().enqueue(new Callback<DonationTypesData>() {
+            @Override
+            public void onResponse(Call<DonationTypesData> call, Response<DonationTypesData> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        donationTypeList.clear();
+                        List<DonationType> body = response.body().getData();
+                        //Add ALL item to list
+                        DonationType donationType = new DonationType(0,"All");
+                        donationTypeList.add(donationType);
+                        donationTypeList.addAll(body);
+                        donationFilterAdapter.notifyDataSetChanged();
+                        showProgress(false);
+                    }
+                } else {
+                    showProgress(false);
+                   // onGetPersonFailure(new Throwable(response.message()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DonationTypesData> call, Throwable throwable) {
+                showProgress(false);
+            }
+        });
+    }
+
+    public void filterDonation(String type){
+        if(type.equals("All")){
+            loadData();
+        }else{
+            doDonationFilter(type);
+        }
+    }
+
+    private void doDonationFilter(String type) {
+        showProgress(true);
+        backendInterface.getFilteredDonations(type.toLowerCase()).enqueue(new Callback<DonationsData>() {
+            @Override
+            public void onResponse(@NonNull Call<DonationsData> call, @NonNull Response<DonationsData> response) {
+                donationArrayList.clear();
+                Log.d("API_Response", response.body().toString());
+                List<Donation> body = response.body().getData();
+                donationArrayList.addAll(body);
+                donationRecyclerView.setVisibility(View.VISIBLE);
+
+                donationAdapter.notifyDataSetChanged();
+                showProgress(false);
+            }
+
+            @Override
+            public void onFailure(Call<DonationsData> call, Throwable t) {
+                showProgress(false);
+            }
+        });
+    }
+
+    private void showProgress(Boolean show) {
+        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override
