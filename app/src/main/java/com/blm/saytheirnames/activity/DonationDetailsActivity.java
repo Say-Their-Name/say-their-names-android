@@ -2,6 +2,7 @@ package com.blm.saytheirnames.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,7 +26,7 @@ public class DonationDetailsActivity extends AppCompatActivity {
     String image, title, desc;
 
     BlurImageView blurImageView;
-    ImageView donationImage;
+    ImageView donationImage, close;
     TextView donationTitle, subTitle, donationDesc;
 
     @Override
@@ -59,6 +60,8 @@ public class DonationDetailsActivity extends AppCompatActivity {
 
         donationTitle.setText(title);
         donationDesc.setText(desc);
+
+        close.setOnClickListener(view -> finish());
     }
 
     void initView() {
@@ -67,5 +70,6 @@ public class DonationDetailsActivity extends AppCompatActivity {
         donationTitle = findViewById(R.id.donation_title);
         subTitle = findViewById(R.id.sub_title);
         donationDesc = findViewById(R.id.donation_desc);
+        close = findViewById(R.id.close);
     }
 }
