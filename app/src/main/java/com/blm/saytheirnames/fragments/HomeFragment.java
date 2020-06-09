@@ -14,12 +14,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.blm.saytheirnames.R;
+import com.blm.saytheirnames.activity.MainActivity;
 import com.blm.saytheirnames.adapters.FilterHomeAdapter;
 import com.blm.saytheirnames.adapters.HeaderCardRecyclerAdapter;
 import com.blm.saytheirnames.adapters.PeopleAdapter;
@@ -35,6 +37,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -118,8 +121,7 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
         tabLayout = mContent.findViewById(R.id.header_tab_layout);
         viewPager = mContent.findViewById(R.id.header_view_pager);
         // TODO: update implementation
-        headerCards = Arrays.asList(new HeaderCard(), new HeaderCard(), new HeaderCard(),
-                new HeaderCard());
+        headerCards = Collections.singletonList(new HeaderCard());
         headerCardRecyclerAdapter = new HeaderCardRecyclerAdapter(headerCards, this);
 
         viewPager.setAdapter(headerCardRecyclerAdapter);
@@ -211,6 +213,13 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
 
     @Override
     public void onHeaderClick() {
-        visitPage("http://google.com");
+        if (getActivity() != null) {
+            Fragment donationFragment = DonationFragment.newInstance();
+            String tag = "DonationFragment";
+            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.container, donationFragment, tag);
+            ft.commit();
+            ((MainActivity) getActivity()).updateBottomNavBasedOnTag(tag);
+        }
     }
 }
