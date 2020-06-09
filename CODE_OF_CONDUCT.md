@@ -54,7 +54,7 @@ decisions when appropriate.
 This Code of Conduct applies within all community spaces, and also applies when
 an individual is officially representing the community in public spaces.
 Examples of representing our community include using an official e-mail address,
-posting via an official social media account, or acting as an appointed
+posting via an official social news account, or acting as an appointed
 representative at an online or offline event.
 
 ## Enforcement
@@ -90,7 +90,7 @@ of actions.
 interaction with the people involved, including unsolicited interaction with
 those enforcing the Code of Conduct, for a specified period of time. This
 includes avoiding interactions in community spaces as well as external channels
-like social media. Violating these terms may lead to a temporary or
+like social news. Violating these terms may lead to a temporary or
 permanent ban.
 
 ### 3. Temporary Ban

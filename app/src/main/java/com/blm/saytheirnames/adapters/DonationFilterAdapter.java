@@ -1,8 +1,6 @@
 package com.blm.saytheirnames.adapters;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blm.saytheirnames.R;
-import com.blm.saytheirnames.models.Donation;
 import com.blm.saytheirnames.models.DonationType;
-import com.blm.saytheirnames.models.Media;
 
 import java.util.List;
 

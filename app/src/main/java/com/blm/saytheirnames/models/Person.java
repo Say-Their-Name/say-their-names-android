@@ -51,8 +51,8 @@ public class Person {
     @SerializedName("petition_links")
     List<Petition> petitionLinks;
 
-    @SerializedName("media_links")
-    List<Media> mediaLinks;
+    @SerializedName("news")
+    List<News> news;
 
     @SerializedName("hash_tags")
     List<Hashtag> hashtags;
@@ -178,12 +178,12 @@ public class Person {
         this.petitionLinks = petitionLinks;
     }
 
-    public List<Media> getMediaLinks() {
-        return mediaLinks;
+    public List<News> getNews() {
+        return news;
     }
 
-    public void setMediaLinks(List<Media> mediaLinks) {
-        this.mediaLinks = mediaLinks;
+    public void setNews(List<News> newsLinks) {
+        this.news = newsLinks;
     }
 
     public List<Hashtag> getHashtags() {

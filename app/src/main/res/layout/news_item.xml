@@ -16,7 +16,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/mediaUrl"
+            android:id="@+id/news"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
