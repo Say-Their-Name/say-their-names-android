@@ -19,9 +19,8 @@ public class ShareUtil {
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.setType("text/plain");
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Share via...");
             intent.putExtra(Intent.EXTRA_TEXT, "#SayTheirNames\n" + url);
-            context.startActivity(intent);
+            context.startActivity(Intent.createChooser(intent,"Share via..."));
         } else {
             Toast.makeText(context, "Error with link", Toast.LENGTH_SHORT).show();
         }
