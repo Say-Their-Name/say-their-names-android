@@ -13,8 +13,10 @@ import androidx.constraintlayout.widget.Group;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blm.saytheirnames.R;
+import com.blm.saytheirnames.adapters.MediaAdapter;
 import com.blm.saytheirnames.adapters.NewsAdapter;
 import com.blm.saytheirnames.adapters.HashtagAdapter;
+import com.blm.saytheirnames.models.Media;
 import com.blm.saytheirnames.models.News;
 import com.blm.saytheirnames.models.Person;
 import com.blm.saytheirnames.models.PersonData;
@@ -37,14 +39,16 @@ import retrofit2.Response;
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class DetailsActivity extends AppCompatActivity
-        implements NewsAdapter.NewsListener, View.OnClickListener, HashtagAdapter.HashtagListener {
+        implements NewsAdapter.NewsListener, View.OnClickListener, HashtagAdapter.HashtagListener, MediaAdapter.MediaListener {
 
     public static final String EXTRA_ID = "identifier";
 
+    private MediaAdapter mediaAdapter;
     private NewsAdapter newsAdapter;
     private HashtagAdapter hashtagAdapter;
 
     private List<News> newsList;
+    private List<Media> mediaList;
     private List<Hashtag> hashtagList;
 
     private String personID;
@@ -84,6 +88,7 @@ public class DetailsActivity extends AppCompatActivity
 
         bindViews();
         initializeBackend();
+        renderNews();
         renderMedia();
         renderSocialMedia();
         renderData();
@@ -120,10 +125,16 @@ public class DetailsActivity extends AppCompatActivity
         share.setOnClickListener(this);
     }
 
-    private void renderMedia() {
+    private void renderNews() {
         newsList = new ArrayList<>();
         newsAdapter = new NewsAdapter(this, newsList);
         news.setAdapter(newsAdapter);
+    }
+
+    private void renderMedia() {
+        mediaList = new ArrayList<>();
+        mediaAdapter = new MediaAdapter(this, mediaList);
+        media.setAdapter(mediaAdapter);
     }
 
     private void renderSocialMedia() {
@@ -176,7 +187,14 @@ public class DetailsActivity extends AppCompatActivity
         }
 
         //TODO: Add Media adapter
-        mediaGroup.setVisibility(View.GONE);
+        if (person.getMedia() != null && person.getMedia().size() > 0) {
+            mediaList.clear();
+            mediaList.addAll(person.getMedia());
+            mediaAdapter.notifyDataSetChanged();
+            mediaGroup.setVisibility(View.VISIBLE);
+        } else {
+            newsGroup.setVisibility(View.GONE);
+        }
 
         if (person.getHashtags() != null && person.getHashtags().size() > 0) {
             hashtagList.clear();
@@ -257,4 +275,8 @@ public class DetailsActivity extends AppCompatActivity
         CustomTabUtil.openCustomTabForUrl(this, url);
     }
 
+    @Override
+    public void onMediaSelected(Media media) {
+
+    }
 }

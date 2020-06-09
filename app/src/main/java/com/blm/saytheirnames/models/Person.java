@@ -54,6 +54,9 @@ public class Person {
     @SerializedName("news")
     List<News> news;
 
+    @SerializedName("media")
+    List<Media> media;
+
     @SerializedName("hash_tags")
     List<Hashtag> hashtags;
 
@@ -192,5 +195,13 @@ public class Person {
 
     public void setHashtags(List<Hashtag> hashtag) {
         this.hashtags = hashtag;
+    }
+
+    public List<Media> getMedia() {
+        return media;
+    }
+
+    public void setMedia(List<Media> media) {
+        this.media = media;
     }
 }
