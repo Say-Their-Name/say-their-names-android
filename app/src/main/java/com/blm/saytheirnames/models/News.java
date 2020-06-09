@@ -1,10 +1,10 @@
 package com.blm.saytheirnames.models;
 
-public class Media {
+public class News {
     private String url;
 
     public String getUrl() {
-        return url;
+        return url.trim();
     }
 
     public void setUrl(String url) {

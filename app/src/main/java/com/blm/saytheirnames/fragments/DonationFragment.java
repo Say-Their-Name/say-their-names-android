@@ -26,7 +26,6 @@ import com.blm.saytheirnames.models.Donation;
 import com.blm.saytheirnames.models.DonationType;
 import com.blm.saytheirnames.models.DonationTypesData;
 import com.blm.saytheirnames.models.DonationsData;
-import com.blm.saytheirnames.models.Media;
 import com.blm.saytheirnames.network.BackendInterface;
 import com.blm.saytheirnames.network.Utils;
 import com.blm.saytheirnames.utils.CustomTabUtil;
