@@ -19,6 +19,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 
     private static final String SELECTED_ITEM = "arg_selected_item";
+    private static final String HOME_TAG = "HomeFragment";
+    private static final String DONATIONS_TAG = "DonationFragment";
+    private static final String PETITIONS_TAG = "PetitionsFragment";
+    private static final String ABOUT_TAG = "AboutFragment";
 
     private BottomNavigationView mBottomNav;
     private int mSelectedItem;
@@ -68,8 +72,30 @@ public class MainActivity extends AppCompatActivity {
     private void setDefaultFragment() {
         mBottomNav.setSelectedItemId(R.id.navigation_home);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, HomeFragment.newInstance());
+        transaction.replace(R.id.container, HomeFragment.newInstance(), HOME_TAG);
         transaction.commit();
+    }
+
+    // method to update selected item in bottom nav when navigating b/t fragments in the same activity
+    public void updateBottomNavBasedOnTag(String fragmentTag) {
+        switch (fragmentTag) {
+            case HOME_TAG:
+                mSelectedItem = R.id.navigation_home;
+                break;
+            case DONATIONS_TAG:
+                mSelectedItem = R.id.navigation_donation;
+                break;
+            case PETITIONS_TAG:
+                mSelectedItem = R.id.navigation_petitions;
+                break;
+            case ABOUT_TAG:
+                mSelectedItem = R.id.navigation_about;
+                break;
+            default:
+                mSelectedItem = R.id.navigation_home;
+                break;
+        }
+        mBottomNav.setSelectedItemId(mSelectedItem);
     }
 
     @Override
@@ -87,19 +113,24 @@ public class MainActivity extends AppCompatActivity {
 
         mSelectedItem = item.getItemId();
         Fragment frag = null;
+        String tag = null;
         // init corresponding fragment
         switch (item.getItemId()) {
             case R.id.navigation_home:
                 frag = HomeFragment.newInstance();
+                tag = HOME_TAG;
                 break;
             case R.id.navigation_donation:
                 frag = DonationFragment.newInstance();
+                tag = DONATIONS_TAG;
                 break;
             case R.id.navigation_petitions:
                 frag = PetitionsFragment.newInstance();
+                tag = PETITIONS_TAG;
                 break;
             case R.id.navigation_about:
                 frag = AboutFragment.newInstance();
+                tag = ABOUT_TAG;
                 break;
             default:
         }
@@ -109,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (frag != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.container, frag, frag.getTag());
+            ft.add(R.id.container, frag, tag);
             ft.commit();
         }
 

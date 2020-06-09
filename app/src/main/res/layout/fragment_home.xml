@@ -9,6 +9,7 @@
 
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -79,7 +80,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/personRecyclerView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/header_recycler_view">
+                app:layout_constraintTop_toBottomOf="@+id/app_bar_home">
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/header_view_pager"
