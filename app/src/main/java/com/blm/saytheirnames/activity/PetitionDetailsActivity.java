@@ -1,6 +1,7 @@
 package com.blm.saytheirnames.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,7 @@ import com.blm.saytheirnames.models.PetitionData;
 import com.blm.saytheirnames.network.BackendInterface;
 import com.blm.saytheirnames.network.Utils;
 import com.blm.saytheirnames.utils.CustomTabUtil;
+import com.blm.saytheirnames.utils.ShareUtil;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.jgabrielfreitas.core.BlurImageView;
@@ -154,23 +156,25 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnSignThisPetition:
-               visitPage(petitionLink);
+                visitPage(petitionLink);
                 break;
             case R.id.btnShareThisPetition:
 
+            case R.id.imgShare:
+                share(petitionLink);
                 break;
             case R.id.imgClose:
                 finish();
-                break;
-
-            case R.id.imgShare:
                 break;
         }
     }
 
 
-
     private void visitPage(String url) {
         CustomTabUtil.openCustomTabForUrl(this, url);
+    }
+
+    private void share(String url) {
+        ShareUtil.shareBaseLink(this, url);
     }
 }

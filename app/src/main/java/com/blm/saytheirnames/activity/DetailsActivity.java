@@ -24,6 +24,7 @@ import com.blm.saytheirnames.models.Hashtag;
 import com.blm.saytheirnames.network.BackendInterface;
 import com.blm.saytheirnames.network.Utils;
 import com.blm.saytheirnames.utils.CustomTabUtil;
+import com.blm.saytheirnames.utils.ShareUtil;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.snackbar.Snackbar;
@@ -51,7 +52,7 @@ public class DetailsActivity extends AppCompatActivity
     private List<Media> mediaList;
     private List<Hashtag> hashtagList;
 
-    private String personID;
+    private String personID,baseUrl;
 
     Person person;
 
@@ -218,6 +219,12 @@ public class DetailsActivity extends AppCompatActivity
             outcome.setText(person.getOutcome());
         }
 
+        if (person.getSharableLinks() == null) {
+            baseUrl = "N/A";
+        } else {
+            baseUrl = person.getSharableLinks().getBase();
+        }
+
         Glide.with(getApplicationContext())
                 .load(person.getImages().get(0).getImage_url())
                 .apply(new RequestOptions()
@@ -246,7 +253,8 @@ public class DetailsActivity extends AppCompatActivity
                 break;
             case R.id.share:
                 //TODO: What are we sharing?
-                showSnackbar("TODO: Share.");
+                share(baseUrl);
+                //showSnackbar("TODO: Share.");
         }
     }
 
@@ -269,6 +277,10 @@ public class DetailsActivity extends AppCompatActivity
 
     private void showProgress(Boolean show) {
         progress.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    private void share(String url) {
+        ShareUtil.shareBaseLink(this, url);
     }
 
     private void navigateToUrl(String url) {

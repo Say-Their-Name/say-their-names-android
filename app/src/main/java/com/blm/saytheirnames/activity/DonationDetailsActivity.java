@@ -22,6 +22,7 @@ import com.blm.saytheirnames.models.PetitionData;
 import com.blm.saytheirnames.network.BackendInterface;
 import com.blm.saytheirnames.network.Utils;
 import com.blm.saytheirnames.utils.CustomTabUtil;
+import com.blm.saytheirnames.utils.ShareUtil;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.snackbar.Snackbar;
@@ -170,11 +171,16 @@ public class DonationDetailsActivity extends AppCompatActivity implements View.O
                 break;
 
             case R.id.imgShare:
+                share(donationLink);
                 break;
         }
     }
 
     private void showProgress(Boolean show) {
         progress.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    private void share(String url) {
+        ShareUtil.shareBaseLink(this, url);
     }
 }

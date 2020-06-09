@@ -60,6 +60,9 @@ public class Person {
     @SerializedName("hash_tags")
     List<Hashtag> hashtags;
 
+    @SerializedName("sharable_links")
+    SharableLinks sharableLinks;
+
 
     public String getId() {
         return id;
@@ -203,5 +206,13 @@ public class Person {
 
     public void setMedia(List<Media> media) {
         this.media = media;
+    }
+
+    public SharableLinks getSharableLinks() {
+        return sharableLinks;
+    }
+
+    public void setSharableLinks(SharableLinks sharableLinks) {
+        this.sharableLinks = sharableLinks;
     }
 }
