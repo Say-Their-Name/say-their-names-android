@@ -77,8 +77,6 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterItem
         public FilterItemHolder(@NonNull View itemView) {
             super(itemView);
             filterLocation = itemView.findViewById(R.id.button);
-
-
         }
     }
 }

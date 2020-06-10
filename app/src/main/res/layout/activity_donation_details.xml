@@ -58,7 +58,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -115,27 +115,13 @@
                     android:textSize="21sp"
                     android:textStyle="bold" />
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/selected_button_background"
-                    android:text="Donate"
-                    android:textAllCaps="true"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView"
-                    app:layout_constraintStart_toStartOf="@+id/textView"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
-
                 <TextView
                     android:id="@+id/sub_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
-                    android:text="CONTENT"
+                    android:text="Something goes here"
                     android:textColor="@color/colorBlack"
-                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -164,32 +150,39 @@
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@color/colorSecondaryGrey" />
-
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/selected_button_background"
-                android:text="Donate"
-                android:textAllCaps="true"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/textView"
-                app:layout_constraintStart_toStartOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
-
         </LinearLayout>
 
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorSecondaryGrey" />
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/selected_button_background"
+            android:text="Donate"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

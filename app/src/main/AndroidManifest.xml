@@ -18,9 +18,8 @@
             android:theme="@style/AppTheme2">
 
         </activity>
-        <activity android:name=".activity.PetitionDetailsActivity" android:theme="@style/AppTheme2"></activity>
         <activity
-            android:name=".activity.DetailsActivity"
+            android:name=".activity.PetitionDetailsActivity"
             android:theme="@style/AppTheme2"></activity>
         <activity
             android:name=".activity.MainActivity"

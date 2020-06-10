@@ -121,13 +121,15 @@ public class DonationFragment extends Fragment {
         donationRecyclerView.setLayoutManager(layoutManager);
 
         donationAdapter.setOnItemClickListener(position -> {
-            String image_url, title, desc;
-            image_url = donationArrayList.get(position).getImage();
+            String outcome_image_url, banner_img_url, title, desc;
+            banner_img_url = donationArrayList.get(position).getBanner_img_url();
+            outcome_image_url = donationArrayList.get(position).getOutcome_img_url();
             title = donationArrayList.get(position).getTitle();
             desc = donationArrayList.get(position).getDescription();
 
             Intent intent = new Intent(getContext(), DonationDetailsActivity.class);
-            intent.putExtra("image", image_url);
+            intent.putExtra("banner", banner_img_url);
+            intent.putExtra("outcome", outcome_image_url);
             intent.putExtra("title", title);
             intent.putExtra("desc", desc);
             startActivity(intent);
@@ -172,7 +174,7 @@ public class DonationFragment extends Fragment {
     }
 
     private void loadData() {
-        @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> getPeople = new AsyncTask<Void, Void, Void>() {
+        @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> getDonation = new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
@@ -208,7 +210,7 @@ public class DonationFragment extends Fragment {
             protected void onPostExecute(Void result) {
             }
         };
-        getPeople.execute(null, null, null);
+        getDonation.execute(null, null, null);
     }
 
     @Override
