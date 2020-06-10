@@ -7,10 +7,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blm.saytheirnames.R;
 import com.blm.saytheirnames.models.DonationType;
+import com.google.android.material.appbar.AppBarLayout;
 
 import java.util.List;
 
@@ -18,24 +20,30 @@ public class DonationFilterAdapter extends RecyclerView.Adapter<DonationFilterAd
 
     private List<DonationType> donationTypeList;
     private DonationFilterAdapter.DonationFilterListener listener;
+    private NestedScrollView nestedScrollView;
 
     private int selected_item = 0;
 
 
-    public DonationFilterAdapter(List<DonationType> donationTypeList, DonationFilterAdapter.DonationFilterListener listener) {
+    /**
+     *
+     * @param donationTypeList
+     * @param listener
+     * @param nestedScrollView used to bring focus to top of recycler after a new filter has been clicked
+     */
+
+    public DonationFilterAdapter(List<DonationType> donationTypeList, DonationFilterAdapter.DonationFilterListener listener, NestedScrollView nestedScrollView) {
         super();
         this.donationTypeList = donationTypeList;
         this.listener = listener;
+        this.nestedScrollView = nestedScrollView;
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public DonationFilterAdapter.FilterItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.filter_item, parent, false);
-
-
         return new FilterItemHolder(convertView);
     }
 
@@ -55,9 +63,12 @@ public class DonationFilterAdapter extends RecyclerView.Adapter<DonationFilterAd
         holder.filterLocation.setText(donationType.getType());
 
         holder.filterLocation.setOnClickListener(v -> {
-            selected_item = position;
-            listener.onDonationFilterSelected(donationType);
-            notifyDataSetChanged();
+            if(selected_item != position){
+                selected_item = position;
+                listener.onDonationFilterSelected(donationType);
+                nestedScrollView.scrollTo(0, 0);
+                notifyDataSetChanged();
+            }
         });
     }
 
@@ -81,8 +92,6 @@ public class DonationFilterAdapter extends RecyclerView.Adapter<DonationFilterAd
         public FilterItemHolder(@NonNull View itemView) {
             super(itemView);
             filterLocation = itemView.findViewById(R.id.button);
-
-
         }
     }
 }
