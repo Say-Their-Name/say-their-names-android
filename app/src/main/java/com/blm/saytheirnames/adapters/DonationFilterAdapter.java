@@ -81,8 +81,6 @@ public class DonationFilterAdapter extends RecyclerView.Adapter<DonationFilterAd
         public FilterItemHolder(@NonNull View itemView) {
             super(itemView);
             filterLocation = itemView.findViewById(R.id.button);
-
-
         }
     }
 }

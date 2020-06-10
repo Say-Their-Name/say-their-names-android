@@ -13,21 +13,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.blm.saytheirnames.R;
+import com.blm.saytheirnames.adapters.HashtagAdapter;
 import com.blm.saytheirnames.models.Donation;
-import com.blm.saytheirnames.models.DonationData;
-import com.blm.saytheirnames.models.PetitionData;
-import com.blm.saytheirnames.network.BackendInterface;
-import com.blm.saytheirnames.network.Utils;
-import com.blm.saytheirnames.utils.CustomTabUtil;
-import com.blm.saytheirnames.utils.ShareUtil;
+import com.blm.saytheirnames.models.Hashtag;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.snackbar.Snackbar;
 import com.jgabrielfreitas.core.BlurImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
@@ -39,7 +36,7 @@ import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class DonationDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    String identifier,image, title, desc, donationLink;
+    String banner, outcome, title, desc;
 
     private BlurImageView blurImageView;
     private ImageView donationImage,close;
@@ -50,137 +47,59 @@ public class DonationDetailsActivity extends AppCompatActivity implements View.O
 
     Donation donation;
 
+    private RecyclerView hashTagRecycler;
+    private HashtagAdapter hashtagAdapter;
+    private ArrayList<Hashtag> hashtagList;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation_details);
 
-
         initView();
-
-        Intent intent = getIntent();
-
-        identifier = intent.getStringExtra("identifier");
-
-       loadData();
+        getIntentData();
+//        hashTags();
     }
 
     void initView() {
-        toolbar = findViewById(R.id.toolbar);
         blurImageView = findViewById(R.id.blurImageView);
         donationImage = findViewById(R.id.actual_image);
-        donationButton = findViewById(R.id.btnDonate);
         donationTitle = findViewById(R.id.donation_title);
         subTitle = findViewById(R.id.sub_title);
-        close = findViewById(R.id.close);
         donationDesc = findViewById(R.id.donation_desc);
-        progress = findViewById(R.id.progress);
-
-        donationButton.setOnClickListener(this);
-        close.setOnClickListener(this);
+        hashTagRecycler = findViewById(R.id.hash_tag_recycler);
     }
 
-    private void loadData() {
-        showProgress(true);
-        @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> getPerson = new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
+    void getIntentData() {
+        Intent intent = getIntent();
 
-            @Override
-            protected Void doInBackground(Void... params) {
-                BackendInterface backendInterface = Utils.getBackendService();
-                backendInterface.getDonationsById(identifier).enqueue(new Callback<DonationData>() {
-                    @Override
-                    public void onResponse(@NonNull Call<DonationData> call, @NonNull Response<DonationData> response) {
-                        if (response.isSuccessful()) {
-                            showProgress(false);
-                            if (response.body() != null) {
-                                donation = response.body().getData();
-                            }
+        banner = intent.getStringExtra("banner");
+        outcome = intent.getStringExtra("outcome");
+        title = intent.getStringExtra("title");
+        desc = intent.getStringExtra("desc");
 
+        Glide.with(this)
+                .load(banner)
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.blm2)
+                        .error(R.drawable.blm2))
+                .apply(bitmapTransform(new BlurTransformation(22, 5)))
+                .into(blurImageView);
 
-                            donationTitle.setText(donation.getTitle());
-                            donationDesc.setText(donation.getDescription());
+        Glide.with(this)
+                .load(outcome)
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.blm2)
+                        .error(R.drawable.blm2))
+                .into(donationImage);
 
-                            donationLink = donation.getLink();
-
-
-                            Glide.with(getApplicationContext())
-                                    .load(donation.getBanner_img_url())
-                                    .apply(new RequestOptions()
-                                            .placeholder(R.drawable.blm2)
-                                            .error(R.drawable.blm2))
-                                    .into(donationImage);
-
-                            Glide.with(getApplicationContext())
-                                    .load(donation.getBanner_img_url())
-                                    .apply(new RequestOptions()
-                                            .placeholder(R.drawable.blm2)
-                                            .error(R.drawable.blm2))
-                                    .apply(bitmapTransform(new BlurTransformation(22, 5)))
-                                    .into(blurImageView);
-
-                           /* Glide.with(getApplicationContext())
-                                    .load(petition.getImage_url())
-                                    .apply(new RequestOptions()
-                                            .placeholder(R.drawable.blm2)
-                                            .error(R.drawable.blm2))
-                                    .into(imageViewMore);*/
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<DonationData> call, Throwable t) {
-                        showProgress(false);
-                        onGetPersonFailure(t);
-                    }
-                });
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void result) {
-            }
-        };
-        getPerson.execute(null, null, null);
+        donationTitle.setText(title);
+        donationDesc.setText(desc);
     }
 
-    private void onGetPersonFailure(Throwable throwable) {
-        //TODO: Get a better message. This could be full of dev jargon.
-        showSnackbar(throwable.getLocalizedMessage());
-    }
-
-    private void showSnackbar(String text) {
-        Snackbar.make(toolbar, text, Snackbar.LENGTH_SHORT).show();
-    }
-
-    private void visitPages(String link) {
-        CustomTabUtil.openCustomTabForUrl(DonationDetailsActivity.this, link);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnDonate:
-                visitPages(donationLink);
-                break;
-            case R.id.close:
-                finish();
-                break;
-
-            case R.id.imgShare:
-                share(donationLink);
-                break;
-        }
-    }
-
-    private void showProgress(Boolean show) {
-        progress.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
-    private void share(String url) {
-        ShareUtil.shareBaseLink(this, url);
-    }
+//    void hashTags() {
+//        hashtagList = new ArrayList<>();
+//        hashtagAdapter = new HashtagAdapter((HashtagAdapter.HashtagListener) this, hashtagList);
+//        hashTagRecycler.setAdapter(hashtagAdapter);
+//    }
 }
