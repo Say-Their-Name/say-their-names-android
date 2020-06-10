@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/header_item_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/default_margin">
+
+    <FrameLayout
+        android:id="@+id/fl_header_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBlack">
+
+        <LinearLayout
+            android:id="@+id/ll_header_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/margin_16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/blacklivesmatter"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_16dp"
+                android:text="@string/how_to_get_involved"
+                android:textColor="@android:color/white"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tv_donate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/donate_now"
+                android:textColor="@android:color/white"
+                android:textStyle="normal" />
+        </LinearLayout>
+    </FrameLayout>
+</androidx.cardview.widget.CardView>
