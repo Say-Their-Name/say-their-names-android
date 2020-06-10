@@ -1,54 +1,32 @@
 package com.blm.saytheirnames.fragments;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.browser.customtabs.CustomTabsIntent;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blm.saytheirnames.R;
 import com.blm.saytheirnames.activity.DonationDetailsActivity;
-import com.blm.saytheirnames.activity.MainActivity;
 import com.blm.saytheirnames.adapters.DonationAdapter;
 import com.blm.saytheirnames.adapters.FilterAdapter;
-import com.blm.saytheirnames.adapters.PeopleAdapter;
-import com.blm.saytheirnames.adapters.PersonsAdapter;
-import com.blm.saytheirnames.adapters.PetitionsAdapter;
-import com.blm.saytheirnames.customTabs.CustomTabActivityHelper;
-import com.blm.saytheirnames.customTabs.WebViewActivity;
 import com.blm.saytheirnames.models.Donation;
 import com.blm.saytheirnames.models.DonationData;
-import com.blm.saytheirnames.models.People;
-import com.blm.saytheirnames.models.PeopleData;
-import com.blm.saytheirnames.models.Person;
-import com.blm.saytheirnames.models.Petition;
-import com.blm.saytheirnames.models.PetitionData;
 import com.blm.saytheirnames.network.BackendInterface;
 import com.blm.saytheirnames.network.Utils;
+import com.blm.saytheirnames.utils.CustomTabUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,15 +99,13 @@ public class DonationFragment extends Fragment {
         donationRecyclerView.setLayoutManager(layoutManager);
 
         donationAdapter.setOnItemClickListener(position -> {
-            String outcome_image_url, banner_img_url, title, desc;
-            banner_img_url = donationArrayList.get(position).getBanner_img_url();
-            outcome_image_url = donationArrayList.get(position).getOutcome_img_url();
+            String image_url, title, desc;
+            image_url = donationArrayList.get(position).getImage();
             title = donationArrayList.get(position).getTitle();
             desc = donationArrayList.get(position).getDescription();
 
             Intent intent = new Intent(getContext(), DonationDetailsActivity.class);
-            intent.putExtra("banner", banner_img_url);
-            intent.putExtra("outcome", outcome_image_url);
+            intent.putExtra("image", image_url);
             intent.putExtra("title", title);
             intent.putExtra("desc", desc);
             startActivity(intent);
@@ -151,30 +127,12 @@ public class DonationFragment extends Fragment {
         return url != null && url.length() > 0 && (url.startsWith("http://") || url.startsWith("https://"));
     }
 
-    private void openCustomChromeTab(Uri uri) {
-        CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
-        CustomTabsIntent customTabsIntent = intentBuilder.build();
-
-        intentBuilder.setToolbarColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
-        intentBuilder.setSecondaryToolbarColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
-
-        CustomTabActivityHelper.openCustomTab(getContext(), customTabsIntent, uri, new CustomTabActivityHelper.CustomTabFallback() {
-            @Override
-            public void openUri(Context activity, Uri uri) {
-                openWebView(uri);
-            }
-        });
-    }
-
-    private void openWebView(Uri uri) {
-        Intent webViewIntent = new Intent(getContext(), WebViewActivity.class);
-        webViewIntent.putExtra(WebViewActivity.EXTRA_URL, uri.toString());
-        webViewIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        getContext().startActivity(webViewIntent);
+    private void visitPage(String url) {
+        CustomTabUtil.openCustomTabForUrl(getActivity(), url);
     }
 
     private void loadData() {
-        @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> getDonation = new AsyncTask<Void, Void, Void>() {
+        @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> getPeople = new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
@@ -210,7 +168,7 @@ public class DonationFragment extends Fragment {
             protected void onPostExecute(Void result) {
             }
         };
-        getDonation.execute(null, null, null);
+        getPeople.execute(null, null, null);
     }
 
     @Override

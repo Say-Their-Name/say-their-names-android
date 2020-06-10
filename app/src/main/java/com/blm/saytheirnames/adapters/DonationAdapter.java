@@ -55,7 +55,7 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Donati
         holder.setIsRecyclable(false);
         Donation donation = donationList.get(position);
         Glide.with(context)
-                .load(donation.getOutcome_img_url())
+                .load(donation.getImage())
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.blm)
                         .error(R.drawable.blm2))
