@@ -14,6 +14,8 @@ import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +31,7 @@ import com.blm.saytheirnames.models.DonationsData;
 import com.blm.saytheirnames.network.BackendInterface;
 import com.blm.saytheirnames.network.Utils;
 import com.blm.saytheirnames.utils.CustomTabUtil;
+import com.google.android.material.appbar.AppBarLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +63,7 @@ public class DonationFragment extends Fragment implements DonationFilterAdapter.
     private List<DonationType> donationTypeList;
     private ProgressBar progressBar;
     private ImageView imageView;
+    private NestedScrollView nestedScrollView;
 
     BackendInterface backendInterface;
 
@@ -89,9 +93,10 @@ public class DonationFragment extends Fragment implements DonationFilterAdapter.
 
         donationRecyclerView = view.findViewById(R.id.donationRecycler);
         recyclerView = view.findViewById(R.id.recyclerView);
+        nestedScrollView = view.findViewById(R.id.nestedScroll);
 
         donationAdapter = new DonationAdapter(donationArrayList, getActivity());
-        donationFilterAdapter = new DonationFilterAdapter(donationTypeList, this);
+        donationFilterAdapter = new DonationFilterAdapter(donationTypeList, this, nestedScrollView);
 
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager1 = new LinearLayoutManager(getActivity());
