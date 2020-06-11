@@ -11,11 +11,19 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.paging.PagedList;
+import androidx.paging.PagedListAdapter;
+import androidx.paging.PagingDataAdapter;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
 
 import io.saytheirnames.R;
 import io.saytheirnames.activity.DetailsActivity;
 import io.saytheirnames.models.People;
+import io.saytheirnames.network.PeoplePager;
+import kotlinx.coroutines.Dispatchers;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -24,23 +32,22 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.FilterItemHolder> {
-    private List<People> peopleList;
-    private List<People> filteredPeopleList;
+public class PeopleAdapter extends PagingDataAdapter<People, PeopleAdapter.FilterItemHolder> {
+
     private SimpleDateFormat dateOut;
     private SimpleDateFormat dateIn;
 
-    private Context context;
-    private int selected_item = 0;
+    public PeopleAdapter() {
+        super(PeoplePager.Companion.getDiffItemCallback(), Dispatchers.getMain(),
+                Dispatchers.getDefault());
 
-    public PeopleAdapter(List<People> peopleList, Context context) {
-        super();
-        this.peopleList = peopleList;
-        this.filteredPeopleList = peopleList;
-        this.context = context;
         dateOut = new SimpleDateFormat("MM.dd.yyyy");
         dateIn = new SimpleDateFormat("yyyy-MM-dd");
-        notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
     }
 
     @NonNull
@@ -52,7 +59,7 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.FilterItem
 
     @Override
     public void onBindViewHolder(@NonNull PeopleAdapter.FilterItemHolder holder, final int position) {
-        People people = peopleList.get(position);
+        People people = getItem(position);
 
         holder.personName.setText(people.getFullName());
 
@@ -66,62 +73,21 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.FilterItem
         }
         holder.personName.setText(people.getFullName());
 
-
-        Glide.with(context)
+        Glide.with(holder.itemView.getContext())
                 .load(people.getImages().get(0).getImage_url())
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.blm2)
                         .error(R.drawable.blm2))
                 .into(holder.personImage);
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, DetailsActivity.class);
+                Intent intent = new Intent(holder.itemView.getContext(), DetailsActivity.class);
                 intent.putExtra(DetailsActivity.EXTRA_ID, people.getIdentifier());
-                context.startActivity(intent);
+                holder.itemView.getContext().startActivity(intent);
             }
         });
-
-
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public int getItemCount() {
-        return peopleList.size();
-    }
-
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence charSequence) {
-                String charString = charSequence.toString();
-                if (charString.isEmpty()) {
-                    filteredPeopleList = peopleList;
-                } else {
-                    List<People> filteredList = new ArrayList<>();
-                    for (People model : peopleList)
-                        if (model.getCity().toLowerCase().contains(charString.toLowerCase()))
-                            filteredList.add(model);
-
-                    filteredPeopleList = filteredList;
-                }
-
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = filteredPeopleList;
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                filteredPeopleList = (ArrayList<People>) filterResults.values;
-                notifyDataSetChanged();
-            }
-        };
     }
 
     static class FilterItemHolder extends RecyclerView.ViewHolder {
