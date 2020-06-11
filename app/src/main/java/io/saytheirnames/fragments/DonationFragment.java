@@ -38,7 +38,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DonationFragment extends Fragment implements DonationFilterAdapter.DonationFilterListener {
+public class DonationFragment extends Fragment {
     private static final String ARG_TEXT = "arg_text";
     private static final String ARG_COLOR = "arg_color";
 
@@ -90,11 +90,10 @@ public class DonationFragment extends Fragment implements DonationFilterAdapter.
         donationTypeList = new ArrayList<>();
 
         donationRecyclerView = view.findViewById(R.id.donationRecycler);
-        recyclerView = view.findViewById(R.id.recyclerView);
+
         nestedScrollView = view.findViewById(R.id.nestedScroll);
 
         donationAdapter = new DonationAdapter(donationArrayList, getActivity());
-        donationFilterAdapter = new DonationFilterAdapter(donationTypeList, this, nestedScrollView);
 
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager1 = new LinearLayoutManager(getActivity());
@@ -102,8 +101,6 @@ public class DonationFragment extends Fragment implements DonationFilterAdapter.
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
 
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager1);
         donationRecyclerView.setLayoutManager(layoutManager);
 
         donationAdapter.setOnItemClickListener(position -> {
@@ -122,21 +119,24 @@ public class DonationFragment extends Fragment implements DonationFilterAdapter.
         });
 
         donationRecyclerView.setAdapter(donationAdapter);
-        recyclerView.setAdapter(donationFilterAdapter);
 
         progressBar = view.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
-        getDonationFilterItems();
         loadData();
-
+        setupDonationFilters();
 
         return view;
     }
 
-    @Override
-    public void onDonationFilterSelected(DonationType donationType) {
-        filterDonation(donationType.getType());
+    // donation filter will not be shown in MVP so this method is unused for now
+    public void setupDonationFilters() {
+        /*recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager1);
+        donationFilterAdapter = new DonationFilterAdapter(donationTypeList, this, nestedScrollView);
+        recyclerView.setAdapter(donationFilterAdapter);
+        getDonationFilterItems();*/
     }
 
     private void visitPage(String url) {
