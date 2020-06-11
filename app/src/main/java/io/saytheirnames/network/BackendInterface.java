@@ -15,7 +15,7 @@ import retrofit2.http.Query;
 
 public interface BackendInterface {
     @GET("/api/people")
-    Call<PeopleData> getPeople();
+    Call<PeopleData> getPeople(@Query("page") Integer page);
 
     @GET("/api/people/{id}")
     Call<PersonData> getPeopleById(@Path("id") String id);
