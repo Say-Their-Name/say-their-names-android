@@ -144,6 +144,7 @@
                     android:textColor="@color/colorBlack" />
 
                 <TextView
+                    android:id="@+id/tv_social_hashtags"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
