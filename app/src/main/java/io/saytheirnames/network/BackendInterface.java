@@ -22,7 +22,7 @@ public interface BackendInterface {
 
 
     @GET("/api/petitions")
-    Call<PetitionsData> getPetitions();
+    Call<PetitionsData> getPetitions(@Query("page") Integer page);
 
 
     @GET("/api/petitions/{id}")

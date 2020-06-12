@@ -13,14 +13,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.paging.LoadState;
+import androidx.paging.LoadStateAdapter;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.jetbrains.annotations.NotNull;
 
 import io.saytheirnames.R;
 import io.saytheirnames.adapters.PetitionsAdapter;
 import io.saytheirnames.models.Petition;
 import io.saytheirnames.models.PetitionsData;
 import io.saytheirnames.network.BackendInterface;
+import io.saytheirnames.network.PetitionsPager;
 import io.saytheirnames.network.Utils;
 
 import java.util.ArrayList;
@@ -37,7 +43,7 @@ public class PetitionsFragment extends Fragment {
     private Toolbar toolbar;
     // private ImageView imgFilter,imgSearch;
 
-    private LinearLayoutManager layoutManager;
+    //private LinearLayoutManager layoutManager;
     private ProgressBar progressBar;
 
     private PetitionsAdapter petitionsAdapter;
@@ -78,64 +84,51 @@ public class PetitionsFragment extends Fragment {
 
         recyclerView = myFragment.findViewById(R.id.recyclerView);
 
-        petitionsAdapter = new PetitionsAdapter(petitionArrayList, getActivity());
+        petitionsAdapter = new PetitionsAdapter();
 
         progressBar = myFragment.findViewById(R.id.progressBar);
 
-        layoutManager = new LinearLayoutManager(getActivity());
 
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
-
-
-        recyclerView.setAdapter(petitionsAdapter);
-
+        initializeRecyclerView();
         loadData();
 
         return myFragment;
     }
 
+    private void initializeRecyclerView() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        /*
+            This triggers the showing/hiding of the progress bar. This looks really hacky
+            this way, though.
+         */
+
+        petitionsAdapter.withLoadStateFooter(new LoadStateAdapter<RecyclerView.ViewHolder>() {
+            @NotNull
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(@NotNull ViewGroup viewGroup, @NotNull LoadState loadState) {
+                return new RecyclerView.ViewHolder(progressBar){};
+            }
+
+            @Override
+            public void onBindViewHolder(@NotNull RecyclerView.ViewHolder viewHolder, @NotNull LoadState loadState) {
+                if (loadState.equals(LoadState.Loading.INSTANCE)) {
+                    progressBar.setVisibility(View.VISIBLE);
+                } else {
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(petitionsAdapter);
+    }
+
     private void loadData() {
-        @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> getPetitions = new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                progressBar.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            protected Void doInBackground(Void... params) {
-                BackendInterface backendInterface = Utils.getBackendService();
-                backendInterface.getPetitions().enqueue(new Callback<PetitionsData>() {
-                    @Override
-                    public void onResponse(@NonNull Call<PetitionsData> call, @NonNull Response<PetitionsData> response) {
-                        petitionArrayList.clear();
-                        Log.d("API_Response", response.body().toString());
-                        List<Petition> body = response.body().getData();
-
-                        petitionArrayList.addAll(body);
-                        progressBar.setVisibility(View.GONE);
-                        recyclerView.setVisibility(View.VISIBLE);
-
-
-                        petitionsAdapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onFailure(Call<PetitionsData> call, Throwable t) {
-                        progressBar.setVisibility(View.GONE);
-                        Log.d("API_Response", t.getMessage().toString());
-                    }
-                });
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void result) {
-            }
-        };
-        getPetitions.execute(null, null, null);
+        PetitionsPager petitionsPager = new PetitionsPager(petitionsAdapter);
+        petitionsPager.loadPetitionsFromPagination();
     }
 }

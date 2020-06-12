@@ -80,13 +80,10 @@ public class PeopleAdapter extends PagingDataAdapter<People, PeopleAdapter.Filte
                         .error(R.drawable.blm2))
                 .into(holder.personImage);
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(holder.itemView.getContext(), DetailsActivity.class);
-                intent.putExtra(DetailsActivity.EXTRA_ID, people.getIdentifier());
-                holder.itemView.getContext().startActivity(intent);
-            }
+        holder.cardView.setOnClickListener(v -> {
+            Intent intent = new Intent(holder.itemView.getContext(), DetailsActivity.class);
+            intent.putExtra(DetailsActivity.EXTRA_ID, people.getIdentifier());
+            holder.itemView.getContext().startActivity(intent);
         });
     }
 

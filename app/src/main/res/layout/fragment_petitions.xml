@@ -87,7 +87,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="16dp"
                 android:indeterminateTint="@color/colorBlack"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
