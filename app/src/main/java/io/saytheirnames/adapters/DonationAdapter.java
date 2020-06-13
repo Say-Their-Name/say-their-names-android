@@ -1,6 +1,7 @@
 package io.saytheirnames.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,30 +10,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.paging.PagingDataAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import io.saytheirnames.R;
 
+import io.saytheirnames.activity.PetitionDetailsActivity;
 import io.saytheirnames.models.Donation;
+import io.saytheirnames.network.DonationsPager;
+import kotlinx.coroutines.Dispatchers;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
-public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.DonationItemHolder> {
-
-    private List<Donation> donationList;
-    private Context context;
-    private int selected_item = 0;
-    private OnItemClickListener mListener;
+public class DonationAdapter extends PagingDataAdapter<Donation,DonationAdapter.DonationItemHolder> {
 
 
-    public DonationAdapter(List<Donation> donationList, Context context) {
-        super();
-        this.donationList = donationList;
-        this.context = context;
-        notifyDataSetChanged();
+    public DonationAdapter() {
+        super(DonationsPager.Companion.getDiffItemCallback(), Dispatchers.getMain(),Dispatchers.getDefault());
     }
 
     @NonNull
@@ -42,64 +39,47 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Donati
         View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.donation_item, parent, false);
 
 
-        return new DonationAdapter.DonationItemHolder(convertView, mListener);
+        return new DonationItemHolder(convertView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull DonationAdapter.DonationItemHolder holder, final int position) {
 
         holder.setIsRecyclable(false);
-        Donation donation = donationList.get(position);
-        Glide.with(context)
-                .load(donation.getBanner_img_url())
-                .apply(new RequestOptions()
-                        .placeholder(R.drawable.blm)
-                        .error(R.drawable.blm2))
-                .into(holder.donationImage);
-        holder.txtTitle.setText(donation.getTitle());
-        holder.txtDescription.setText(String.valueOf(donation.getDescription()));
+        Donation donation = getItem(position);
+        if (donation != null) {
+            Glide.with(holder.itemView.getContext())
+                    .load(donation.getBanner_img_url())
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.blm)
+                            .error(R.drawable.blm2))
+                    .into(holder.donationImage);
+
+            holder.txtTitle.setText(donation.getTitle());
+            holder.txtDescription.setText(String.valueOf(donation.getDescription()));
+
+            holder.findOutMore.setOnClickListener(v -> {
+                Intent intent = new Intent(holder.itemView.getContext(), PetitionDetailsActivity.class);
+                intent.putExtra(PetitionDetailsActivity.EXTRA_ID, donation.getIdentifier());
+                holder.itemView.getContext().startActivity(intent);
+            });
+
+        }
     }
 
 
-    public void setOnItemClickListener(DonationAdapter.OnItemClickListener listener) {
-        mListener = listener;
-    }
-
-    public interface OnItemClickListener {
-        void knowMore(int position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public int getItemCount() {
-        return donationList.size();
-    }
-
-    class DonationItemHolder extends RecyclerView.ViewHolder {
+    static class DonationItemHolder extends RecyclerView.ViewHolder {
         TextView txtTitle;
         TextView txtDescription;
         ImageView donationImage;
         Button findOutMore;
 
-        public DonationItemHolder(@NonNull View itemView, final OnItemClickListener listener) {
+        public DonationItemHolder(@NonNull View itemView) {
             super(itemView);
             txtTitle = itemView.findViewById(R.id.donation_title);
             txtDescription = itemView.findViewById(R.id.donation_desc);
             donationImage = itemView.findViewById(R.id.donation_image);
             findOutMore = itemView.findViewById(R.id.know_more);
-
-            findOutMore.setOnClickListener(v -> {
-                if (listener != null) {
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION) {
-                        listener.knowMore(position);
-                    }
-                }
-            });
         }
     }
 }

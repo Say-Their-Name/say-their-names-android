@@ -16,8 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.paging.LoadState;
+import androidx.paging.LoadStateAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.jetbrains.annotations.NotNull;
 
 import io.saytheirnames.R;
 import io.saytheirnames.activity.DonationDetailsActivity;
@@ -28,6 +32,8 @@ import io.saytheirnames.models.DonationType;
 import io.saytheirnames.models.DonationTypesData;
 import io.saytheirnames.models.DonationsData;
 import io.saytheirnames.network.BackendInterface;
+import io.saytheirnames.network.DonationsPager;
+import io.saytheirnames.network.PetitionsPager;
 import io.saytheirnames.network.Utils;
 import io.saytheirnames.utils.CustomTabUtil;
 
@@ -39,12 +45,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DonationFragment extends Fragment {
-    private static final String ARG_TEXT = "arg_text";
-    private static final String ARG_COLOR = "arg_color";
-
-    private String mText;
-    private int mColor;
-
     private View view;
     //private TextView mTextView;
 
@@ -93,7 +93,7 @@ public class DonationFragment extends Fragment {
 
         nestedScrollView = view.findViewById(R.id.nestedScroll);
 
-        donationAdapter = new DonationAdapter(donationArrayList, getActivity());
+        donationAdapter = new DonationAdapter();
 
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager1 = new LinearLayoutManager(getActivity());
@@ -101,30 +101,15 @@ public class DonationFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
 
-        donationRecyclerView.setLayoutManager(layoutManager);
+        /*donationRecyclerView.setLayoutManager(layoutManager);
 
-        donationAdapter.setOnItemClickListener(position -> {
-            String identifier,image_url, title, desc;
-            identifier = donationArrayList.get(position).getIdentifier();
-            image_url = donationArrayList.get(position).getBanner_img_url();
-            title = donationArrayList.get(position).getTitle();
-            desc = donationArrayList.get(position).getDescription();
 
-            Intent intent = new Intent(getContext(), DonationDetailsActivity.class);
-            intent.putExtra("identifier", identifier);
-            intent.putExtra("image", image_url);
-            intent.putExtra("title", title);
-            intent.putExtra("desc", desc);
-            startActivity(intent);
-        });
-
-        donationRecyclerView.setAdapter(donationAdapter);
+        donationRecyclerView.setAdapter(donationAdapter);*/
 
         progressBar = view.findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.VISIBLE);
 
+        initializeRecyclerView();
         loadData();
-        setupDonationFilters();
 
         return view;
     }
@@ -143,44 +128,41 @@ public class DonationFragment extends Fragment {
         CustomTabUtil.openCustomTabForUrl(getActivity(), url);
     }
 
+    private void initializeRecyclerView() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        /*
+            This triggers the showing/hiding of the progress bar. This looks really hacky
+            this way, though.
+         */
+
+        donationAdapter.withLoadStateFooter(new LoadStateAdapter<RecyclerView.ViewHolder>() {
+            @NotNull
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(@NotNull ViewGroup viewGroup, @NotNull LoadState loadState) {
+                return new RecyclerView.ViewHolder(progressBar){};
+            }
+
+            @Override
+            public void onBindViewHolder(@NotNull RecyclerView.ViewHolder viewHolder, @NotNull LoadState loadState) {
+                if (loadState.equals(LoadState.Loading.INSTANCE)) {
+                    progressBar.setVisibility(View.VISIBLE);
+                } else {
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        donationRecyclerView.setHasFixedSize(true);
+        donationRecyclerView.setLayoutManager(layoutManager);
+        donationRecyclerView.setAdapter(donationAdapter);
+    }
+
     private void loadData() {
-        showProgress(true);
-        @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> getPeople = new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
-
-            @Override
-            protected Void doInBackground(Void... params) {
-
-                backendInterface.getDonations().enqueue(new Callback<DonationsData>() {
-                    @Override
-                    public void onResponse(@NonNull Call<DonationsData> call, @NonNull Response<DonationsData> response) {
-                        donationArrayList.clear();
-                        Log.d("API_Response", response.body().toString());
-                        List<Donation> body = response.body().getData();
-
-                        donationArrayList.addAll(body);
-                        donationRecyclerView.setVisibility(View.VISIBLE);
-
-                        donationAdapter.notifyDataSetChanged();
-                        showProgress(false);
-                    }
-
-                    @Override
-                    public void onFailure(Call<DonationsData> call, Throwable t) {
-                        showProgress(false);
-                    }
-                });
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void result) {
-            }
-        };
-        getPeople.execute(null, null, null);
+        DonationsPager petitionsPager = new DonationsPager(donationAdapter);
+        petitionsPager.loadDonationsFromPagination();
     }
 
     public void getDonationFilterItems(){
@@ -277,8 +259,6 @@ public class DonationFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putString(ARG_TEXT, mText);
-        // outState.putInt(ARG_COLOR, mColor);
         super.onSaveInstanceState(outState);
     }
 

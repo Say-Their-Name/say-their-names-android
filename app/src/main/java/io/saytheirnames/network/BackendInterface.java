@@ -30,7 +30,7 @@ public interface BackendInterface {
 
 
     @GET("/api/donations")
-    Call<DonationsData> getDonations();
+    Call<DonationsData> getDonations(@Query("page") Integer page);
 
 
     @GET("/api/donations/{identifier}")
