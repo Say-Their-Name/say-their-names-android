@@ -4,15 +4,10 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.recyclerview.widget.DiffUtil
 import io.saytheirnames.adapters.DonationAdapter
-import io.saytheirnames.adapters.PeopleAdapter
-import io.saytheirnames.adapters.PetitionsAdapter
 import io.saytheirnames.models.Donation
-import io.saytheirnames.models.People
-import io.saytheirnames.models.Petition
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class DonationsPager(val adapter: DonationAdapter): Any() {
 

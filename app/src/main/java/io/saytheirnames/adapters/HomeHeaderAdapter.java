@@ -22,6 +22,7 @@ import io.saytheirnames.models.HeaderCard;
  * we have to find some way to scroll the header on the home screen as well. One way to do that
  * is to add that into the Recyclerview as well. This is what this adapter aims to accomplish.
  */
+
 public class HomeHeaderAdapter extends RecyclerView.Adapter<HomeHeaderAdapter.ViewHolder> {
 
     private HeaderCardRecyclerAdapter.HeaderCardClickListener listener;
@@ -29,6 +30,7 @@ public class HomeHeaderAdapter extends RecyclerView.Adapter<HomeHeaderAdapter.Vi
     public HomeHeaderAdapter(HeaderCardRecyclerAdapter.HeaderCardClickListener listener) {
         this.listener = listener;
     }
+
 
     @NonNull
     @Override

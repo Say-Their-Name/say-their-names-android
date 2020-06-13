@@ -1,40 +1,28 @@
 package io.saytheirnames.fragments;
 
-import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.paging.LoadState;
 import androidx.paging.LoadStateAdapter;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
-import io.saytheirnames.R;
-import io.saytheirnames.adapters.PetitionsAdapter;
-import io.saytheirnames.models.Petition;
-import io.saytheirnames.models.PetitionsData;
-import io.saytheirnames.network.BackendInterface;
-import io.saytheirnames.network.PetitionsPager;
-import io.saytheirnames.network.Utils;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.saytheirnames.R;
+import io.saytheirnames.adapters.PetitionsAdapter;
+import io.saytheirnames.models.Petition;
+import io.saytheirnames.network.PetitionsPager;
 
 public class PetitionsFragment extends Fragment {
 
