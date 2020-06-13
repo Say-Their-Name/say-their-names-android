@@ -13,11 +13,12 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.paging.LoadState;
 import androidx.paging.LoadStateAdapter;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.MergeAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 
 import io.saytheirnames.R;
 import io.saytheirnames.activity.MainActivity;
@@ -26,13 +27,7 @@ import io.saytheirnames.adapters.HeaderCardRecyclerAdapter;
 import io.saytheirnames.adapters.HomeHeaderAdapter;
 import io.saytheirnames.adapters.PeopleAdapter;
 import io.saytheirnames.models.HomeFilter;
-import io.saytheirnames.models.People;
 import io.saytheirnames.network.PeoplePager;
-import kotlin.Unit;
-import kotlin.jvm.functions.Function0;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.HeaderCardClickListener {
 

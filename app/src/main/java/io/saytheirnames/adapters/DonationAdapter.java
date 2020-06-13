@@ -1,6 +1,5 @@
 package io.saytheirnames.adapters;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,17 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.paging.PagingDataAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import io.saytheirnames.R;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
+import io.saytheirnames.R;
 import io.saytheirnames.activity.PetitionDetailsActivity;
 import io.saytheirnames.models.Donation;
 import io.saytheirnames.network.DonationsPager;
 import kotlinx.coroutines.Dispatchers;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-
-import java.util.List;
 
 public class DonationAdapter extends PagingDataAdapter<Donation,DonationAdapter.DonationItemHolder> {
 

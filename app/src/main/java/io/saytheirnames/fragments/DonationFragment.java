@@ -1,9 +1,6 @@
 package io.saytheirnames.fragments;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.res.Resources;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,8 +20,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.saytheirnames.R;
-import io.saytheirnames.activity.DonationDetailsActivity;
 import io.saytheirnames.adapters.DonationAdapter;
 import io.saytheirnames.adapters.DonationFilterAdapter;
 import io.saytheirnames.models.Donation;
@@ -33,13 +32,8 @@ import io.saytheirnames.models.DonationTypesData;
 import io.saytheirnames.models.DonationsData;
 import io.saytheirnames.network.BackendInterface;
 import io.saytheirnames.network.DonationsPager;
-import io.saytheirnames.network.PetitionsPager;
 import io.saytheirnames.network.Utils;
 import io.saytheirnames.utils.CustomTabUtil;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

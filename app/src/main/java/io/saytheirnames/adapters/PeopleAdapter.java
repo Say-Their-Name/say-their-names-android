@@ -1,37 +1,29 @@
 package io.saytheirnames.adapters;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.paging.PagedList;
-import androidx.paging.PagedListAdapter;
 import androidx.paging.PagingDataAdapter;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
-
-import io.saytheirnames.R;
-import io.saytheirnames.activity.DetailsActivity;
-import io.saytheirnames.models.People;
-import io.saytheirnames.network.PeoplePager;
-import kotlinx.coroutines.Dispatchers;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
+import io.saytheirnames.R;
+import io.saytheirnames.activity.DetailsActivity;
+import io.saytheirnames.models.People;
+import io.saytheirnames.network.PeoplePager;
+import kotlinx.coroutines.Dispatchers;
 public class PeopleAdapter extends PagingDataAdapter<People, PeopleAdapter.FilterItemHolder> {
 
     private SimpleDateFormat dateOut;

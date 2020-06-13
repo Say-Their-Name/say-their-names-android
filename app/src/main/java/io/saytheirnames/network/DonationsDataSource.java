@@ -11,7 +11,6 @@ import java.util.Collections;
 import io.saytheirnames.models.Donation;
 import io.saytheirnames.models.DonationsData;
 import io.saytheirnames.models.Petition;
-import io.saytheirnames.models.PetitionsData;
 import kotlin.coroutines.Continuation;
 
 public class DonationsDataSource extends PagingSource<Integer, Donation> {

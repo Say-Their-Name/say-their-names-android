@@ -8,10 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.Collections;
 
-import io.saytheirnames.models.People;
-import io.saytheirnames.models.PeopleData;
 import io.saytheirnames.models.Petition;
-import io.saytheirnames.models.PetitionData;
 import io.saytheirnames.models.PetitionsData;
 import kotlin.coroutines.Continuation;
 
