@@ -23,15 +23,16 @@ public class AboutFragment extends Fragment {
     private View myFragment;
 
     String twitterLink = "https://twitter.com/SayTheirName_io";
-    String slackLink = "https://saytheirnames.slack.com/";
+    String slackLink = "https://t.co/JvU3sgfoFu";
     String repoLink = "https://github.com/Say-Their-Name/";
+    String addNameLink = "https://airtable.com/shr6Da28410B2Muy3";
     String aboutPageLink = "https://saytheirnames.io/about";
 
-    private Button btnTwitter,btnSlack,btnRepo;
+    private Button btnTwitter, btnSlack, btnRepo, btnRequest;
 
-    private WebView webView;
+    /*private WebView webView;
     private ProgressBar progressBar;
-    private WebSettings webSettings;
+    private WebSettings webSettings;*/
     private Toolbar toolbar;
 
 
@@ -51,14 +52,14 @@ public class AboutFragment extends Fragment {
         // Inflate the layout for this fragment
         myFragment = inflater.inflate(R.layout.fragment_about, container, false);
 
-        webView = myFragment.findViewById(R.id.webview_content);
-        progressBar = myFragment.findViewById(R.id.progressBar);
+       /* webView = myFragment.findViewById(R.id.webview_content);
+        progressBar = myFragment.findViewById(R.id.progressBar);*/
 
         toolbar = myFragment.findViewById(R.id.toolbar);
         toolbar.setTitle("");
         ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
 
-        webView.loadUrl(aboutPageLink);
+/*        webView.loadUrl(aboutPageLink);
 
         webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -76,19 +77,21 @@ public class AboutFragment extends Fragment {
                 webView.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
             }
-        });
+        });*/
 
-        /*btnRepo = myFragment.findViewById(R.id.btnViewRepo);
+        btnRepo = myFragment.findViewById(R.id.btnViewRepo);
         btnTwitter = myFragment.findViewById(R.id.btnFollowUs);
         btnSlack = myFragment.findViewById(R.id.btnSlackChannel);
+        btnRequest = myFragment.findViewById(R.id.btnRequestToAdd);
 
         btnRepo.setOnClickListener(v -> {
-         visitPages(repoLink);
+            visitPages(repoLink);
         });
         btnSlack.setOnClickListener(v -> {
-        visitPages(slackLink);
+            visitPages(slackLink);
         });
-        btnTwitter.setOnClickListener(v -> visitPages(twitterLink));*/
+        btnTwitter.setOnClickListener(v -> visitPages(twitterLink));
+        btnRequest.setOnClickListener(v -> visitPages(addNameLink));
 
         return myFragment;
     }

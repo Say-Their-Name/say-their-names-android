@@ -61,7 +61,7 @@
     <string name="join_our_slack_channel">JOIN OUR SLACK CHANNEL</string>
     <string name="follow_us">FOLLOW US</string>
     <string name="how_do_i_get_invovled">HOW DO I GET INVOVLED</string>
-    <string name="brief_history">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturiasdlnalkd</string>
+    <string name="brief_history">Say Their Names is a social movement to raise awareness for all the black victims of racial inequality all around the world. This movement is in support of the overall Black Lives Matter movement and aims to highlight individuals affected by anti-Black Violence. Say Their Names movement calls attention and demands justice for all victims.</string>
     <string name="get_involved">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</string>
     <string name="get_involved_as_a_developer">HOW DO I GET INVOLVED AS A DEVELOPER</string>
     <string name="get_involved_developer">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</string>
@@ -75,4 +75,11 @@
     <string name="outcome">Outcome</string>
     <string name="their_story">Their Story</string>
     <string name="social_media_hashtags">SOCIAL MEDIA HASHTAGS</string>
+    <string name="about_project_title">ABOUT THIS PROJECT</string>
+    <string name="about_project_text">Welcome to the Say Their Names Project. Our aim is to build an open-source platform to raise awareness of the injustice and often forgotten names of racial inequality. We strive to identify and amplify verified organizations to ensure donations are reaching those who can make the most impact with it.</string>
+    <string name="request_header">REQUEST FOR AN EDIT OR REMOVAL</string>
+    <string name="request_text">If you would like to propose an edit to a victim page or if you are a representative of the victim and would like the victim to be removed from this directory please send us a message on Twitter.</string>
+    <string name="history_header">HISTORY ON THE SAY THEIR NAME MOVEMENT</string>
+    <string name="add_name_header">DID WE MISS SOMEONE?</string>
+    <string name="request_to_add_a_name">REQUEST TO ADD A NAME</string>
 </resources>
