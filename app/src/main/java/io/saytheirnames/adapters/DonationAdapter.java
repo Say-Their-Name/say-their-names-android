@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import io.saytheirnames.R;
+import io.saytheirnames.activity.DonationDetailsActivity;
 import io.saytheirnames.activity.PetitionDetailsActivity;
 import io.saytheirnames.models.Donation;
 import io.saytheirnames.network.DonationsPager;
@@ -55,8 +56,8 @@ public class DonationAdapter extends PagingDataAdapter<Donation,DonationAdapter.
             holder.txtDescription.setText(String.valueOf(donation.getDescription()));
 
             holder.findOutMore.setOnClickListener(v -> {
-                Intent intent = new Intent(holder.itemView.getContext(), PetitionDetailsActivity.class);
-                intent.putExtra(PetitionDetailsActivity.EXTRA_ID, donation.getIdentifier());
+                Intent intent = new Intent(holder.itemView.getContext(), DonationDetailsActivity.class);
+                intent.putExtra(DonationDetailsActivity.EXTRA_ID, donation.getIdentifier());
                 holder.itemView.getContext().startActivity(intent);
             });
 

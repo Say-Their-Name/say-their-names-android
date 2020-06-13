@@ -37,6 +37,8 @@ public class DonationDetailsActivity extends AppCompatActivity implements View.O
 
     String identifier,image, title, desc, donationLink;
 
+    public static final String EXTRA_ID = "identifier";
+
     private BlurImageView blurImageView;
     private ImageView donationImage,close;
     private TextView donationTitle, subTitle, donationDesc, socialHashtags;
@@ -56,7 +58,7 @@ public class DonationDetailsActivity extends AppCompatActivity implements View.O
 
         Intent intent = getIntent();
 
-        identifier = intent.getStringExtra("identifier");
+        identifier = intent.getStringExtra(EXTRA_ID);
 
        loadData();
     }
