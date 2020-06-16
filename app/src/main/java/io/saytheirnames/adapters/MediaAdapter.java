@@ -18,7 +18,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
-public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.NewsViewHolder> {
+public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHolder> {
 
     private MediaListener listener;
     private List<Media> mediaList;
@@ -32,14 +32,13 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.NewsViewHold
 
     @NonNull
     @Override
-    public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.news_item, parent, false);
-        return new NewsViewHolder(convertView);
+    public MediaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.media_item, parent, false);
+        return new MediaViewHolder(convertView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NewsViewHolder holder, final int position) {
-        //TODO: This should support URL previews at some point. I believe there are libraries out there that can do that for us.
+    public void onBindViewHolder(@NonNull MediaViewHolder holder, final int position) {
 
         Media media = mediaList.get(position);
 
@@ -48,7 +47,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.NewsViewHold
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.blm2)
                         .error(R.drawable.blm2))
-                .into(holder.newsUrl);
+                .into(holder.mediaImage);
 
         holder.itemView.setOnClickListener(v -> listener.onMediaSelected(media));
 
@@ -70,13 +69,13 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.NewsViewHold
         void onMediaSelected(Media media);
     }
 
-    static class NewsViewHolder extends RecyclerView.ViewHolder {
-        ImageView newsUrl;
+    static class MediaViewHolder extends RecyclerView.ViewHolder {
+        ImageView mediaImage;
         CardView cardView;
 
-        public NewsViewHolder(@NonNull View itemView) {
+        public MediaViewHolder(@NonNull View itemView) {
             super(itemView);
-            newsUrl = itemView.findViewById(R.id.news);
+            mediaImage = itemView.findViewById(R.id.image);
             cardView = itemView.findViewById(R.id.cardView);
         }
     }
