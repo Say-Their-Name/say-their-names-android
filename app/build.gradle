@@ -65,4 +65,8 @@ dependencies {
 
     implementation "androidx.paging:paging-runtime:3.0.0-alpha01"
 
+    implementation "org.jsoup:jsoup:1.11.3"
+    implementation "io.github.ponnamkarthik:richlinkpreview:1.0.9"
+    implementation "com.squareup.picasso:picasso:2.71828"
+
 }
