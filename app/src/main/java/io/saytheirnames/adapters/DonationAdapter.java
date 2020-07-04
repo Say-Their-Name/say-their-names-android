@@ -53,7 +53,9 @@ public class DonationAdapter extends PagingDataAdapter<Donation,DonationAdapter.
                     .into(holder.donationImage);
 
             holder.txtTitle.setText(donation.getTitle());
-            holder.txtDescription.setText(String.valueOf(donation.getDescription()));
+            //if null, replace with empty string.
+            String donationDescription = donation.getDescription() == null? "" : donation.getDescription();
+            holder.txtDescription.setText(donationDescription);
 
             holder.findOutMore.setOnClickListener(v -> {
                 Intent intent = new Intent(holder.itemView.getContext(), DonationDetailsActivity.class);
