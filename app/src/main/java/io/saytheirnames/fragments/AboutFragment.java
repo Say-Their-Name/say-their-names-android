@@ -18,7 +18,7 @@ public class AboutFragment extends Fragment {
     private View myFragment;
 
     String twitterLink = "https://twitter.com/SayTheirName_io";
-    String slackLink = "https://t.co/JvU3sgfoFu";
+    String slackLink = "https://bit.ly/say-their-names-slack";
     String repoLink = "https://github.com/Say-Their-Name/";
     String addNameLink = "https://airtable.com/shr6Da28410B2Muy3";
     String aboutPageLink = "https://saytheirnames.io/about";
