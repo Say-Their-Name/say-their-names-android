@@ -1,5 +1,7 @@
 package io.saytheirnames.activity;
 
+import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -15,7 +17,9 @@ import io.saytheirnames.fragments.HomeFragment;
 import io.saytheirnames.fragments.PetitionsFragment;
 import io.saytheirnames.network.BackendInterface;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -70,6 +74,36 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+    @Override
+    public void onBackPressed() {
+        MenuItem homeItem = mBottomNav.getMenu().getItem(0);
+        if (mSelectedItem != homeItem.getItemId()) {
+            // select home item
+            selectFragment(homeItem);
+
+            //this will also highlight the home menu item icon
+            updateBottomNavBasedOnTag(HOME_TAG);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        //clear Glide's disk cache whenever an activity is destroyed. Mechanism for helping against memory leaks/ Out of memory errors
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                // This method must be called on a background thread.
+                Glide.get(getApplicationContext()).clearDiskCache();
+                return null;
+            }
+        };
+    }
+
     private void setDefaultFragment() {
         mBottomNav.setSelectedItemId(R.id.navigation_home);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -97,17 +131,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         mBottomNav.setSelectedItemId(mSelectedItem);
-    }
-
-    @Override
-    public void onBackPressed() {
-        MenuItem homeItem = mBottomNav.getMenu().getItem(0);
-        if (mSelectedItem != homeItem.getItemId()) {
-            // select home item
-            selectFragment(homeItem);
-        } else {
-            super.onBackPressed();
-        }
     }
 
     private void selectFragment(MenuItem item) {

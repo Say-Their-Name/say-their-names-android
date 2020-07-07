@@ -25,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.snackbar.Snackbar;
 import com.jgabrielfreitas.core.BlurImageView;
+import com.squareup.picasso.Picasso;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import retrofit2.Call;
@@ -61,6 +62,22 @@ public class DonationDetailsActivity extends AppCompatActivity implements View.O
         identifier = intent.getStringExtra(EXTRA_ID);
 
        loadData();
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        //clear Glide's disk cache whenever an activity is destroyed. Mechanism for helping against memory leaks/ Out of memory errors
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                // This method must be called on a background thread.
+                Glide.get(getApplicationContext()).clearDiskCache();
+                return null;
+            }
+        };
     }
 
     void initView() {

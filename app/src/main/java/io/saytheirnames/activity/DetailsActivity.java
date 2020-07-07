@@ -1,5 +1,7 @@
 package io.saytheirnames.activity;
 
+import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +30,7 @@ import io.saytheirnames.utils.ShareUtil;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.snackbar.Snackbar;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,6 +96,25 @@ public class DetailsActivity extends AppCompatActivity
         renderMedia();
         renderSocialMedia();
         renderData();
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        //clear Glide's disk cache whenever an activity is destroyed. Mechanism for helping against memory leaks/ Out of memory errors
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                // This method must be called on a background thread.
+                Glide.get(getApplicationContext()).clearDiskCache();
+
+                // DetailsActivity's richLinkViewer  (in the NewsAdapter) internally uses Picasso
+                Picasso.get().shutdown();
+                return null;
+            }
+        };
     }
 
     private void initializeBackend() {
@@ -187,14 +209,13 @@ public class DetailsActivity extends AppCompatActivity
             newsGroup.setVisibility(View.GONE);
         }
 
-        //TODO: Add Media adapter
         if (person.getMedia() != null && person.getMedia().size() > 0) {
             mediaList.clear();
             mediaList.addAll(person.getMedia());
             mediaAdapter.notifyDataSetChanged();
             mediaGroup.setVisibility(View.VISIBLE);
         } else {
-            newsGroup.setVisibility(View.GONE);
+            mediaGroup.setVisibility(View.GONE);
         }
 
         if (person.getHashtags() != null && person.getHashtags().size() > 0) {
