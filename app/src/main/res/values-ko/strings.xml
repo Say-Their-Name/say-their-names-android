@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Loco xml export: Android string resources
+ Project: Say Their Names
+ Release: Working copy
+ Locale: ko, Korean
+ Exported by: Say Their Names
+ Exported at: Sun, 12 Jul 2020 23:26:05 +0200
+-->
+<resources>
+    <string name="home">홈</string>
+    <string name="donations">기부하기</string>
+    <string name="petitions">청원하기</string>
+    <string name="about">요약</string>
+    <string name="cancel">취소</string>
+    <string name="find_out_more">더 알아보기</string>
+    <string name="verified">검증된 사이트</string>
+    <string name="filter_all">전체</string>
+    <string name="filter_businesses">업체 (목록)</string>
+    <string name="filter_protesters">시위자 (명단)</string>
+    <string name="filter_victims">희생자 (명단)</string>
+    <string name="share">공유하기</string>
+    <string name="close">닫기</string>
+    <string name="say_their_names">희생자들의 이름을 외쳐봅니다</string>
+    <string name="bookmark">북마크</string>
+    <string name="search">검색 /검색하기</string>
+    <string name="donate">Donate</string>
+    <string name="DONATE_NOW">DONATE NOW</string>
+    <string name="description">Description</string>
+    <string name="person.say_their_names">희생자들의 이름을 외쳐봅니다</string>
+    <string name="person.age">나이</string>
+    <string name="person.children">희생자 자녀 수</string>
+    <string name="person.location">지역</string>
+    <string name="person.their_story">희생자의 스토리</string>
+    <string name="person.outcome">그 후 스토리</string>
+    <string name="person.news">뉴스</string>
+    <string name="person.media">미디어</string>
+    <string name="person.hashtags">해시태그</string>
+    <string name="person.hashtagCopyTip">Press and hold to copy</string>
+    <string name="person.copied">Copied</string>
+    <!-- Get Involved - Slack -->
+    <string name="get_involved.slack.title">HOW DO I GET INVOLVED?</string>
+    <string name="get_involved.slack.button">JOIN OUR SLACK CHANNEL</string>
+    <!-- Get Involved - Developer -->
+    <string name="get_involved.developer.title">HOW DO I GET INVOLVED AS A DEVELOPER?</string>
+    <string name="get_involved.developer.button">VIEW OUR GITHUB</string>
+    <!-- Get Involved - Twitter -->
+    <string name="get_involved.twitter.title">JOIN US ON TWITTER</string>
+    <string name="get_involved.twitter.button">FOLLOW US</string>
+    <!-- More -->
+    <string name="more_history.aboutTitle">SOME HISTORY ON THE SAY THEIR NAMES MOVEMENT</string>
+    <string name="more_history.aboutDesc">Say Their Names is a social movement to raise awareness for all the black victims of racial inequality all around the world. This movement is in support of the overall Black Lives Matter movement and aims to highlight individuals affected by anti-Black Violence. Say Their Names movement calls attention and demands justice for all victims.</string>
+    <string name="massive_thank_you">A MASSIVE THANK YOU TO EVERYONE INVOLVED</string>
+    <string name="sign">Sign this petition</string>
+    <string name="about_this_project.title">About this project</string>
+    <string name="about_this_project_details">Welcome to the Say Their Names Project. Our aim is to build an open-source platform to raise awareness of the injustice and often forgotten names of racial inequality. We strive to identify and amplify verified organizations to ensure donations are reaching those who can make the most impact with it.</string>
+    <string name="request_edit_or_removal.title">REQUEST AN EDIT OR REMOVAL</string>
+    <string name="request_edit_or_removal.details">If you would like to propose an edit to a victim page or if you are a representative of the victim and would like the victim to be removed from this directory please send us a message on Twitter.</string>
+    <string name="twitter">Twitter</string>
+    <string name="did_we_miss_someone">DID WE MISS SOMEONE?</string>
+    <string name="request_to_add_new_name">REQUEST TO ADD A NAME</string>
+    <string name="people.hero_text">Delayed justice is injustice. Join the fight for justice. Sign petitions and donate today.</string>
+</resources>

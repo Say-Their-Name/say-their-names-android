@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Loco xml export: Android string resources
+ Project: Say Their Names
+ Release: Working copy
+ Locale: ru, Russian
+ Exported by: Say Their Names
+ Exported at: Sun, 12 Jul 2020 23:26:05 +0200
+-->
+<resources>
+    <string name="home">Главная</string>
+    <string name="donations">Пожертвования</string>
+    <string name="petitions">Петиции</string>
+    <string name="about">О приложении</string>
+    <string name="cancel">Отмена</string>
+    <string name="find_out_more">УЗНАТЬ ПОДРОБНЕЕ</string>
+    <string name="verified">Проверено</string>
+    <string name="filter_all">ВСЕ</string>
+    <string name="filter_businesses">ПРЕДПРИЯТИЯ</string>
+    <string name="filter_protesters">ПРОТЕСТУЮЩИЕ</string>
+    <string name="filter_victims">ЖЕРТВЫ</string>
+    <string name="share">Поделиться</string>
+    <string name="close">Закрыть</string>
+    <string name="say_their_names">Say their names</string>
+    <string name="bookmark">Закладки</string>
+    <string name="search">Поиск</string>
+    <string name="donate">Пожертвовать</string>
+    <string name="DONATE_NOW">Пожертвовать</string>
+    <string name="description">Описание</string>
+    <string name="person.say_their_names">Say their names</string>
+    <string name="person.age">Возраст</string>
+    <string name="person.children">Дети</string>
+    <string name="person.location">Местоположение</string>
+    <string name="person.their_story">История</string>
+    <string name="person.outcome">Результат</string>
+    <string name="person.news">Новости</string>
+    <string name="person.media">СМИ</string>
+    <string name="person.hashtags">Хештеги в социальных сетях</string>
+    <string name="person.hashtagCopyTip">Нажмите и удерживайте, чтобы скопировать</string>
+    <string name="person.copied">Скопировано</string>
+    <!-- Get Involved - Slack -->
+    <string name="get_involved.slack.title">Как я могу помочь?</string>
+    <string name="get_involved.slack.button">Присоединиться к слеку</string>
+    <!-- Get Involved - Developer -->
+    <string name="get_involved.developer.title">Я разработчик - как я могу помочь?</string>
+    <string name="get_involved.developer.button">Наш гитхаб</string>
+    <!-- Get Involved - Twitter -->
+    <string name="get_involved.twitter.title">Подписаться в Твиттере</string>
+    <string name="get_involved.twitter.button">Подписаться</string>
+    <!-- More -->
+    <string name="more_history.aboutTitle">О движении SAY THEIR NAMES</string>
+    <string name="more_history.aboutDesc">Say Their Names это движение, целью которого является привлечение внимания к жертвам неравноправия на основе расовой принадлежности по всему миру. Say Their Names поддерживает движение Black Lives Matter и стремится осветить людей, жизни которых пострадали от анти-расового насилия.</string>
+    <string name="massive_thank_you">Огромное спасибо всем участникам проекта!</string>
+    <string name="sign">К подписи</string>
+    <string name="about_this_project.title">О проекте</string>
+    <string name="about_this_project_details">Наша цель – построить платформу с открытым кодом, которая позволит привлечь внимание к несправедливости на базе расовой принадлежности и людям, которые часто оказываются забыты. Мы стремимся находить и распространять информацию о проверенных организациях, чтобы вы могли быть уверены, что пожертвования действительно идут тем, кому они действительно могут помочь.\u0020</string>
+    <string name="request_edit_or_removal.title">Запрос правок или удаления</string>
+    <string name="request_edit_or_removal.details">Если вы хотите предложить поправки к какой-либо странице, или если вы являетесь представителем жертвы и желаете, чтобы страница была удалена, с нами можно связаться в Твиттере.</string>
+    <string name="twitter">Twitter</string>
+    <string name="did_we_miss_someone">Не хватает каких-то данных?</string>
+    <string name="request_to_add_new_name">Запрос добавить имя</string>
+    <string name="people.hero_text">Отложенная справедливость - это несправедливость. Присоединитесь к борьбе, подписывайте петиции и пожертвуйте сегодня.</string>
+</resources>

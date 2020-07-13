@@ -62,6 +62,20 @@
 
     <style name="ToolbarStyle" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
         <item name="fontFamily">@font/raleway</item>
+        <item name="textAllCaps">true</item>
 
+    </style>
+
+    <!-- Added to transform menu items to uppercase -->
+    <style name="UpperButtons" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/UpperButtons.ActionBarStyle</item>
+    </style>
+
+    <style name="UpperButtons.ActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:titleTextStyle">@style/UpperButtons.ActionBar.TitleTextStyle</item>
+    </style>
+
+    <style name="UpperButtons.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="textAllCaps">true</item>
     </style>
 </resources>
