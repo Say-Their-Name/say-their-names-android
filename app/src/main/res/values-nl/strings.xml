@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Loco xml export: Android string resources
+ Project: Say Their Names
+ Release: Working copy
+ Locale: nl, Dutch; Flemish
+ Exported by: Say Their Names
+ Exported at: Sun, 12 Jul 2020 23:26:05 +0200
+-->
+<resources>
+    <string name="home">Home</string>
+    <string name="donations">Donaties</string>
+    <string name="petitions">Petities</string>
+    <string name="about">Over</string>
+    <string name="cancel">Annuleer</string>
+    <string name="find_out_more">MEER WETEN?</string>
+    <string name="verified">geverifieerd</string>
+    <string name="filter_all">ALLES</string>
+    <string name="filter_businesses">BEDRIJVEN</string>
+    <string name="filter_protesters">PROTESTERS</string>
+    <string name="filter_victims">SLACHTOFFERS</string>
+    <string name="share">Delen</string>
+    <string name="close">Sluit</string>
+    <string name="say_their_names">Say their names</string>
+    <string name="bookmark">Favoriet</string>
+    <string name="search">Zoek</string>
+    <string name="donate">Doneer</string>
+    <string name="DONATE_NOW">DONEER NU</string>
+    <string name="description">Omschrijving</string>
+    <string name="person.say_their_names">Say their names</string>
+    <string name="person.age">Leeftijd</string>
+    <string name="person.children">Kinderen</string>
+    <string name="person.location">Lokatie</string>
+    <string name="person.their_story">Hun Verhaal</string>
+    <string name="person.outcome">Uitkomst</string>
+    <string name="person.news">Nieuws</string>
+    <string name="person.media">Media</string>
+    <string name="person.hashtags">Social Media Hashtags</string>
+    <string name="person.hashtagCopyTip">Houd ingedrukt om te kopiëren</string>
+    <string name="person.copied">Gekopieerd</string>
+    <!-- Get Involved - Slack -->
+    <string name="get_involved.slack.title">HOE KAN IK HELPEN ALS EEN DESIGNER?</string>
+    <string name="get_involved.slack.button">VOEG JE TOE AAN ONZE SLACK CHANNEL</string>
+    <!-- Get Involved - Developer -->
+    <string name="get_involved.developer.title">HOE KAN IK HELPEN AS EEN DEVELOPER?</string>
+    <string name="get_involved.developer.button">BEKIJK ONZE GITHUB</string>
+    <!-- Get Involved - Twitter -->
+    <string name="get_involved.twitter.title">VOLG ONS OP TWITTER</string>
+    <string name="get_involved.twitter.button">VOLG ONS</string>
+    <!-- More -->
+    <string name="more_history.aboutTitle">GESCHIEDENIS OVER SAY THEIR NAMES BEWEGING</string>
+    <string name="more_history.aboutDesc">Say Their Names is een sociale beweging om het bewustzijn van alle slachtoffers van raciale ongelijkheid over de hele wereld te vergroten. Deze beweging ondersteunt de algehele Black Lives Matter beweging en heeft tot doel individuen te benadrukken die getroffen zijn door racistisch geweld. De beweging Say Their Names vraagt aandacht en eist gerechtigheid voor alle slachtoffers.</string>
+    <string name="massive_thank_you">HEEL ERG BEDANKT AAN IEDEREEN DIE HEEFT MEEGEWERKT</string>
+    <string name="sign">Onderteken de petitie</string>
+    <string name="about_this_project.title">Over dit project</string>
+    <string name="about_this_project_details">Welkom bij het Say Their Names Project. Ons doel is om een open-source platform te bouwen om het bewustzijn van de vergeten namen van raciale ongelijkheid te vergroten. We streven ernaar om geverifieerde organisaties te identificeren en te versterken om ervoor te zorgen dat donaties diegene bereiken met de meeste impact.</string>
+    <string name="request_edit_or_removal.title">VERZOEK TOT WIJZIGING OF VERWIJDERING</string>
+    <string name="request_edit_or_removal.details">Wilt u een bewerking op een pagina voorstellen of vertegenwoordigd u een slachtoffer en wilt dat deze uit de directory wordt verwijderd, stuur ons dan een bericht op Twitter.</string>
+    <string name="twitter">Twitter</string>
+    <string name="did_we_miss_someone">MISSEN WE IEMAND?</string>
+    <string name="request_to_add_new_name">VOEG NAAM TOE</string>
+    <string name="people.hero_text">Vertraagde gerechtigheid is onrechtvaardigheid. Doe mee aan de strijd voor gerechtigheid. Teken de petities en doneer vandaag nog.</string>
+</resources>

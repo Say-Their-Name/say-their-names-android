@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Loco xml export: Android string resources
+ Project: Say Their Names
+ Release: Working copy
+ Locale: es, Spanish
+ Exported by: Say Their Names
+ Exported at: Sun, 12 Jul 2020 23:26:05 +0200
+-->
+<resources>
+    <string name="home">Inicio</string>
+    <string name="donations">Donaciones</string>
+    <string name="petitions">Peticiones</string>
+    <string name="about">Más Información</string>
+    <string name="cancel">Cancelar</string>
+    <string name="find_out_more">APRENDE MÁS</string>
+    <string name="verified">verificado</string>
+    <string name="filter_all">TODOS</string>
+    <string name="filter_businesses">EMPRESAS</string>
+    <string name="filter_protesters">MANIFESTANTES</string>
+    <string name="filter_victims">VÍCTIMAS</string>
+    <string name="share">Compartir</string>
+    <string name="close">Cerrar</string>
+    <string name="say_their_names">Di sus nombres</string>
+    <string name="bookmark">Marcar</string>
+    <string name="search">Buscar</string>
+    <string name="donate">Dona</string>
+    <string name="DONATE_NOW">DONA AHORA</string>
+    <string name="description">Descripción</string>
+    <string name="person.say_their_names">Di sus nombres</string>
+    <string name="person.age">Edad</string>
+    <string name="person.children">Hijos</string>
+    <string name="person.location">Ubicación</string>
+    <string name="person.their_story">Su Historia</string>
+    <string name="person.outcome">Resultado</string>
+    <string name="person.news">Noticias</string>
+    <string name="person.media">Medios de Comunicación</string>
+    <string name="person.hashtags">Hashtags de Redes Sociales</string>
+    <string name="person.hashtagCopyTip">Mantenga presionado para copiar</string>
+    <string name="person.copied">Copiado</string>
+    <!-- Get Involved - Slack -->
+    <string name="get_involved.slack.title">¿COMO PARTICIPO?</string>
+    <string name="get_involved.slack.button">PARTICIPA EN SLACK</string>
+    <!-- Get Involved - Developer -->
+    <string name="get_involved.developer.title">¿COMO PUEDO PARTICIPAR COMO UN PROGRAMADOR?</string>
+    <string name="get_involved.developer.button">VISITA NUESTRO GITHUB</string>
+    <!-- Get Involved - Twitter -->
+    <string name="get_involved.twitter.title">PARTICIPA EN TWITTER</string>
+    <string name="get_involved.twitter.button">SIGUENOS</string>
+    <!-- More -->
+    <string name="more_history.aboutTitle">UN POCO DE HISTORIA SOBRE EL MOVIMIENTO DI SUS NOMBRES</string>
+    <string name="more_history.aboutDesc">Di Sus Nombres es un movimiento social para aumentar conocimiento de todas la víctimas de piel oscura que han sufrido la injusticia social alrededor del mundo. Este movimiento apoya el movimiento Black Lives Matter y aspira a destacar los individuales que han sido afectados por la violencia contra las personas de piel oscura. El movimiento Di Sus Nombres llama atención a la injusticia y demanda justicia para todas las víctimas.</string>
+    <string name="massive_thank_you">UN AGRADECIMIENTO MASIVO A TODOS LOS INVOLUCRADOS</string>
+    <string name="sign">Firma la petición</string>
+    <string name="about_this_project.title">Sobre este projecto</string>
+    <string name="about_this_project_details">Bienvenido al projecto Di Sus Nombres. Nuestra misión es crear una plataforma de código abierto para aumentar el conocimiento de la injusticia y nombres que son olvidados frecuentemente por la injusticia racial. Nos esforzamos para identificar y ampliar organizaciones verificadas para asegurarnos que las donaciones lleguen a aquellos a los cuales el impacto sea major con ellas</string>
+    <string name="request_edit_or_removal.title">SOLICITE UN CAMBIO O ELIMINACIÓN</string>
+    <string name="request_edit_or_removal.details">Si esta interesado en proponer una modificación al perfil de una víctima o si es un representante de una víctima y quisiera la eliminación de la víctima de este directorio, por favor no dude en enviarnos un mensaje por Twitter.</string>
+    <string name="twitter">Twitter</string>
+    <string name="did_we_miss_someone">¿SE NOS OLVIDÓ ALGUIEN?</string>
+    <string name="request_to_add_new_name">AGREGE SU NOMBRE</string>
+    <string name="people.hero_text">Justicia retrasada es injusticia. Únete a nosotros en la lucha por la justicia. Firma las peticiones y dona hoy.</string>
+</resources>

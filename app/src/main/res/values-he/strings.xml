@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Loco xml export: Android string resources
+ Project: Say Their Names
+ Release: Working copy
+ Locale: he, Hebrew
+ Exported by: Say Their Names
+ Exported at: Sun, 12 Jul 2020 23:26:05 +0200
+-->
+<resources>
+    <string name="home">דף הבית</string>
+    <string name="donations">תרומות</string>
+    <string name="petitions">Petitions</string>
+    <string name="about">אודות</string>
+    <string name="cancel">ביטל</string>
+    <string name="find_out_more">למד עוד</string>
+    <string name="verified">מאומת</string>
+    <string name="filter_all">הכול</string>
+    <string name="filter_businesses">עסקים</string>
+    <string name="filter_protesters">PROTESTERS</string>
+    <string name="filter_victims">VICTIMS</string>
+    <string name="share">שתף</string>
+    <string name="close">סגור</string>
+    <string name="say_their_names">אומר את השמות שלהם</string>
+    <string name="bookmark">סימניות</string>
+    <string name="search">חיפוש</string>
+    <string name="donate">תרום</string>
+    <string name="DONATE_NOW">תרום עכשיו</string>
+    <string name="description">הסבר</string>
+    <string name="person.say_their_names">אומר את השמות שלהם</string>
+    <string name="person.age">גיל</string>
+    <string name="person.children">ילדים</string>
+    <string name="person.location">אתר</string>
+    <string name="person.their_story">הסיפור שלהם</string>
+    <string name="person.outcome">תוצאה</string>
+    <string name="person.news">חדשות</string>
+    <string name="person.media">מדיה</string>
+    <string name="person.hashtags">Social Media Hashtags</string>
+    <string name="person.hashtagCopyTip">Press and hold to copy</string>
+    <string name="person.copied">מועתק</string>
+    <!-- Get Involved - Slack -->
+    <string name="get_involved.slack.title">איך אני יכול לעזור?</string>
+    <string name="get_involved.slack.button">JOIN OUR SLACK CHANNEL</string>
+    <!-- Get Involved - Developer -->
+    <string name="get_involved.developer.title">HOW DO I GET INVOLVED AS A DEVELOPER?</string>
+    <string name="get_involved.developer.button">VIEW OUR GITHUB</string>
+    <!-- Get Involved - Twitter -->
+    <string name="get_involved.twitter.title">הצטרף אלינו בטוויטר</string>
+    <string name="get_involved.twitter.button">עקבו אחרינו</string>
+    <!-- More -->
+    <string name="more_history.aboutTitle">SOME HISTORY ON THE SAY THEIR NAMES MOVEMENT</string>
+    <string name="more_history.aboutDesc">Say Their Names is a social movement to raise awareness for all the black victims of racial inequality all around the world. This movement is in support of the overall Black Lives Matter movement and aims to highlight individuals affected by anti-Black Violence. Say Their Names movement calls attention and demands justice for all victims.</string>
+    <string name="massive_thank_you">תודה ענקית לכל המעורבים</string>
+    <string name="sign">Sign this petition</string>
+    <string name="about_this_project.title">על פרויקט זה</string>
+    <string name="about_this_project_details">Welcome to the Say Their Names Project. Our aim is to build an open-source platform to raise awareness of the injustice and often forgotten names of racial inequality. We strive to identify and amplify verified organizations to ensure donations are reaching those who can make the most impact with it.</string>
+    <string name="request_edit_or_removal.title">REQUEST AN EDIT OR REMOVAL</string>
+    <string name="request_edit_or_removal.details">If you would like to propose an edit to a victim page or if you are a representative of the victim and would like the victim to be removed from this directory please send us a message on Twitter.</string>
+    <string name="twitter">טוויטר</string>
+    <string name="did_we_miss_someone">האם שכחנו את מישהו?</string>
+    <string name="request_to_add_new_name">בקשה להוסיף שם</string>
+    <string name="people.hero_text">צדק מעוכב הוא אי צדק. הצטרף למאבק למען הצדק. חותם על עצומות ותרום היום.</string>
+</resources>

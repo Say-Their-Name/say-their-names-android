@@ -30,7 +30,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/raleway"
-                android:text="@string/title_petition"
+                android:text="@string/petitions"
+                android:textAllCaps="true"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />

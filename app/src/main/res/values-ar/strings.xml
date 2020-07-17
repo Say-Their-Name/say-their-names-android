@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Loco xml export: Android string resources
+ Project: Say Their Names
+ Release: Working copy
+ Locale: ar, Arabic
+ Exported by: Say Their Names
+ Exported at: Sun, 12 Jul 2020 23:26:05 +0200
+-->
+<resources>
+    <string name="home">الرئيسية</string>
+    <string name="donations">التبرعات</string>
+    <string name="petitions">العرائض</string>
+    <string name="about">حول</string>
+    <string name="cancel">إلغاء</string>
+    <string name="find_out_more">المزيد</string>
+    <string name="verified">موثق</string>
+    <string name="filter_all">الكل</string>
+    <string name="filter_businesses">المشاريع</string>
+    <string name="filter_protesters">المتظاهرين</string>
+    <string name="filter_victims">الضحايا</string>
+    <string name="share">انشر</string>
+    <string name="close">اغلاق</string>
+    <string name="say_their_names">Say their names</string>
+    <string name="bookmark">اضف الى العلامات المرجعية</string>
+    <string name="search">بحث</string>
+    <string name="donate">تبرع</string>
+    <string name="DONATE_NOW">تبرع الآن</string>
+    <string name="description">الوصف</string>
+    <string name="person.say_their_names">Say their names</string>
+    <string name="person.age">العمر</string>
+    <string name="person.children">الأطفال</string>
+    <string name="person.location">المكان</string>
+    <string name="person.their_story">الحادثة</string>
+    <string name="person.outcome">النتيجة</string>
+    <string name="person.news">أخبار</string>
+    <string name="person.media">الوسائط</string>
+    <string name="person.hashtags">الوسوم</string>
+    <string name="person.hashtagCopyTip">اضغط مع الاستمرار للنسخ</string>
+    <string name="person.copied">تم النسخ</string>
+    <!-- Get Involved - Slack -->
+    <string name="get_involved.slack.title">كيف اشارك كمصمم؟</string>
+    <string name="get_involved.slack.button">انضم لقناة SLACK الخاصة بنا</string>
+    <!-- Get Involved - Developer -->
+    <string name="get_involved.developer.title">كيف اشارك كمبرمج؟</string>
+    <string name="get_involved.developer.button">قم بزيارة صفحتنا على GitHub</string>
+    <!-- Get Involved - Twitter -->
+    <string name="get_involved.twitter.title">انضم إلينا على تويتر</string>
+    <string name="get_involved.twitter.button">تابعنا</string>
+    <!-- More -->
+    <string name="more_history.aboutTitle">تاريخ حركة قل أسمائهم</string>
+    <string name="more_history.aboutDesc">قل أسمائهم هي حركة اجتماعية لزيادة الوعي عن الضحايا السود الذين تعرضوا لعدم المساواة العرقية في جميع أنحاء العالم. تدعم هذه الحركة حركة حياة السود مهمة وتهدف إلى تسليط الضوء على الأفراد المتضررين من العنف ضد السود. حركة قل أسمائهم تلفت الانتباه وتطالب بالعدالة لجميع الضحايا.</string>
+    <string name="massive_thank_you">A MASSIVE THANK YOU TO EVERYONE INVOLVED</string>
+    <string name="sign">وقع العريضة</string>
+    <string name="about_this_project.title">عن هذا المشروع</string>
+    <string name="about_this_project_details">مرحبًا بكم في مشروع قل أسمائهم. هدفنا هو بناء منصة مفتوحة المصدر لزيادة الوعي بالظلم والاسماء المنسية التي تعرضت لعدم المساواة العرقي. نحن نسعى جاهدين للبحت وتحديد المنظمات الموثوقة لضمان وصول تبرعاتكم إلى أولئك الذين في امس الحاجة اليها.</string>
+    <string name="request_edit_or_removal.title">طلب تعديل أو إزالة</string>
+    <string name="request_edit_or_removal.details">إذا كنت ترغب في اقتراح تعديل على صفحة الضحية أو إذا كنت ممثلًا للضحية وتريد إزالة الضحية من هذا البرنامج، فيرجى التواصل معنا عن طريق تويتر.</string>
+    <string name="twitter">تويتر</string>
+    <string name="did_we_miss_someone">هل نسينا شخص ما؟</string>
+    <string name="request_to_add_new_name">اطلب إضافة اسم</string>
+    <string name="people.hero_text">Delayed justice is injustice. Join the fight for justice. Sign petitions and donate today.</string>
+</resources>
