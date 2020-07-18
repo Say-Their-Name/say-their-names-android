@@ -41,6 +41,4 @@ public interface BackendInterface {
 
     @GET("/api/donations")
     Call<DonationsData> getFilteredDonations(@Query("type") String type);
-
-
 }

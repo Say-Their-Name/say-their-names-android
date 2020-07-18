@@ -1,7 +1,5 @@
 package io.saytheirnames.activity;
 
-import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,33 +10,31 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.Group;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import io.saytheirnames.R;
-import io.saytheirnames.adapters.MediaAdapter;
-import io.saytheirnames.adapters.NewsAdapter;
-import io.saytheirnames.adapters.HashtagAdapter;
-import io.saytheirnames.models.Media;
-import io.saytheirnames.models.News;
-import io.saytheirnames.models.Person;
-import io.saytheirnames.models.PersonData;
-import io.saytheirnames.models.Hashtag;
-import io.saytheirnames.network.BackendInterface;
-import io.saytheirnames.network.Utils;
-import io.saytheirnames.utils.CustomTabUtil;
-import io.saytheirnames.utils.ShareUtil;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.snackbar.Snackbar;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.saytheirnames.R;
+import io.saytheirnames.adapters.HashtagAdapter;
+import io.saytheirnames.adapters.MediaAdapter;
+import io.saytheirnames.adapters.NewsAdapter;
+import io.saytheirnames.models.Hashtag;
+import io.saytheirnames.models.Media;
+import io.saytheirnames.models.News;
+import io.saytheirnames.models.Person;
+import io.saytheirnames.utils.CustomTabUtil;
+import io.saytheirnames.utils.ShareUtil;
+import io.saytheirnames.viewmodels.PersonDetailsViewModel;
 import jp.wasabeef.glide.transformations.BlurTransformation;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
@@ -55,11 +51,7 @@ public class DetailsActivity extends AppCompatActivity
     private List<Media> mediaList;
     private List<Hashtag> hashtagList;
 
-    private String personID,baseUrl;
-
-    Person person;
-
-    BackendInterface backendInterface;
+    private String personID, baseUrl;
 
     private Toolbar toolbar;
     private FrameLayout heroContainer;
@@ -83,6 +75,9 @@ public class DetailsActivity extends AppCompatActivity
     private Group mediaGroup;
     private Group hashtagGroup;
 
+    private PersonDetailsViewModel mPersonDetailsViewModel;
+    private Person mPerson;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,34 +86,21 @@ public class DetailsActivity extends AppCompatActivity
         personID = getIntent().getStringExtra(EXTRA_ID);
 
         bindViews();
-        initializeBackend();
         renderNews();
         renderMedia();
         renderSocialMedia();
-        renderData();
-    }
+        showProgress(true);
 
-    @SuppressLint("StaticFieldLeak")
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+        mPersonDetailsViewModel = new ViewModelProvider(this).get(PersonDetailsViewModel.class);
+        mPersonDetailsViewModel.init();
+        mPersonDetailsViewModel.searchPersonWithId(personID);
 
-        //clear Glide's disk cache whenever an activity is destroyed. Mechanism for helping against memory leaks/ Out of memory errors
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                // This method must be called on a background thread.
-                Glide.get(getApplicationContext()).clearDiskCache();
-
-                // DetailsActivity's richLinkViewer  (in the NewsAdapter) internally uses Picasso
-                Picasso.get().shutdown();
-                return null;
+        mPersonDetailsViewModel.getPerson().observe(this, person -> {
+            if (person != null) {
+                showProgress(false);
+                handlePersonData(person);
             }
-        };
-    }
-
-    private void initializeBackend() {
-        backendInterface = Utils.getBackendService();
+        });
     }
 
     private void bindViews() {
@@ -176,29 +158,8 @@ public class DetailsActivity extends AppCompatActivity
         navigateToUrl(hashtag.getLink());
     }
 
-    private void renderData() {
-        showProgress(true);
-        backendInterface.getPeopleById(personID).enqueue(new Callback<PersonData>() {
-            @Override
-            public void onResponse(Call<PersonData> call, Response<PersonData> response) {
-                if (response.isSuccessful()) {
-                    onGetPersonSuccess(response.body().getData());
-                } else {
-                    onGetPersonFailure(new Throwable(response.message()));
-                }
-                showProgress(false);
-            }
-
-            @Override
-            public void onFailure(Call<PersonData> call, Throwable throwable) {
-                onGetPersonFailure(throwable);
-                showProgress(false);
-            }
-        });
-    }
-
-    private void onGetPersonSuccess(Person person) {
-        this.person = person;
+    private void handlePersonData(Person person) {
+        this.mPerson = person;
 
         if (person.getNews() != null && person.getNews().size() > 0) {
             newsList.clear();
@@ -265,11 +226,11 @@ public class DetailsActivity extends AppCompatActivity
 
     @Override
     public void onClick(View view) {
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.donate:
-                if (person.getDonationLinks().size() > 0) {
+                if (mPerson.getDonationLinks().size() > 0) {
                     //TODO: For now, just get the first one. We'll improve on this and present multiple options later.
-                    navigateToUrl(person.getDonationLinks().get(0).getLink());
+                    navigateToUrl(mPerson.getDonationLinks().get(0).getLink());
                 }
                 break;
             case R.id.share:
@@ -277,11 +238,6 @@ public class DetailsActivity extends AppCompatActivity
                 share(baseUrl);
                 //showSnackbar("TODO: Share.");
         }
-    }
-
-    private void onGetPersonFailure(Throwable throwable) {
-        //TODO: Get a better message. This could be full of dev jargon.
-        showSnackbar(throwable.getLocalizedMessage());
     }
 
     private void showSnackbar(String text) {
@@ -310,6 +266,17 @@ public class DetailsActivity extends AppCompatActivity
 
     @Override
     public void onMediaSelected(Media media) {
+        //TODO: Implement? Maybe show a bigger image of the picture selected
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //Clear Glide's disk cache whenever an activity is destroyed
+        Completable.fromAction(() -> {
+            Glide.get(getApplicationContext()).clearDiskCache();
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe();
     }
 }

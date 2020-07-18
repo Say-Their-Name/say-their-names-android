@@ -1,86 +1,67 @@
 package io.saytheirnames.activity;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 
-import io.saytheirnames.R;
-import io.saytheirnames.models.Donation;
-import io.saytheirnames.models.DonationData;
-import io.saytheirnames.network.BackendInterface;
-import io.saytheirnames.network.Utils;
-import io.saytheirnames.utils.CustomTabUtil;
-import io.saytheirnames.utils.ShareUtil;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.material.snackbar.Snackbar;
 import com.jgabrielfreitas.core.BlurImageView;
-import com.squareup.picasso.Picasso;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.saytheirnames.R;
+import io.saytheirnames.models.Donation;
+import io.saytheirnames.utils.CustomTabUtil;
+import io.saytheirnames.utils.ShareUtil;
+import io.saytheirnames.viewmodels.DonationDetailsViewModel;
 import jp.wasabeef.glide.transformations.BlurTransformation;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class DonationDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    String identifier,image, title, desc, donationLink;
-
+    private String identifier, image, title, desc, donationLink;
     public static final String EXTRA_ID = "identifier";
 
     private BlurImageView blurImageView;
-    private ImageView donationImage,close;
+    private ImageView donationImage, close;
     private TextView donationTitle, subTitle, donationDesc, socialHashtags;
     private Button donationButton;
     private View progress;
     private Toolbar toolbar;
 
-    Donation donation;
+    private DonationDetailsViewModel mDonationDetailsViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation_details);
 
+        bindViews();
+        showProgress(true);
+        identifier = getIntent().getStringExtra(EXTRA_ID);
 
-        initView();
-
-        Intent intent = getIntent();
-
-        identifier = intent.getStringExtra(EXTRA_ID);
-
-       loadData();
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        //clear Glide's disk cache whenever an activity is destroyed. Mechanism for helping against memory leaks/ Out of memory errors
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                // This method must be called on a background thread.
-                Glide.get(getApplicationContext()).clearDiskCache();
-                return null;
+        mDonationDetailsViewModel = new ViewModelProvider(this).get(DonationDetailsViewModel.class);
+        mDonationDetailsViewModel.init();
+        mDonationDetailsViewModel.searchDonationWithId(identifier);
+        mDonationDetailsViewModel.getDonationDetails().observe(this, donation -> {
+            if (donation != null) {
+                showProgress(false);
+                handleDonationData(donation);
             }
-        };
+        });
     }
 
-    void initView() {
+    private void bindViews() {
         toolbar = findViewById(R.id.toolbar);
         blurImageView = findViewById(R.id.blurImageView);
         donationImage = findViewById(R.id.actual_image);
@@ -90,87 +71,32 @@ public class DonationDetailsActivity extends AppCompatActivity implements View.O
         close = findViewById(R.id.close);
         donationDesc = findViewById(R.id.donation_desc);
         socialHashtags = findViewById(R.id.tv_social_hashtags);
-        socialHashtags.setVisibility(View.GONE); // hiding view until endpoint has hastags available
+        socialHashtags.setVisibility(View.GONE); // hiding view until endpoint has hashtags available
         progress = findViewById(R.id.progress);
 
         donationButton.setOnClickListener(this);
         close.setOnClickListener(this);
     }
 
-    private void loadData() {
-        showProgress(true);
-        @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> getPerson = new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
+    private void handleDonationData(Donation donation) {
+        donationTitle.setText(donation.getTitle());
+        donationDesc.setText(donation.getDescription());
+        donationLink = donation.getLink();
 
-            @Override
-            protected Void doInBackground(Void... params) {
-                BackendInterface backendInterface = Utils.getBackendService();
-                backendInterface.getDonationsById(identifier).enqueue(new Callback<DonationData>() {
-                    @Override
-                    public void onResponse(@NonNull Call<DonationData> call, @NonNull Response<DonationData> response) {
-                        if (response.isSuccessful()) {
-                            showProgress(false);
-                            if (response.body() != null) {
-                                donation = response.body().getData();
-                            }
+        Glide.with(getApplicationContext())
+                .load(donation.getBanner_img_url())
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.blm2)
+                        .error(R.drawable.blm2))
+                .into(donationImage);
 
-
-                            donationTitle.setText(donation.getTitle());
-                            donationDesc.setText(donation.getDescription());
-
-                            donationLink = donation.getLink();
-
-
-                            Glide.with(getApplicationContext())
-                                    .load(donation.getBanner_img_url())
-                                    .apply(new RequestOptions()
-                                            .placeholder(R.drawable.blm2)
-                                            .error(R.drawable.blm2))
-                                    .into(donationImage);
-
-                            Glide.with(getApplicationContext())
-                                    .load(donation.getBanner_img_url())
-                                    .apply(new RequestOptions()
-                                            .placeholder(R.drawable.blm2)
-                                            .error(R.drawable.blm2))
-                                    .apply(bitmapTransform(new BlurTransformation(22, 5)))
-                                    .into(blurImageView);
-
-                           /* Glide.with(getApplicationContext())
-                                    .load(petition.getImage_url())
-                                    .apply(new RequestOptions()
-                                            .placeholder(R.drawable.blm2)
-                                            .error(R.drawable.blm2))
-                                    .into(imageViewMore);*/
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<DonationData> call, Throwable t) {
-                        showProgress(false);
-                        onGetPersonFailure(t);
-                    }
-                });
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void result) {
-            }
-        };
-        getPerson.execute(null, null, null);
-    }
-
-    private void onGetPersonFailure(Throwable throwable) {
-        //TODO: Get a better message. This could be full of dev jargon.
-        showSnackbar(throwable.getLocalizedMessage());
-    }
-
-    private void showSnackbar(String text) {
-        Snackbar.make(toolbar, text, Snackbar.LENGTH_SHORT).show();
+        Glide.with(getApplicationContext())
+                .load(donation.getBanner_img_url())
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.blm2)
+                        .error(R.drawable.blm2))
+                .apply(bitmapTransform(new BlurTransformation(22, 5)))
+                .into(blurImageView);
     }
 
     private void visitPages(String link) {
@@ -199,5 +125,16 @@ public class DonationDetailsActivity extends AppCompatActivity implements View.O
 
     private void share(String url) {
         ShareUtil.shareBaseLink(this, url);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //Clear Glide's disk cache whenever an activity is destroyed
+        Completable.fromAction(() -> {
+            Glide.get(getApplicationContext()).clearDiskCache();
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe();
     }
 }

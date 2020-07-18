@@ -1,25 +1,19 @@
 package io.saytheirnames.activity;
 
-import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import io.saytheirnames.R;
-import io.saytheirnames.fragments.DonationFragment;
 import io.saytheirnames.fragments.AboutFragment;
+import io.saytheirnames.fragments.DonationFragment;
 import io.saytheirnames.fragments.HomeFragment;
 import io.saytheirnames.fragments.PetitionsFragment;
-import io.saytheirnames.network.BackendInterface;
-
-import com.bumptech.glide.Glide;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView mBottomNav;
     private int mSelectedItem;
-    BackendInterface backendInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,17 +37,13 @@ public class MainActivity extends AppCompatActivity {
         mBottomNav = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                selectFragment(item);
-                return true;
-            }
+        mBottomNav.setOnNavigationItemSelectedListener(item -> {
+            selectFragment(item);
+            return true;
         });
 
         setDefaultFragment();
-       // updateToolbarText();
-
+        // updateToolbarText();
 
         MenuItem selectedItem;
         if (savedInstanceState != null) {
@@ -66,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
         selectFragment(selectedItem);
 
     }
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -88,22 +76,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressLint("StaticFieldLeak")
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        //clear Glide's disk cache whenever an activity is destroyed. Mechanism for helping against memory leaks/ Out of memory errors
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                // This method must be called on a background thread.
-                Glide.get(getApplicationContext()).clearDiskCache();
-                return null;
-            }
-        };
-    }
-
     private void setDefaultFragment() {
         mBottomNav.setSelectedItemId(R.id.navigation_home);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -114,9 +86,6 @@ public class MainActivity extends AppCompatActivity {
     // method to update selected item in bottom nav when navigating b/t fragments in the same activity
     public void updateBottomNavBasedOnTag(String fragmentTag) {
         switch (fragmentTag) {
-            case HOME_TAG:
-                mSelectedItem = R.id.navigation_home;
-                break;
             case DONATIONS_TAG:
                 mSelectedItem = R.id.navigation_donation;
                 break;
@@ -167,7 +136,5 @@ public class MainActivity extends AppCompatActivity {
             ft.add(R.id.container, frag, tag);
             ft.commit();
         }
-
     }
-
 }
