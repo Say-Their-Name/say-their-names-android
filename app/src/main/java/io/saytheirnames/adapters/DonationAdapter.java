@@ -57,6 +57,8 @@ public class DonationAdapter extends PagingDataAdapter<Donation,DonationAdapter.
             String donationDescription = donation.getDescription() == null? "" : donation.getDescription();
             holder.txtDescription.setText(donationDescription);
 
+            holder.donation_type.setText(donation.getType().getType());
+
             holder.findOutMore.setOnClickListener(v -> {
                 Intent intent = new Intent(holder.itemView.getContext(), DonationDetailsActivity.class);
                 intent.putExtra(DonationDetailsActivity.EXTRA_ID, donation.getIdentifier());
@@ -72,6 +74,7 @@ public class DonationAdapter extends PagingDataAdapter<Donation,DonationAdapter.
         TextView txtDescription;
         ImageView donationImage;
         Button findOutMore;
+        Button donation_type;
 
         public DonationItemHolder(@NonNull View itemView) {
             super(itemView);
@@ -79,6 +82,7 @@ public class DonationAdapter extends PagingDataAdapter<Donation,DonationAdapter.
             txtDescription = itemView.findViewById(R.id.donation_desc);
             donationImage = itemView.findViewById(R.id.donation_image);
             findOutMore = itemView.findViewById(R.id.know_more);
+            donation_type = itemView.findViewById(R.id.donation_type);
         }
     }
 }

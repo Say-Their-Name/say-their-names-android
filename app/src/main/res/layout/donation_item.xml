@@ -16,15 +16,37 @@
         android:layout_margin="8dp"
         android:background="@drawable/card_border">
 
-        <ImageView
-            android:id="@+id/donation_image"
+        <FrameLayout
+            android:id="@+id/frameLayout"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:contentDescription="@string/donation_image"
-            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <ImageView
+                android:id="@+id/donation_image"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:contentDescription="@string/donation_image"
+                android:scaleType="centerCrop"
+                />
+
+            <Button
+                android:id="@+id/donation_type"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@color/md_white_1000"
+                android:padding="@dimen/margin_4dp"
+                android:layout_marginTop="@dimen/margin_4dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                android:text="type"
+                android:layout_gravity="end"
+                />
+
+        </FrameLayout>
+
 
         <TextView
             android:id="@+id/donation_title"
@@ -37,9 +59,9 @@
             android:textColor="@color/colorBlack"
             android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/donation_image"
-            app:layout_constraintStart_toStartOf="@+id/donation_image"
-            app:layout_constraintTop_toBottomOf="@+id/donation_image" />
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout"
+            app:layout_constraintStart_toStartOf="@+id/frameLayout"
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 
         <TextView
             android:id="@+id/donation_desc"
