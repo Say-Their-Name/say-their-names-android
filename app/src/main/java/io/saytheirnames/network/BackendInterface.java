@@ -17,6 +17,9 @@ public interface BackendInterface {
     @GET("/api/people")
     Call<PeopleData> getPeople(@Query("page") Integer page);
 
+    @GET("/api/people")
+    Call<PeopleData> searchPeople(@Query("name") String name);
+
     @GET("/api/people/{id}")
     Call<PersonData> getPeopleById(@Path("id") String id);
 

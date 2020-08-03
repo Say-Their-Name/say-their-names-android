@@ -49,6 +49,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             }
             @Override
             public void onError(Exception e) {
+                Log.d("ERROR:::", String.valueOf(e.getLocalizedMessage()));
             }
         });
 

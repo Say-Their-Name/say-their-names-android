@@ -21,6 +21,7 @@
             app:layout_scrollFlags="scroll|enterAlways">
 
             <RelativeLayout
+                android:id="@+id/relative_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -61,6 +62,7 @@
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
+
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -1,13 +1,18 @@
 package io.saytheirnames.fragments;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.paging.LoadState;
@@ -16,11 +21,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.MergeAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 import io.saytheirnames.R;
+import io.saytheirnames.activity.HomeSearchActivity;
 import io.saytheirnames.activity.MainActivity;
 import io.saytheirnames.adapters.FilterHomeAdapter;
 import io.saytheirnames.adapters.HeaderCardRecyclerAdapter;
@@ -42,6 +50,11 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
     private String[] filterList;
     private ArrayList<HomeFilter> filterArrayList;
     private ProgressBar progressBar;
+
+    private AppBarLayout appBarLayout;
+    private Toolbar toolbar;
+    private RelativeLayout relativeLayout;
+    private ImageButton searchButton;
 
     Resources resources;
 
@@ -67,6 +80,12 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
 
         personRecyclerView = mContent.findViewById(R.id.personRecyclerView);
         progressBar = mContent.findViewById(R.id.progressBar);
+        appBarLayout = mContent.findViewById(R.id.app_bar_home);
+        toolbar = appBarLayout.findViewById(R.id.toolbar);
+        relativeLayout = toolbar.findViewById(R.id.relative_layout);
+        searchButton = relativeLayout.findViewById(R.id.searchButton);
+
+
 
         peopleAdapter = new PeopleAdapter();
 
@@ -74,10 +93,19 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
 
         filterHomeAdapter = new FilterHomeAdapter(filterArrayList, getActivity());
 
+        searchButton.setOnClickListener(v -> {
+            doSearch();
+        });
+
         initializeRecyclerView();
         loadData();
 
         return mContent;
+    }
+
+    private void doSearch(){
+        Intent intent = new Intent(getActivity(), HomeSearchActivity.class);
+        startActivity(intent);
     }
 
     private void initializeRecyclerView() {
