@@ -15,4 +15,67 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
     </style>
+
+    <style name="Person"/>
+    <style name="Person.Information"/>
+    <style name="Person.Information.Label">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginStart">32dp</item>
+    </style>
+    <style name="Person.Information.Value">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+    <style name="Person.Section">
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+    <style name="Person.Section.Text">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintHorizontal_bias">0</item>
+    </style>
+    <style name="Person.Section.List">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layoutManager">androidx.recyclerview.widget.LinearLayoutManager</item>
+    </style>
+    <style name="Person.Section.Label">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:layout_marginTop">32dp</item>
+        <item name="android:layout_marginStart">32dp</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <item name="fontFamily">@font/raleway</item>
+        <item name="textAllCaps">true</item>
+
+    </style>
+
+    <!-- Added to transform menu items to uppercase -->
+    <style name="UpperButtons" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/UpperButtons.ActionBarStyle</item>
+    </style>
+
+    <style name="UpperButtons.ActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:titleTextStyle">@style/UpperButtons.ActionBar.TitleTextStyle</item>
+    </style>
+
+    <style name="UpperButtons.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="textAllCaps">true</item>
+    </style>
 </resources>

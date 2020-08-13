@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Loco xml export: Android string resources
+ Project: Say Their Names
+ Release: Working copy
+ Locale: fr, French
+ Exported by: Say Their Names
+ Exported at: Sun, 12 Jul 2020 23:26:05 +0200
+-->
+<resources>
+    <string name="home">Accueil</string>
+    <string name="donations">Les Dons</string>
+    <string name="petitions">Les Pétitions</string>
+    <string name="about">À propos</string>
+    <string name="cancel">Annuler</string>
+    <string name="find_out_more">Plus d\'informations</string>
+    <string name="verified">verifié</string>
+    <string name="filter_all">TOUS</string>
+    <string name="filter_businesses">ENTREPRISES</string>
+    <string name="filter_protesters">MANIFESTANTS</string>
+    <string name="filter_victims">VICTIMES</string>
+    <string name="share">Partager</string>
+    <string name="close">Fermer</string>
+    <string name="say_their_names">Dis leurs noms</string>
+    <string name="bookmark">Signet</string>
+    <string name="search">Chercher</string>
+    <string name="donate">Donner</string>
+    <string name="DONATE_NOW">Donner maintenant</string>
+    <string name="description">Description</string>
+    <string name="person.say_their_names">Dis leurs noms</string>
+    <string name="person.age">Âge</string>
+    <string name="person.children">Enfants</string>
+    <string name="person.location">Lieu</string>
+    <string name="person.their_story">Leur Histoire</string>
+    <string name="person.outcome">Les Faits</string>
+    <string name="person.news">Les Actualités</string>
+    <string name="person.media">Média</string>
+    <string name="person.hashtags">Hashtags des réseaux sociaux</string>
+    <string name="person.hashtagCopyTip">Appuyer et maintenir enfoncé pour copier</string>
+    <string name="person.copied">Copié</string>
+    <!-- Get Involved - Slack -->
+    <string name="get_involved.slack.title">COMMENT PARTICIPER ?</string>
+    <string name="get_involved.slack.button">JOINDRE LE CANAL SLACK</string>
+    <!-- Get Involved - Developer -->
+    <string name="get_involved.developer.title">PARTICIPER EN TANT QUE DÉVELOPPEUR WEB?</string>
+    <string name="get_involved.developer.button">VOIR LE CODE SOURCE</string>
+    <!-- Get Involved - Twitter -->
+    <string name="get_involved.twitter.title">VENEZ NOUS REJOINDRE SUR TWITTER</string>
+    <string name="get_involved.twitter.button">SUIVEZ NOUS</string>
+    <!-- More -->
+    <string name="more_history.aboutTitle">L\'HISTOIRE DU MOUVEMENT DIS LEURS NOMS</string>
+    <string name="more_history.aboutDesc">Dis Leurs Noms est un mouvement social qui a pour objectif d\'accroître la prise de conscience sur les inégalités raciales de toutes les victimes de couleur de peau noire, dans le monde entier. Il supporte le mouvement Black Lives Matter, spécifiquement pour mettre en relief les individus affectés par la violence contre les Noirs. Le mouvement Dis Leurs Noms établit une prise de conscience des victimes de ces inégalités et demande justice.</string>
+    <string name="massive_thank_you">UN GRAND MERCI A TOUS LES CONTRIBUTEURS</string>
+    <string name="sign">Signer la pétition</string>
+    <string name="about_this_project.title">À propos de ce projet</string>
+    <string name="about_this_project_details">Bienvenue sur le projet Dis Leurs Noms. Notre objectif est de construire une plateforme open source collaborative pour accroître la prise de conscience sur l\'injustice et de commémorer les figures oubliées des inégalités raciales. Nous nous efforçons d\'identifier et d\'amplifier le travail des organizations agréés, pour s\'assurer que vos dons financiers aient le plus d\'impact.</string>
+    <string name="request_edit_or_removal.title">DEMANDER UNE MODIFICATION</string>
+    <string name="request_edit_or_removal.details">Si vous voulez proposer un changement d\'une des pages des victimes, ou si vous représentez une des victimes et que vous souhaitez enlever le nom de ce répertoire, envoyez nous un message sur Twitter.</string>
+    <string name="twitter">Twitter</string>
+    <string name="did_we_miss_someone">MANQUE-T-IL QUELQU\'UN ?</string>
+    <string name="request_to_add_new_name">AJOUTER UN NOM</string>
+    <string name="people.hero_text">Une justice différée est une injustice,\nRejoignez le combat pour la justice.\u0020\u0020Signez des pétitions et faites un don dès aujourd’hui.</string>
+</resources>
