@@ -224,7 +224,6 @@ public class DonationFragment extends Fragment implements DonationFilterAdapter.
 
     @Override
     public void onDonationFilterSelected(DonationType donationType) {
-        System.out.println("::DONATIONSFILTERING:: donationType.getType()=" + donationType.getType());
         donationAdapter.refresh();
         donationsPager.setFilterType(donationType.getType());
     }
