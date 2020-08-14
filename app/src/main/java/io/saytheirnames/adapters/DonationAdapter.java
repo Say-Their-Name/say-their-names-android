@@ -17,7 +17,6 @@ import com.bumptech.glide.request.RequestOptions;
 
 import io.saytheirnames.R;
 import io.saytheirnames.activity.DonationDetailsActivity;
-import io.saytheirnames.activity.PetitionDetailsActivity;
 import io.saytheirnames.models.Donation;
 import io.saytheirnames.network.DonationsPager;
 import kotlinx.coroutines.Dispatchers;
@@ -42,7 +41,6 @@ public class DonationAdapter extends PagingDataAdapter<Donation,DonationAdapter.
     @Override
     public void onBindViewHolder(@NonNull DonationAdapter.DonationItemHolder holder, final int position) {
 
-        holder.setIsRecyclable(false);
         Donation donation = getItem(position);
         if (donation != null) {
             Glide.with(holder.itemView.getContext())

@@ -2,14 +2,12 @@ package io.saytheirnames.fragments;
 
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
@@ -29,7 +27,6 @@ import io.saytheirnames.adapters.DonationFilterAdapter;
 import io.saytheirnames.models.Donation;
 import io.saytheirnames.models.DonationType;
 import io.saytheirnames.models.DonationTypesData;
-import io.saytheirnames.models.DonationsData;
 import io.saytheirnames.network.BackendInterface;
 import io.saytheirnames.network.DonationsPager;
 import io.saytheirnames.network.Utils;
@@ -38,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DonationFragment extends Fragment {
+public class DonationFragment extends Fragment implements DonationFilterAdapter.DonationFilterListener {
     private View view;
     //private TextView mTextView;
 
@@ -56,6 +53,7 @@ public class DonationFragment extends Fragment {
     private ProgressBar progressBar;
     private ImageView imageView;
     private NestedScrollView nestedScrollView;
+    private DonationsPager donationsPager;
 
     BackendInterface backendInterface;
 
@@ -95,27 +93,30 @@ public class DonationFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
 
-        /*donationRecyclerView.setLayoutManager(layoutManager);
+        donationRecyclerView.setLayoutManager(layoutManager);
 
 
-        donationRecyclerView.setAdapter(donationAdapter);*/
+        donationRecyclerView.setAdapter(donationAdapter);
 
         progressBar = view.findViewById(R.id.progressBar);
+        donationsPager = new DonationsPager(donationAdapter);
 
         initializeRecyclerView();
-        loadData();
+        setupDonationFilters();
+        donationsPager.setFilterType("All");
+        donationsPager.loadDonationsFromPagination();
 
         return view;
     }
 
     // donation filter will not be shown in MVP so this method is unused for now
     public void setupDonationFilters() {
-        /*recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager1);
         donationFilterAdapter = new DonationFilterAdapter(donationTypeList, this, nestedScrollView);
         recyclerView.setAdapter(donationFilterAdapter);
-        getDonationFilterItems();*/
+        getDonationFilterItems();
     }
 
     private void visitPage(String url) {
@@ -154,11 +155,6 @@ public class DonationFragment extends Fragment {
         donationRecyclerView.setAdapter(donationAdapter);
     }
 
-    private void loadData() {
-        DonationsPager petitionsPager = new DonationsPager(donationAdapter);
-        petitionsPager.loadDonationsFromPagination();
-    }
-
     public void getDonationFilterItems(){
         showProgress(true);
         backendInterface.getDonationsTypes().enqueue(new Callback<DonationTypesData>() {
@@ -183,36 +179,6 @@ public class DonationFragment extends Fragment {
 
             @Override
             public void onFailure(Call<DonationTypesData> call, Throwable throwable) {
-                showProgress(false);
-            }
-        });
-    }
-
-    public void filterDonation(String type){
-        if(type.equals("All")){
-            loadData();
-        }else{
-            doDonationFilter(type);
-        }
-    }
-
-    private void doDonationFilter(String type) {
-        showProgress(true);
-        backendInterface.getFilteredDonations(type.toLowerCase()).enqueue(new Callback<DonationsData>() {
-            @Override
-            public void onResponse(@NonNull Call<DonationsData> call, @NonNull Response<DonationsData> response) {
-                donationArrayList.clear();
-                Log.d("API_Response", response.body().toString());
-                List<Donation> body = response.body().getData();
-                donationArrayList.addAll(body);
-                donationRecyclerView.setVisibility(View.VISIBLE);
-
-                donationAdapter.notifyDataSetChanged();
-                showProgress(false);
-            }
-
-            @Override
-            public void onFailure(Call<DonationsData> call, Throwable t) {
                 showProgress(false);
             }
         });
@@ -256,4 +222,10 @@ public class DonationFragment extends Fragment {
         super.onSaveInstanceState(outState);
     }
 
+    @Override
+    public void onDonationFilterSelected(DonationType donationType) {
+        System.out.println("::DONATIONSFILTERING:: donationType.getType()=" + donationType.getType());
+        donationAdapter.refresh();
+        donationsPager.setFilterType(donationType.getType());
+    }
 }
