@@ -9,7 +9,7 @@
         android:id="@+id/fl_header_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBlack">
+        android:background="@android:color/black">
 
         <LinearLayout
             android:id="@+id/ll_header_item"

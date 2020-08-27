@@ -33,8 +33,8 @@ public class CustomTabUtil {
         CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
         CustomTabsIntent customTabsIntent = intentBuilder.build();
 
-        intentBuilder.setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary));
-        intentBuilder.setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
+        intentBuilder.setToolbarColor(ContextCompat.getColor(context, R.color.Primary));
+        intentBuilder.setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.PrimaryDark));
 
         CustomTabActivityHelper.openCustomTab(context, customTabsIntent, uri, (activity, uri1) -> openWebView(context, uri1));
     }

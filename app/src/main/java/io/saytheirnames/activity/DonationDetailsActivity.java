@@ -21,6 +21,7 @@ import io.saytheirnames.network.BackendInterface;
 import io.saytheirnames.network.Utils;
 import io.saytheirnames.utils.CustomTabUtil;
 import io.saytheirnames.utils.ShareUtil;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.snackbar.Snackbar;
@@ -36,12 +37,12 @@ import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class DonationDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    String identifier,image, title, desc, donationLink;
+    String identifier, image, title, desc, donationLink;
 
     public static final String EXTRA_ID = "identifier";
 
     private BlurImageView blurImageView;
-    private ImageView donationImage,close;
+    private ImageView donationImage, close;
     private TextView donationTitle, subTitle, donationDesc, socialHashtags;
     private Button donationButton;
     private View progress;
@@ -54,14 +55,10 @@ public class DonationDetailsActivity extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation_details);
 
-
         initView();
-
         Intent intent = getIntent();
-
         identifier = intent.getStringExtra(EXTRA_ID);
-
-       loadData();
+        loadData();
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -186,7 +183,6 @@ public class DonationDetailsActivity extends AppCompatActivity implements View.O
             case R.id.close:
                 finish();
                 break;
-
             case R.id.imgShare:
                 share(donationLink);
                 break;

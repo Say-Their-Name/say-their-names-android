@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#000000</color>
+    <color name="Primary">#000000</color>
+    <color name="PrimaryDark">#000000</color>
+    <color name="Secondary">@color/colorGrey</color>
 
     <color name="colorGrey">#9c9c9c</color>
     <color name="colorSecondaryGrey">#f2f2f2</color>
     <color name="colorBlack">#000000</color>
+
+    <color name="Background">#FFFFFF</color>
+    <color name="Surface">#FFFFFF</color>
+    <color name="OnBackground">#000000</color>
+    <color name="OnSurface">#000000</color>
+    <color name="OnPrimary">#FFFFFF</color>
+    <color name="OnSecondary">#000000</color>
+
 </resources>

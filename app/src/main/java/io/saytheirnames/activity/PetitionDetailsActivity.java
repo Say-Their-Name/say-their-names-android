@@ -38,9 +38,9 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
 
     private ImageView imgClose, imgShare;
 
-    private TextView txtName, txtDescription, txtShareThisPetition;
+    private TextView txtName, txtDescription;
 
-    private Button btnSignThisPetition;
+    private Button btnSignThisPetition,  txtShareThisPetition;
 
     private ImageView actualImage;
     private BlurImageView blurImageView;
@@ -174,7 +174,6 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
                 visitPage(petitionLink);
                 break;
             case R.id.btnShareThisPetition:
-
             case R.id.imgShare:
                 share(petitionLink);
                 break;
@@ -183,7 +182,6 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
                 break;
         }
     }
-
 
     private void visitPage(String url) {
         CustomTabUtil.openCustomTabForUrl(this, url);
