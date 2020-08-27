@@ -2,50 +2,55 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/Primary</item>
+        <item name="colorPrimaryDark">@color/PrimaryDark</item>
+        <item name="colorAccent">@color/Secondary</item>
+        <item name="android:navigationBarColor">@color/PrimaryDark</item>
     </style>
 
-    <style name="AppTheme2" parent="Theme.AppCompat.Light.NoActionBar">
-
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+    <style name="AppTheme2" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/Primary</item>
+        <item name="colorPrimaryDark">@color/PrimaryDark</item>
+        <item name="colorAccent">@color/Secondary</item>
     </style>
 
-    <style name="Person"/>
-    <style name="Person.Information"/>
+    <style name="Person" />
+
+    <style name="Person.Information" />
+
     <style name="Person.Information.Label">
         <item name="android:textSize">12sp</item>
         <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/OnBackground</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:layout_marginStart">32dp</item>
     </style>
+
     <style name="Person.Information.Value">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textColor">@color/OnBackground</item>
     </style>
+
     <style name="Person.Section">
         <item name="android:textSize">14sp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textColor">@color/OnBackground</item>
     </style>
+
     <style name="Person.Section.Text">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_marginEnd">16dp</item>
         <item name="layout_constraintEnd_toEndOf">parent</item>
         <item name="layout_constraintHorizontal_bias">0</item>
     </style>
+
     <style name="Person.Section.List">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -53,9 +58,11 @@
         <item name="layout_constraintEnd_toEndOf">parent</item>
         <item name="layoutManager">androidx.recyclerview.widget.LinearLayoutManager</item>
     </style>
+
     <style name="Person.Section.Label">
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/OnBackground</item>
         <item name="android:layout_marginTop">32dp</item>
         <item name="android:layout_marginStart">32dp</item>
     </style>
@@ -64,6 +71,28 @@
         <item name="fontFamily">@font/raleway</item>
         <item name="textAllCaps">true</item>
 
+    </style>
+
+    <style name="BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="android:background">@color/Surface</item>
+        <item name="labelVisibilityMode">labeled</item>
+
+        <item name="itemIconTint">@color/bottom_nav_color</item>
+        <item name="itemTextColor">@color/bottom_nav_color</item>
+    </style>
+
+    <style name="Button" parent="ThemeOverlay.AppCompat">
+        <item name="android:backgroundTint">@color/Surface</item>
+        <item name="android:textColor">@color/OnSurface</item>
+
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:elevation">2dp</item>
+
+
+        <item name="strokeColor">@color/OnSurface</item>
+        <item name="strokeWidth">2dp</item>
     </style>
 
     <!-- Added to transform menu items to uppercase -->
@@ -78,4 +107,13 @@
     <style name="UpperButtons.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="textAllCaps">true</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

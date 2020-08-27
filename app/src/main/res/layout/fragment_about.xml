@@ -8,7 +8,6 @@
     android:orientation="vertical"
     tools:context=".fragments.AboutFragment">
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_home"
         android:layout_width="match_parent"
@@ -18,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorBlack"
+            android:background="@color/Primary"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_scrollFlags="scroll|enterAlways"
@@ -33,7 +32,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/raleway"
                 android:text="@string/more"
-                android:textColor="@android:color/white"
+                android:textColor="@color/OnPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -48,8 +47,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:background="@color/Background">
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -73,7 +72,7 @@
                 android:layout_marginEnd="16dp"
                 android:text="@string/about_this_project.title"
                 android:textAllCaps="true"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/OnBackground"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -85,7 +84,7 @@
                 android:layout_marginTop="@dimen/margin_16dp"
                 android:layout_marginEnd="@dimen/margin_16dp"
                 android:text="@string/about_this_project_details"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/OnBackground"
                 android:textSize="16sp" />
 
             <TextView
@@ -96,7 +95,7 @@
                 android:layout_marginTop="@dimen/margin_16dp"
                 android:layout_marginEnd="@dimen/margin_16dp"
                 android:text="@string/request_edit_or_removal.title"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/OnBackground"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -108,7 +107,7 @@
                 android:layout_marginTop="@dimen/margin_16dp"
                 android:layout_marginEnd="@dimen/margin_16dp"
                 android:text="@string/request_edit_or_removal.details"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/OnBackground"
                 android:textSize="16sp" />
 
             <TextView
@@ -119,7 +118,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="@dimen/margin_16dp"
                 android:text="@string/more_history.aboutTitle"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/OnBackground"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/imageView2"
@@ -134,7 +133,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="@dimen/margin_16dp"
                 android:text="@string/more_history.aboutDesc"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/OnBackground"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@+id/textView"
                 app:layout_constraintStart_toStartOf="@+id/textView"
@@ -148,7 +147,7 @@
                 android:layout_marginTop="@dimen/margin_16dp"
                 android:layout_marginEnd="@dimen/margin_16dp"
                 android:text="@string/did_we_miss_someone"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/OnBackground"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textView3"
@@ -162,9 +161,9 @@
                 android:layout_marginStart="@dimen/margin_16dp"
                 android:layout_marginTop="22dp"
                 android:layout_marginEnd="@dimen/margin_16dp"
-                android:background="@color/colorBlack"
+                android:background="@color/Primary"
+                android:textColor="@color/OnPrimary"
                 android:text="@string/request_to_add_new_name"
-                android:textColor="@android:color/white"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@+id/textView7"
                 app:layout_constraintStart_toStartOf="@+id/textView7"
@@ -178,7 +177,7 @@
                 android:layout_marginTop="@dimen/margin_16dp"
                 android:layout_marginEnd="@dimen/margin_16dp"
                 android:text="@string/get_involved.slack.title"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/OnBackground"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textView3"
@@ -192,9 +191,9 @@
                 android:layout_marginStart="@dimen/margin_16dp"
                 android:layout_marginTop="22dp"
                 android:layout_marginEnd="@dimen/margin_16dp"
-                android:background="@color/colorBlack"
+                android:background="@color/Primary"
+                android:textColor="@color/OnPrimary"
                 android:text="@string/get_involved.slack.button"
-                android:textColor="@android:color/white"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@+id/textView7"
                 app:layout_constraintStart_toStartOf="@+id/textView7"
@@ -208,7 +207,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="@dimen/margin_16dp"
                 android:text="@string/get_involved.developer.title"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/OnBackground"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/btnSlackChannel"
@@ -222,9 +221,9 @@
                 android:layout_marginStart="@dimen/margin_16dp"
                 android:layout_marginTop="22dp"
                 android:layout_marginEnd="@dimen/margin_16dp"
-                android:background="@color/colorBlack"
+                android:backgroundTint="@color/Primary"
+                android:textColor="@color/OnPrimary"
                 android:text="@string/get_involved.developer.button"
-                android:textColor="@android:color/white"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@+id/textView11"
                 app:layout_constraintStart_toStartOf="@+id/textView11"
@@ -238,7 +237,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="@dimen/margin_16dp"
                 android:text="@string/get_involved.twitter.title"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/OnBackground"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/btnViewRepo"
@@ -253,9 +252,9 @@
                 android:layout_marginTop="22dp"
                 android:layout_marginEnd="@dimen/margin_16dp"
                 android:layout_marginBottom="70dp"
-                android:background="@color/colorBlack"
+                android:background="@color/Primary"
+                android:textColor="@color/OnPrimary"
                 android:text="@string/get_involved.twitter.button"
-                android:textColor="@android:color/white"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/textView15"

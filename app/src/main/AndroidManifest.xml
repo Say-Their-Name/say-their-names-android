@@ -2,25 +2,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.saytheirnames">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <application
+        android:name=".STNApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:largeHeap="true"
         android:usesCleartextTraffic="false">
         <activity
             android:name=".activity.DetailsActivity"
-            android:theme="@style/AppTheme2">
-
-        </activity>
-        <activity android:name=".activity.PetitionDetailsActivity" android:theme="@style/AppTheme2"/>
-        <activity android:name=".activity.HomeSearchActivity" android:theme="@style/AppTheme2"/>
+            android:theme="@style/AppTheme2"/>
+        <activity
+            android:name=".activity.PetitionDetailsActivity"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".activity.HomeSearchActivity"
+            android:theme="@style/AppTheme2" />
         <activity
             android:name=".activity.MainActivity"
             android:theme="@style/AppTheme2">
@@ -38,5 +38,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

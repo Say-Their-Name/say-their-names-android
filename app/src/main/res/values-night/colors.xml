@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="Primary">#212121</color>
+    <color name="PrimaryDark">#121212</color>
+    <color name="Secondary">@color/colorGrey</color>
+
+    <color name="Background">#121212</color>
+    <color name="Surface">#212121</color>
+
+    <color name="OnBackground">#FFFFFF</color>
+    <color name="OnSurface">#FFFFFF</color>
+    <color name="OnPrimary">#FFFFFF</color>
+    <color name="OnSecondary">#FFFFFF</color>
+</resources>

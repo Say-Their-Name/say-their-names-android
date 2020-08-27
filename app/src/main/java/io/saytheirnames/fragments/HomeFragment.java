@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -11,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 
 import io.saytheirnames.R;
 import io.saytheirnames.activity.HomeSearchActivity;
+import io.saytheirnames.ThemeManager;
 import io.saytheirnames.activity.MainActivity;
 import io.saytheirnames.adapters.FilterHomeAdapter;
 import io.saytheirnames.adapters.HeaderCardRecyclerAdapter;
@@ -100,6 +103,7 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
         initializeRecyclerView();
         loadData();
 
+        initializeToolbar();
         return mContent;
     }
 
@@ -130,7 +134,8 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
             @NotNull
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NotNull ViewGroup viewGroup, @NotNull LoadState loadState) {
-                return new RecyclerView.ViewHolder(progressBar){};
+                return new RecyclerView.ViewHolder(progressBar) {
+                };
             }
 
             @Override
@@ -138,7 +143,7 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
                 if (loadState.equals(LoadState.Loading.INSTANCE)) {
                     progressBar.setVisibility(View.VISIBLE);
                 } else {
-                   progressBar.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.GONE);
                 }
             }
         });
@@ -150,6 +155,16 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
     private void loadData() {
         PeoplePager peoplePager = new PeoplePager(peopleAdapter);
         peoplePager.loadPeopleFromPagination();
+    }
+
+    private void initializeToolbar() {
+        androidx.appcompat.widget.Toolbar toolbar = mContent.findViewById(R.id.toolbar);
+        toolbar.inflateMenu(R.menu.fragment_home_menu);
+        toolbar.setOnMenuItemClickListener(item -> onOptionsItemSelected(item));
+        if (ThemeManager.INSTANCE.isNightMode())
+            toolbar.getMenu().findItem(R.id.theme).setIcon(R.drawable.night_theme_white_24dp);
+        else
+            toolbar.getMenu().findItem(R.id.theme).setIcon(R.drawable.light_theme_white_24dp);
     }
 
     @Override
@@ -169,6 +184,17 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
             ft.replace(R.id.container, donationFragment, tag);
             ft.commit();
             ((MainActivity) getActivity()).updateBottomNavBasedOnTag(tag);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.theme:
+                ThemeManager.INSTANCE.toggleTheme(getContext());
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

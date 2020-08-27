@@ -7,7 +7,6 @@
     android:background="@android:color/white"
     tools:context=".fragments.HomeFragment">
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_home"
         android:layout_width="match_parent"
@@ -17,7 +16,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/Primary"
             app:layout_scrollFlags="scroll|enterAlways">
 
             <RelativeLayout
@@ -46,9 +45,9 @@
                     android:fontFamily="@font/raleway"
                     android:text="@string/app_name"
                     android:textAllCaps="true"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/OnPrimary"
                     android:textSize="18sp" />
-
+                
                 <ImageButton
                     android:id="@+id/searchButton"
                     android:layout_width="30dp"
@@ -58,7 +57,6 @@
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_search" />
-
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -81,6 +79,7 @@
         android:columnWidth="150dp"
         android:numColumns="2"
         android:overScrollMode="never"
+        android:background="@color/Background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

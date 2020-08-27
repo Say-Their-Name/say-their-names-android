@@ -7,9 +7,9 @@
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
     android:orientation="vertical"
-    app:cardBackgroundColor="@android:color/white"
+    app:cardBackgroundColor="@color/Surface"
     app:cardCornerRadius="0dp"
-    app:cardElevation="0dp">
+    app:cardElevation="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/OnSurface"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/OnSurface"
             android:maxLines="3"
             android:ellipsize="middle"
             app:layout_constraintEnd_toEndOf="parent"
@@ -57,11 +57,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/find_out_btn_border"
+            style="@style/Button"
             android:text="@string/find_out_more"
-            android:textColor="@color/colorBlack"
-            android:textSize="17sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/txtDescription"
             app:layout_constraintStart_toStartOf="@+id/txtDescription"

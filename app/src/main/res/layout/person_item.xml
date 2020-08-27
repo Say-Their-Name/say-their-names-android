@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="0dp"
+    app:cardElevation="1dp"
     app:cardCornerRadius="0dp"
     android:id="@+id/cardView"
     android:layout_margin="@dimen/default_margin"
@@ -12,7 +12,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/Surface">
 
         <ImageView
             android:id="@+id/personImage"
@@ -31,12 +32,11 @@
             android:layout_marginTop="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
             android:text="@string/person_name"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/OnSurface"
             android:textSize="@dimen/default_font"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/personImage"
             app:layout_constraintTop_toBottomOf="@+id/personImage" />
-
 
         <TextView
             android:id="@+id/dateOfIncident"
@@ -45,6 +45,7 @@
             android:layout_marginBottom="@dimen/default_margin"
             android:text="@string/date_of_incident"
             android:textSize="@dimen/default_font"
+            android:textColor="@color/OnSurface"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/txtPersonName"
             app:layout_constraintTop_toBottomOf="@+id/txtPersonName" />

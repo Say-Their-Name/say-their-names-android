@@ -19,8 +19,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
             android:paddingBottom="16dp"
+            android:background="@color/Background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
-                android:background="@color/colorBlack"
+                android:background="@color/Primary"
                 android:theme="@style/ToolbarStyle"
                 app:title="@string/app_name"
                 android:textAlignment="center"
@@ -49,7 +49,7 @@
                         android:text="@string/app_name"
                         android:textAllCaps="true"
                         android:textSize="18sp"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/OnPrimary"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -75,9 +75,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
             </androidx.appcompat.widget.Toolbar>
 
             <FrameLayout
@@ -86,7 +84,6 @@
                 android:layout_height="wrap_content"
                 android:minHeight="100dp"
                 android:maxHeight="700dp"
-                android:background="@color/colorBlack"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/toolbar">
 
@@ -116,7 +113,7 @@
                 android:layout_marginStart="32dp"
                 android:textSize="21sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/primary_text_light"
+                android:textColor="@color/OnBackground"
                 app:layout_constraintTop_toBottomOf="@id/hero_container"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="FIRSTNAME LAST"/>
@@ -313,10 +310,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </ScrollView>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -324,7 +318,7 @@
         android:layout_gravity="bottom"
         android:orientation="vertical"
         android:layout_weight="0"
-        android:background="@android:color/white">
+        android:background="@color/Background">
 
         <View
             android:id="@+id/donate_divider"
@@ -336,9 +330,9 @@
             android:id="@+id/donate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorBlack"
+            android:background="@color/Primary"
             android:text="@string/donate"
-            android:textColor="@android:color/white"
+            android:textColor="@color/OnPrimary"
             android:layout_margin="16dp"/>
 
     </LinearLayout>
