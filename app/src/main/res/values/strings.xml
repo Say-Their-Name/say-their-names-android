@@ -20,9 +20,6 @@
     <string name="donate">Donate</string>
 
 
-
-
-
     <!-- person from ios -->
     <string name="person.say_their_names">Say their names</string>
     <string name="person.age">Age</string>
@@ -33,8 +30,8 @@
     <string name="person.news">News</string>
     <string name="person.media">Media</string>
     <string name="person.hashtags">Social Media Hashtags</string>
-<!--    <string name="person.hashtagCopyTip">Press and hold to copy</string>-->
-<!--    <string name="person.copied">Copied</string>-->
+    <!--    <string name="person.hashtagCopyTip">Press and hold to copy</string>-->
+    <!--    <string name="person.copied">Copied</string>-->
 
     <string-array name="filters">
         <item>Age</item>
