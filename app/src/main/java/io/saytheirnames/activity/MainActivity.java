@@ -17,7 +17,6 @@ import io.saytheirnames.fragments.AboutFragment;
 import io.saytheirnames.fragments.DonationFragment;
 import io.saytheirnames.fragments.HomeFragment;
 import io.saytheirnames.fragments.PetitionsFragment;
-import io.saytheirnames.network.BackendInterface;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNav;
     private MenuItem menuItem;
     private int mSelectedItem;
-    BackendInterface backendInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
         getBottomNavigation();
         checkSavedInstanceState(savedInstanceState);
-
-        /*getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.action_bar_layout);*/
-
-        // updateToolbarText();
     }
 
-    /* Passing each menu ID as a set of Ids because each
-    menu should be considered as top level destinations. */
     private void getBottomNavigation() {
         mBottomNav = findViewById(R.id.nav_view);
         mBottomNav.setOnNavigationItemSelectedListener(item -> {
@@ -85,10 +76,7 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         menuItem = mBottomNav.getMenu().getItem(0);
         if (mSelectedItem != menuItem.getItemId()) {
-            // select home item
             selectFragment(menuItem);
-
-            //this will also highlight the home menu item icon
             updateBottomNavBasedOnTag(HOME_TAG);
         } else {
             super.onBackPressed();
@@ -99,19 +87,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-        //clear Glide's disk cache whenever an activity is destroyed. Mechanism for helping against memory leaks/ Out of memory errors
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                // This method must be called on a background thread.
                 Glide.get(getApplicationContext()).clearDiskCache();
                 return null;
             }
         };
     }
 
-    // method to update selected item in bottom nav when navigating b/t fragments in the same activity
     public void updateBottomNavBasedOnTag(String fragmentTag) {
         switch (fragmentTag) {
             case HOME_TAG:
@@ -131,11 +115,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void selectFragment(MenuItem item) {
-
         mSelectedItem = item.getItemId();
         Fragment fragment = null;
         String tag = null;
-        // init corresponding fragment
+
         switch (item.getItemId()) {
             case R.id.navigation_home:
                 fragment = HomeFragment.newInstance();
@@ -156,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
             default:
         }
 
-        // update selected item
         mSelectedItem = item.getItemId();
 
         if (fragment != null) {
@@ -164,7 +146,5 @@ public class MainActivity extends AppCompatActivity {
             ft.add(R.id.container, fragment, tag);
             ft.commit();
         }
-
     }
-
-}}
+}
