@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setBottomNavHomeFragment() {
         mBottomNav.setSelectedItemId(R.id.navigation_home);
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, HomeFragment.newInstance(), HOME_TAG);
         transaction.commit();
@@ -81,19 +82,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                Glide.get(getApplicationContext()).clearDiskCache();
-                return null;
-            }
-        };
     }
 
     public void updateBottomNavBasedOnTag(String fragmentTag) {
@@ -146,5 +134,18 @@ public class MainActivity extends AppCompatActivity {
             ft.add(R.id.container, fragment, tag);
             ft.commit();
         }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                Glide.get(getApplicationContext()).clearDiskCache();
+                return null;
+            }
+        };
     }
 }
