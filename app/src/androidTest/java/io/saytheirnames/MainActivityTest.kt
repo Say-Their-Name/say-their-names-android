@@ -31,6 +31,6 @@ class MainActivityTest {
 
         onView(withId(R.id.nav_host_fragment)).check(matches(isDisplayed()))
     }
-    
+
     private fun launchActivity() = ActivityScenario.launch(MainActivity::class.java)
 }
