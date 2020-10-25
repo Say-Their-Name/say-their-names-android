@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -19,8 +18,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.paging.LoadState;
 import androidx.paging.LoadStateAdapter;
+import androidx.recyclerview.widget.ConcatAdapter;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.MergeAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -82,7 +81,7 @@ public class HomeSearchActivity extends AppCompatActivity implements HeaderCardR
     ;
 
     private RecyclerView personRecyclerView;
-    private MergeAdapter mergeAdapter;
+    private ConcatAdapter mergeAdapter;
 
     private PeopleAdapter peopleAdapter;
     private PeopleSearchAdapter peopleSearchAdapter;
@@ -138,7 +137,7 @@ public class HomeSearchActivity extends AppCompatActivity implements HeaderCardR
         peopleSearchAdapter = new PeopleSearchAdapter(peopleList, HomeSearchActivity.this);
 
 
-        mergeAdapter = new MergeAdapter(new HomeHeaderAdapter(this), peopleAdapter);
+        mergeAdapter = new ConcatAdapter(new HomeHeaderAdapter(this), peopleAdapter);
 
 
         cancelText.setOnClickListener(v -> {
