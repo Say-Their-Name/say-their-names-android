@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -17,8 +16,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.paging.LoadState;
 import androidx.paging.LoadStateAdapter;
+import androidx.recyclerview.widget.ConcatAdapter;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.MergeAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -42,7 +41,7 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
     private View mContent;
 
     private RecyclerView personRecyclerView;
-    private MergeAdapter mergeAdapter;
+    private ConcatAdapter mergeAdapter;
 
     private PeopleAdapter peopleAdapter;
     private FilterHomeAdapter filterHomeAdapter;
@@ -86,10 +85,9 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
         searchButton = relativeLayout.findViewById(R.id.searchButton);
 
 
-
         peopleAdapter = new PeopleAdapter();
 
-        mergeAdapter = new MergeAdapter(new HomeHeaderAdapter(this), peopleAdapter);
+        mergeAdapter = new ConcatAdapter(new HomeHeaderAdapter(this), peopleAdapter);
 
         filterHomeAdapter = new FilterHomeAdapter(filterArrayList, getActivity());
 
@@ -103,7 +101,7 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
         return mContent;
     }
 
-    private void doSearch(){
+    private void doSearch() {
         Intent intent = new Intent(getActivity(), HomeSearchActivity.class);
         startActivity(intent);
     }
@@ -130,7 +128,8 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
             @NotNull
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NotNull ViewGroup viewGroup, @NotNull LoadState loadState) {
-                return new RecyclerView.ViewHolder(progressBar){};
+                return new RecyclerView.ViewHolder(progressBar) {
+                };
             }
 
             @Override
@@ -138,7 +137,7 @@ public class HomeFragment extends Fragment implements HeaderCardRecyclerAdapter.
                 if (loadState.equals(LoadState.Loading.INSTANCE)) {
                     progressBar.setVisibility(View.VISIBLE);
                 } else {
-                   progressBar.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.GONE);
                 }
             }
         });
