@@ -41,9 +41,9 @@ public class DonationDetailsActivity extends AppCompatActivity implements View.O
     public static final String EXTRA_ID = "identifier";
 
     private BlurImageView blurImageView;
-    private ImageView donationImage,close;
-    private TextView donationTitle, subTitle, donationDesc, socialHashtags;
-    private Button donationButton;
+    private ImageView donationImage;
+    private TextView donationTitle;
+    private TextView donationDesc;
     private View progress;
     private Toolbar toolbar;
 
@@ -84,12 +84,12 @@ public class DonationDetailsActivity extends AppCompatActivity implements View.O
         toolbar = findViewById(R.id.toolbar);
         blurImageView = findViewById(R.id.blurImageView);
         donationImage = findViewById(R.id.actual_image);
-        donationButton = findViewById(R.id.btnDonate);
+        Button donationButton = findViewById(R.id.btnDonate);
         donationTitle = findViewById(R.id.donation_title);
-        subTitle = findViewById(R.id.sub_title);
-        close = findViewById(R.id.close);
+        TextView subTitle = findViewById(R.id.sub_title);
+        ImageView close = findViewById(R.id.close);
         donationDesc = findViewById(R.id.donation_desc);
-        socialHashtags = findViewById(R.id.tv_social_hashtags);
+        TextView socialHashtags = findViewById(R.id.tv_social_hashtags);
         socialHashtags.setVisibility(View.GONE); // hiding view until endpoint has hastags available
         progress = findViewById(R.id.progress);
 
