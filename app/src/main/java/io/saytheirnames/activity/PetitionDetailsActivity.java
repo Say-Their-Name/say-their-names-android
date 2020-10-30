@@ -56,8 +56,8 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_petition_details);
 
-        initViews();
         getIntentExtras();
+        initViews();
 
         toolbar.setTitle("");
 
@@ -80,11 +80,11 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
         txtDescription = findViewById(R.id.txtDescription);
         txtShareThisPetition = findViewById(R.id.btnShareThisPetition);
         btnSignThisPetition = findViewById(R.id.btnSignThisPetition);
+        toolbar = findViewById(R.id.toolbar);
         imgClose = toolbar.findViewById(R.id.imgClose);
         imgShare = toolbar.findViewById(R.id.imgShare);
         txtName = findViewById(R.id.txtName);
         txtDescription = findViewById(R.id.txtDescription);
-        toolbar = findViewById(R.id.toolbar);
     }
 
     private void setOnClickListeners() {
