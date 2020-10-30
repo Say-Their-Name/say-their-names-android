@@ -36,19 +36,17 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
 
     public static final String EXTRA_ID = "identifier";
 
-    private ImageView imgClose, imgShare;
+    private ImageView imgClose, imgShare, actualImage;
 
     private TextView txtName, txtDescription, txtShareThisPetition;
 
     private Button btnSignThisPetition;
-
-    private ImageView actualImage;
+    
     private BlurImageView blurImageView;
 
     private Toolbar toolbar;
 
-    private String petitionID;
-    private String petitionLink;
+    private String petitionID, petitionLink;
 
     private Petition petition;
 
@@ -62,7 +60,7 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
         getIntentExtras();
 
         toolbar.setTitle("");
-        
+
         setOnClickListeners();
         loadData();
     }
@@ -181,7 +179,6 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
                 visitPage(petitionLink);
                 break;
             case R.id.btnShareThisPetition:
-
             case R.id.imgShare:
                 share(petitionLink);
                 break;
