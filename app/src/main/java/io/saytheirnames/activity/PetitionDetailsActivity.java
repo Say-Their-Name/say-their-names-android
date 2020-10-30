@@ -36,16 +36,11 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
 
     public static final String EXTRA_ID = "identifier";
 
-    private ImageView imgClose, imgShare;
-
-    private TextView txtName, txtDescription, txtShareThisPetition;
-
-    private Button btnSignThisPetition;
+    private TextView txtName;
+    private TextView txtDescription;
 
     private ImageView actualImage;
     private BlurImageView blurImageView;
-
-    private Toolbar toolbar;
 
     private String petitionID;
     private String petitionLink;
@@ -67,15 +62,15 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
         txtName = findViewById(R.id.txtName);
         txtDescription = findViewById(R.id.txtDescription);
 
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
 
-        imgClose = toolbar.findViewById(R.id.imgClose);
-        imgShare = toolbar.findViewById(R.id.imgShare);
+        ImageView imgClose = toolbar.findViewById(R.id.imgClose);
+        ImageView imgShare = toolbar.findViewById(R.id.imgShare);
 
         actualImage = findViewById(R.id.actual_image);
         blurImageView = findViewById(R.id.blurImageView);
-        txtShareThisPetition = findViewById(R.id.btnShareThisPetition);
-        btnSignThisPetition = findViewById(R.id.btnSignThisPetition);
+        TextView txtShareThisPetition = findViewById(R.id.btnShareThisPetition);
+        Button btnSignThisPetition = findViewById(R.id.btnSignThisPetition);
 
 
         toolbar.setTitle("");
@@ -183,7 +178,6 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
                 break;
         }
     }
-
 
     private void visitPage(String url) {
         CustomTabUtil.openCustomTabForUrl(this, url);
