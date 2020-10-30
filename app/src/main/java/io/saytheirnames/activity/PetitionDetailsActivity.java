@@ -36,11 +36,16 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
 
     public static final String EXTRA_ID = "identifier";
 
-    private TextView txtName;
-    private TextView txtDescription;
+    private ImageView imgClose, imgShare;
+
+    private TextView txtName, txtDescription, txtShareThisPetition;
+
+    private Button btnSignThisPetition;
 
     private ImageView actualImage;
     private BlurImageView blurImageView;
+
+    private Toolbar toolbar;
 
     private String petitionID;
     private String petitionLink;
@@ -53,33 +58,42 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_petition_details);
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            petitionID = extras.getString(EXTRA_ID);
-
-        }
-
-        txtName = findViewById(R.id.txtName);
-        txtDescription = findViewById(R.id.txtDescription);
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-
-        ImageView imgClose = toolbar.findViewById(R.id.imgClose);
-        ImageView imgShare = toolbar.findViewById(R.id.imgShare);
-
-        actualImage = findViewById(R.id.actual_image);
-        blurImageView = findViewById(R.id.blurImageView);
-        TextView txtShareThisPetition = findViewById(R.id.btnShareThisPetition);
-        Button btnSignThisPetition = findViewById(R.id.btnSignThisPetition);
-
+        initViews();
+        getIntentExtras();
 
         toolbar.setTitle("");
+        
+        setOnClickListeners();
+        loadData();
+    }
+
+    private void getIntentExtras() {
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            petitionID = extras.getString(EXTRA_ID);
+        }
+    }
+
+    private void initViews() {
+        actualImage = findViewById(R.id.actual_image);
+        blurImageView = findViewById(R.id.blurImageView);
+        txtName = findViewById(R.id.txtName);
+        txtDescription = findViewById(R.id.txtDescription);
+        txtShareThisPetition = findViewById(R.id.btnShareThisPetition);
+        btnSignThisPetition = findViewById(R.id.btnSignThisPetition);
+        imgClose = toolbar.findViewById(R.id.imgClose);
+        imgShare = toolbar.findViewById(R.id.imgShare);
+        txtName = findViewById(R.id.txtName);
+        txtDescription = findViewById(R.id.txtDescription);
+        toolbar = findViewById(R.id.toolbar);
+    }
+
+    private void setOnClickListeners() {
         imgClose.setOnClickListener(this);
         imgShare.setOnClickListener(this);
         txtShareThisPetition.setOnClickListener(this);
         btnSignThisPetition.setOnClickListener(this);
-
-        loadData();
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -116,12 +130,10 @@ public class PetitionDetailsActivity extends AppCompatActivity implements View.O
                                 petition = response.body().getData();
                             }
 
-
                             txtName.setText(petition.getTitle());
                             txtDescription.setText(petition.getDescription());
 
                             petitionLink = petition.getLink();
-
 
                             Glide.with(getApplicationContext())
                                     .load(petition.getBanner_img_url())
