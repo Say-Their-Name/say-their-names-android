@@ -36,32 +36,60 @@ import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class DonationDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    String identifier,image, title, desc, donationLink;
-
     public static final String EXTRA_ID = "identifier";
 
+    private String identifier;
+    private String donationLink;
+
     private BlurImageView blurImageView;
-    private ImageView donationImage;
     private TextView donationTitle;
     private TextView donationDesc;
+    private TextView socialHashtags;
+
+    private ImageView close;
+    private ImageView donationImage;
+
     private View progress;
     private Toolbar toolbar;
 
-    Donation donation;
+    private Donation donation;
+
+    private Button donationButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation_details);
 
+        getIntentExtra();
+        setOnClickListeners();
+        socialHashtags.setVisibility(View.GONE); // hiding view until endpoint has hastags available
+        loadData();
+    }
 
+    private void getIntentExtra() {
         initView();
 
         Intent intent = getIntent();
 
         identifier = intent.getStringExtra(EXTRA_ID);
+    }
 
-       loadData();
+    private void initView() {
+        toolbar = findViewById(R.id.toolbar);
+        blurImageView = findViewById(R.id.blurImageView);
+        donationImage = findViewById(R.id.actual_image);
+        donationButton = findViewById(R.id.btnDonate);
+        donationTitle = findViewById(R.id.donation_title);
+        close = findViewById(R.id.close);
+        donationDesc = findViewById(R.id.donation_desc);
+        socialHashtags = findViewById(R.id.tv_social_hashtags);
+        progress = findViewById(R.id.progress);
+    }
+
+    private void setOnClickListeners() {
+        donationButton.setOnClickListener(this);
+        close.setOnClickListener(this);
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -78,23 +106,6 @@ public class DonationDetailsActivity extends AppCompatActivity implements View.O
                 return null;
             }
         };
-    }
-
-    void initView() {
-        toolbar = findViewById(R.id.toolbar);
-        blurImageView = findViewById(R.id.blurImageView);
-        donationImage = findViewById(R.id.actual_image);
-        Button donationButton = findViewById(R.id.btnDonate);
-        donationTitle = findViewById(R.id.donation_title);
-        TextView subTitle = findViewById(R.id.sub_title);
-        ImageView close = findViewById(R.id.close);
-        donationDesc = findViewById(R.id.donation_desc);
-        TextView socialHashtags = findViewById(R.id.tv_social_hashtags);
-        socialHashtags.setVisibility(View.GONE); // hiding view until endpoint has hastags available
-        progress = findViewById(R.id.progress);
-
-        donationButton.setOnClickListener(this);
-        close.setOnClickListener(this);
     }
 
     private void loadData() {
