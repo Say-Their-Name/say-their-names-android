@@ -25,7 +25,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.snackbar.Snackbar;
 import com.jgabrielfreitas.core.BlurImageView;
-import com.squareup.picasso.Picasso;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import retrofit2.Call;
@@ -44,7 +43,7 @@ public class DonationDetailsActivity extends AppCompatActivity implements View.O
     private BlurImageView blurImageView;
     private TextView donationTitle;
     private TextView donationDesc;
-    private TextView socialHashtags;
+    private TextView socialHashTags;
 
     private ImageView close;
     private ImageView donationImage;
@@ -63,19 +62,19 @@ public class DonationDetailsActivity extends AppCompatActivity implements View.O
 
         getIntentExtra();
         setOnClickListeners();
-        socialHashtags.setVisibility(View.GONE); // hiding view until endpoint has hastags available
+        socialHashTags.setVisibility(View.GONE); // hiding view until endpoint has hashtags available
         loadData();
     }
 
     private void getIntentExtra() {
-        initView();
+        initViews();
 
         Intent intent = getIntent();
 
         identifier = intent.getStringExtra(EXTRA_ID);
     }
 
-    private void initView() {
+    private void initViews() {
         toolbar = findViewById(R.id.toolbar);
         blurImageView = findViewById(R.id.blurImageView);
         donationImage = findViewById(R.id.actual_image);
@@ -83,29 +82,13 @@ public class DonationDetailsActivity extends AppCompatActivity implements View.O
         donationTitle = findViewById(R.id.donation_title);
         close = findViewById(R.id.close);
         donationDesc = findViewById(R.id.donation_desc);
-        socialHashtags = findViewById(R.id.tv_social_hashtags);
+        socialHashTags = findViewById(R.id.tv_social_hashtags);
         progress = findViewById(R.id.progress);
     }
 
     private void setOnClickListeners() {
         donationButton.setOnClickListener(this);
         close.setOnClickListener(this);
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        //clear Glide's disk cache whenever an activity is destroyed. Mechanism for helping against memory leaks/ Out of memory errors
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                // This method must be called on a background thread.
-                Glide.get(getApplicationContext()).clearDiskCache();
-                return null;
-            }
-        };
     }
 
     private void loadData() {
@@ -197,7 +180,6 @@ public class DonationDetailsActivity extends AppCompatActivity implements View.O
             case R.id.close:
                 finish();
                 break;
-
             case R.id.imgShare:
                 share(donationLink);
                 break;
@@ -210,5 +192,20 @@ public class DonationDetailsActivity extends AppCompatActivity implements View.O
 
     private void share(String url) {
         ShareUtil.shareBaseLink(this, url);
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //clear Glide's disk cache whenever an activity is destroyed. Mechanism for helping against memory leaks/ Out of memory errors
+        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                // This method must be called on a background thread.
+                Glide.get(getApplicationContext()).clearDiskCache();
+                return null;
+            }
+        };
     }
 }
