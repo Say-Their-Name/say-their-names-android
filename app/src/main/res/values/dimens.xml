@@ -8,4 +8,5 @@
     <dimen name="margin_4dp">4dp</dimen>
     <dimen name="margin_16dp">16dp</dimen>
     <dimen name="margin_24dp">24dp</dimen>
+    <dimen name="sp_19">19sp</dimen>
 </resources>
