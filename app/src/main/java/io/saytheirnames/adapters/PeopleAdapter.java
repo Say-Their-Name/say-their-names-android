@@ -18,6 +18,7 @@ import com.bumptech.glide.request.RequestOptions;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import io.saytheirnames.R;
 import io.saytheirnames.activity.DetailsActivity;
@@ -32,8 +33,8 @@ public class PeopleAdapter extends PagingDataAdapter<People, PeopleAdapter.Filte
     public PeopleAdapter() {
         super(PeoplePager.Companion.getDiffItemCallback(), Dispatchers.getMain(),
                 Dispatchers.getDefault());
-
-        dateOut = new SimpleDateFormat("MM.dd.yyyy");
+        dateOut = Locale.getDefault().getCountry().equals("US") ?
+                new SimpleDateFormat("MM.dd.yyyy") : new SimpleDateFormat("dd.MM.yyyy");
         dateIn = new SimpleDateFormat("yyyy-MM-dd");
     }
 
