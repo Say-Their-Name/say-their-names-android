@@ -5,15 +5,31 @@ import androidx.paging.PagingConfig
 import androidx.recyclerview.widget.DiffUtil
 import io.saytheirnames.adapters.DonationAdapter
 import io.saytheirnames.models.Donation
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class DonationsPager(val adapter: DonationAdapter): Any() {
+class DonationsPager(val adapter: DonationAdapter) {
 
+    private var type = ""
+    private val pagingData = Pager<Int, Donation>(
+            config = PagingConfig(
+                    pageSize = 12,
+                    prefetchDistance = 12
+            ),
+            initialKey = 1,
+            pagingSourceFactory = { DonationsDataSource(type) }
+    ).flow
+
+    fun setFilterType(type: String) {
+        this.type = type
+    }
+
+    @ExperimentalCoroutinesApi
     fun loadDonationsFromPagination() {
         GlobalScope.launch {
-            getDonationsPager().collectLatest {
+            pagingData.collectLatest {
                 try {
                     adapter.submitData(it)
                 } catch(e: Exception) {
@@ -22,16 +38,6 @@ class DonationsPager(val adapter: DonationAdapter): Any() {
             }
         }
     }
-
-    private fun getDonationsPager() = Pager<Int, Donation>(
-            config = PagingConfig(
-                    pageSize = 12,
-                    prefetchDistance = 12
-            ),
-            initialKey = 1
-    ) {
-        DonationsDataSource()
-    }.flow
 
     companion object {
         fun getDiffItemCallback() = object: DiffUtil.ItemCallback<Donation>() {
